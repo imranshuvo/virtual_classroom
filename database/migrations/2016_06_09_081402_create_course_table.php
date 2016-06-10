@@ -20,6 +20,7 @@ class CreateCourseTable extends Migration
             $table->integer('class_number');
             $table->integer('max_allowed_student');
             $table->integer('user_id');
+            $table->text('description');
             $table->date('start_date');
             $table->date('end_date');
             $table->timestamps();

@@ -55,6 +55,13 @@ include($file_path);
 						    		  <span class="add-on"><i class="icon-th"></i></span>
 						    	</div>
 						    </div>
+
+						    <div class="form-group">
+						    	<label for="class_number" class="col-sm-2 control-label">Description</label>
+						    	<div class="col-sm-10">
+						    		<textarea name="description" class="form-control" id="" cols="30" rows="10"></textarea>
+						    	</div>
+						    </div>
 						    
 						    <div class="form-group">        
 						      <div class="col-sm-offset-2 col-sm-10">

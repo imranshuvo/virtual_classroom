@@ -26,3 +26,18 @@ Route::get('/register/course',['middleware' => 'auth', 'uses' => 'CourseControll
 Route::post('/register/course',['middleware' => 'auth' , 'uses' => 'CourseController@create']);
 
 Route::get('/teacher/courses',['middleware' => 'auth' , 'uses' => 'TeacherController@getAllCourses']);
+Route::get('courses','CourseController@showAll');
+Route::get('course/{id}','CourseController@showSingle');
+
+Route::get('course/{id}/enroll',['middleware' => 'auth', 'uses' => 'CourseController@enroll']);
+
+Route::post('search','CourseController@search');
+
+// Teacher
+Route::get('teacher/my-course/{id}',['middleware' => 'auth' , 'uses' => 'TeacherController@singleCourseMaterialPage']);
+
+
+
+//Student
+Route::get('student/courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
+Route::get('student/my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);

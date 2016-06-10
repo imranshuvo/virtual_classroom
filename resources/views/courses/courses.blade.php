@@ -20,7 +20,16 @@
 					@if(count($courses) > 0)
 						@foreach($courses as $course)
 							<div class="panel panel-default">
-							  <div class="panel-heading">{{ $course->name }}</div>
+							  <div class="panel-heading">
+								@if(isset($type))
+									@if($type == 'student')
+										<a href="{{ url('student/my-course/') }}/{{ $course->id }}">{{ $course->name }}</a>
+									@else
+										<a href="{{ url('teacher/my-course/') }}/{{ $course->id }}">{{ $course->name }}</a>
+									@endif
+								@else 
+								  	<a href="{{ url('course') }}/{{ $course->id }}" >{{ $course->name }}</a></div>
+							  	@endif
 							  <div class="panel-body">
 							      <ul class="list-inline">
 							      	<li>Start Date: {{ $course->start_date }}</li>

@@ -51,6 +51,14 @@
                     <li><a href="{{ url('/home') }}">Home</a></li>
                     <li><a href="{{ url('/courses') }}">Courses</a></li>
                 </ul>
+                
+                <form class="navbar-form navbar-left" action="{{ url('search') }}" role="search" style="width: 40%;" method="post">
+                    {{ csrf_field() }}
+                    <div class="form-group search-form" style="width: 80%;">
+                       <input type="text" class="form-control" name="search" placeholder="What do you want to learn ?" style="width: 100%;">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
@@ -62,6 +70,9 @@
                         @if(Auth::user()->role_id == 2)
                             <li><a href="{{ url('/register/course') }}">Register a Course</a></li>
                             <li><a href="{{ url('/teacher/courses') }}">My Courses</a></li>
+                        @endif
+                        @if(Auth::user()->role_id == 1)
+                            <li><a href="{{ url('/student/courses') }}">My Courses</a></li>
                         @endif
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
