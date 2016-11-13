@@ -6,3 +6,21 @@
     font-size: 17px;
     padding-top: 15px;
 }
+.single-course-box .item.text-center.bg-white:hover {
+    box-shadow: 2px 1px 2px #47C1E3;
+}
+.bg-info {
+    background-color: #4da6c7;
+    color: white;
+}
+.bg-dark h1 {
+    color: white;
+}
+.bg-dark p, .bg-dark a {
+    color: white;
+}
+.single-course-public.img-full {
+    max-height: 500px;
+    object-fit: contain;
+    width: 100%;
+}

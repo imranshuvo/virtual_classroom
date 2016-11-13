@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootaide.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
@@ -28,38 +29,36 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default topnav" role="navigation">
-        <div class="container topnav">
-            <!-- Brand and toggle get grouped for better mobile display -->
+    <header class="bg-white navbar-fixed-top box-shadow">
+        <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button class="btn btn-link visible-xs pull-right m-r m-t-sm" type="button" data-toggle="collapse" data-target=".navbar-demo-4">
+                    <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand topnav" href="{{ url('/') }}">                    
-                    <img src="{{ asset('images/VirtualClassroom.png') }}" alt="" width="100" height="100">
-                </a>
+                <a href="{{ url('/') }}" class="navbar-brand m-r-sm"><img src="img/logo.png" class="m-r-sm hide"><span class="h4 font-bold"><img src="{{ asset('images/VirtualClassroom.png') }}" alt="" width="100" height="100"></span></a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                <!-- Left Side Of Navbar -->
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
-                    <li><a href="{{ url('/courses') }}">Courses</a></li>
-                </ul>
+            <div class="collapse navbar-collapse navbar-demo-4">
                 
-                <form class="navbar-form navbar-left" action="{{ url('search') }}" role="search" style="width: 40%;" method="post">
+                <!-- search form -->
+                <form class="navbar-form navbar-left m-v-sm" action="{{ url('search') }}" role="search" style="width: 40%;" method="post">
                     {{ csrf_field() }}
-                    <div class="form-group search-form" style="width: 80%;">
-                       <input type="text" class="form-control" name="search" placeholder="What do you want to learn ?" style="width: 100%;">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-sm bg-light" placeholder="Search" name="search">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-sm bg-light">
+                                    <i class="fa fa-search"></i>
+                                </button> 
+                            </span>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
                 </form>
+                <!-- / search form -->
                 <ul class="nav navbar-nav navbar-right">
-                    <!-- Authentication Links -->
+                    
+                    <li><a href="{{ url('courses') }}">All Courses</a></li>
+
+                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
@@ -72,57 +71,95 @@
                             <li><a href="{{ url('/student/courses') }}">My Courses</a></li>
                         @endif
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                            <a href class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-bell fa fa-bell fa-fw"></i>
+                                <span class="visible-xs-inline">Notifications</span>
+                                <span class="badge badge-sm up bg-danger">2</span>
                             </a>
-
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#"><i class="fa fa-user fa-btn"></i>Profile</a></li>
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <!--dropdown -->
+                            <div class="dropdown-menu w-xl">
+                                <div class="panel bg-white">
+                                    <div class="panel-heading b-light bg-light">
+                                        <strong>You have <span>2</span> notifications</strong>
+                                    </div>
+                                    <div class="list-group">
+                                        <a class="list-group-item" href>
+                                            <span class="pull-left thumb-sm m-r-sm">
+                                                <img src="imgs/a0.jpg" alt="..." class="img-circle">
+                                            </span>
+                                            <span class="block m-b-none">
+                                                Panic message<br>
+                                                <small class="text-muted">13 minutes ago</small>
+                                            </span>
+                                        </a>
+                                        <a class="list-group-item" href>
+                                            <span class="block m-b-none">
+                                                First commit<br>
+                                                <small class="text-muted">1 hour ago</small>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="panel-footer text-sm">
+                                        <a class="pull-right" href><i class="fa fa-cog"></i></a>
+                                        <a href>See all the notifications</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ dropdown -->
+                        </li>
+                       
+                        <li class="dropdown">
+                            <a href class="dropdown-toggle clear" data-toggle="dropdown"> 
+                                <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"> 
+                                    <img src="imgs/a0.jpg" alt="..."> 
+                                    <i class="on md b-white bottom"></i> 
+                                </span> <span class="hidden-sm hidden-md">{{ Auth::user()->name }}</span>
+                            </a>
+                            <!--dropdown -->
+                            <ul class="dropdown-menu w">
+                                <li>
+                                    <a href="{{ url('student/profile') }}">Profile</a>
+                                </li>
+                                
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="{{ url('logout') }}">Logout</a>
+                                </li>
+                          
                             </ul>
+                        <!--/ dropdown -->
                         </li>
                     @endif
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.container -->
-    </nav>
+    </header>
 
     @yield('content')
 
+    </div>
+
 
     <!-- Footer -->
-    <footer>
+    <footer class="bg-dark">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Shuvo&Fahima</p>
-                </div>
+            <div class="row p-v m-t-md text-center">
+                
+                <p class="m-b-none">
+                    Build with <i class="fa fa-heart-o m-h-2x"></i> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
+                </p>
+                
+                <p>
+                   &copy; 2016 
+                </p>
             </div>
         </div>
-    </footer>
+</footer>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('js/bootaide.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script> 
 </body>

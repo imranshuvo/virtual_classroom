@@ -41,3 +41,4 @@ Route::get('teacher/my-course/{id}',['middleware' => 'auth' , 'uses' => 'Teacher
 //Student
 Route::get('student/courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
 Route::get('student/my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);
+Route::get('student/profile',['middleware' => 'auth', 'uses' => 'StudentController@getPrivateProfile']);

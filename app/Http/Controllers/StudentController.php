@@ -28,4 +28,16 @@ class StudentController extends Controller
     public function singleCourseMaterialPage($id){
     	return view('courses.course-material');
     }
+
+
+    //Get the private profile of Student
+    public function getPrivateProfile(Request $req){
+        $st_information = $req->user();
+        if(!empty($st_information) || count($st_information) > 0) {
+            return view('student.profile-private')->with(['user' => $st_information]);
+        }
+    }
+
+
+
 }
