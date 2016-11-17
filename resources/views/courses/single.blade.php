@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row p-t-xxl">
             <div class="col-sm-8 col-sm-offset-2 p-v-xxl text-center">
-                <h1 class="h1 m-t-l p-v-l">{{ $course->name }}</h1>
+                <h1 class="h1 m-t-l p-v-l">{{ $course->title }}</h1>
             </div>
         </div>
     </div>
@@ -31,13 +31,13 @@
 						<div class="clear m-b s">
 							<a class="pull-left thumb-xxs m-r-sm " herf=""> <img src="imgs/a0.jpg" alt="..." class="img-full img-circle"> </a>
 							<div class="clear m-t-xs p-t-2x">
-								<p class="h6"> <a href="" class="text-white">Gifaree Evan</a></p>
+								<p class="h6"> <a href="" class="text-white">Author: {{ $course->teacher->name }}</a></p>
 							</div>
 						</div>
 					</div>
 					<div class="bottom wrapper-lg w-full">
 						<div class="col-md-8">
-							<h4 class="h4 text-inline"><a class="text-white" href="">{{ $course->name }}</a></h4>
+							<h4 class="h4 text-inline"><a class="text-white" href="">{{ $course->title }}</a></h4>
 						</div>
 						<div class="col-md-4">
 							@if(Auth::check())
@@ -61,16 +61,11 @@
 				</div>
 				<div class="wrapper b-b">
 					<p class="m-b-none">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque
-						quam. Aliquam sollicitudin venenatis ipsum ac feugiat. Vestibulum
-						ullamcorper sodales nisi nec condimentum. Mauris convallis mauris
-						at pellentesque volutpat.
+						{{ $course->description }}
 					</p>
 				</div>
 				<div class="wrapper-lg">
-					<a href="" class="m-r-xl"><span>23</span> Comments</a>
-					<a href=""><span>434</span> Shares</a>
-					<a class="pull-right" href=""><i class="icon-speech fa-2x text-muted pos-abt m-l-n-xs"></i> <span class="m-l-xl">leave a comment</span></a>
+					
 				</div>
 			</div>
 			@endif

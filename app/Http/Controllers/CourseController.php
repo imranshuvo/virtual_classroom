@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
 use App\Http\Requests;
+Use App\Course;
 
 class CourseController extends Controller
 {
@@ -19,29 +21,29 @@ class CourseController extends Controller
     //Create a course 
 
     public function create(Request $req){
-        echo '<pre>';
-        print_r($req);
-        echo '</pre>';
-        die();
+        // replace the point from the european date format with a dash
+        $date = str_replace('/', '-', $req->input('start_date'));
+        // create the mysql date format
+        $date = Carbon::createFromFormat('d-m-Y', $date)->toDateString();
     	$data = [
-    		'name' => $req->input('name'),
+    		'title' => $req->input('title'),
     		'category_id' => $req->input('category_id'),
     		'class_number' => $req->input('class_number'),
     		'user_id' => $req->user()->id,
     		'max_allowed_student' => $req->input('max_allowed_student'),
-    		'start_date' => $req->input('start_date'),
+    		'start_date' => $date,
     		'description' => $req->input('description')
      		];
 
      	$this->validate($req,[
-     		'name' => 'required',
+     		'title' => 'required',
      		'category_id' => 'required',
      		'class_number' => 'required',
      		'max_allowed_student' => 'required',
      		'start_date' => 'required',
      		'description' => 'required'
      		]);
-
+        
      	$id = \DB::table('courses')->insertGetId($data);
      	if($id != null){
      		return redirect('home')->with('message','Course Created Successfully!');
@@ -52,13 +54,13 @@ class CourseController extends Controller
 
     // Show all courses 
     public function showAll(){
-    	$courses = \DB::table('courses')->get();
+    	$courses = \DB::table('courses')->join('users','users.id', '=','courses.user_id')->get();
     	return view('courses.courses')->with(['courses' => $courses]);
     }
 
     //Show single course
     public function showSingle($id){
-    	$course = \DB::table('courses')->where('id',$id)->first();
+        $course = Course::find($id);
     	return view('courses.single')->with(['course' => $course]);
     }
 

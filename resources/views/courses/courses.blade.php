@@ -43,12 +43,12 @@
 						
 							<div class="item text-center bg-info" style="height: 315px;">
 								<div class="top w-full p-h-xxl p-v-lg">
-									<h5>{{ $course->name }}</h5>
+									<h5>{{ $course->title }}</h5>
 									<div class="line line-lg b-b b-white w-3x m-auto"></div>
 								</div>	
 								<div class="bottom w-full p-h-xxl p-v-lg">
-									<p class="h6">Gifaree Evan</p>
-									<h6>Start Date: {{ $course->start_date }}</h6>
+									<p class="h6"><b>Author:</b> <a href="{{ url('user/teacher/') }}{{ $course->user_id }}">{{ $course->name }}</a></p>
+									<h6>Start Date: {{ date('j F,Y',strtotime($course->start_date)) }}</h6>
 									<h6>Allowed Students: {{ $course->max_allowed_student }}</h6>
 									<h6>Number of Classes: {{ $course->class_number }}</h6>								
 								</div>						

@@ -15,7 +15,7 @@ class CreateCourseTable extends Migration
         //
         Schema::create('courses',function(Blueprint $table){
             $table->increments('id');
-            $table->string('name');
+            $table->string('title');
             $table->integer('category_id');
             $table->integer('class_number');
             $table->integer('max_allowed_student');

@@ -28,7 +28,7 @@ include($file_path);
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">Name</label>
 				      <div class="col-sm-10">
-				        <input type="text" class="form-control" id="email" name="name" placeholder="Enter name of the course">
+				        <input type="text" class="form-control" id="email" name="title" placeholder="Enter name of the course">
 				      </div>
 				    </div>
 				    <div class="form-group">
@@ -56,7 +56,7 @@ include($file_path);
 				    </div>
 				    <div class="form-group">
 				    	<label for="class_number" class="col-sm-2 control-label">Start Date</label>
-				    	<div class="col-sm-10 input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy" id="dp3">
+				    	<div class="col-sm-10 input-append date" id="dp3" data-date="12-02-2012" data-date-format="yyyy-mm-dd" id="dp3">
 				    		<input type="text" name="start_date" class="form-control" id="dp5">
 				    		  <span class="add-on"><i class="icon-th"></i></span>
 				    	</div>
