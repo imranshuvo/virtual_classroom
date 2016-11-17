@@ -922,6 +922,7 @@ $(document).ready(function() {
 	});
 	
 	// owl-carousel
+/*
 	$('.owl-carousel').owlCarousel({
 		autoHeight : true,
 		margin: 15,
@@ -938,6 +939,7 @@ $(document).ready(function() {
 		smartSpeed : 1000,
 		autoplayHoverPause : true, 
 	});
+*/
 	
 	//textarea autogrow
 	$('.autoglow').autogrow();
@@ -985,6 +987,7 @@ $(document).ready(function() {
 	});
 	
 	// Headroom init
+/*
 	var elem = document.querySelector(".headroom");
 	var headroom = new Headroom(elem, {
 		"offset" : 100,
@@ -996,7 +999,7 @@ $(document).ready(function() {
 		}
 	});
 	headroom.init();
-	
+*/
 	
 	
 }); 

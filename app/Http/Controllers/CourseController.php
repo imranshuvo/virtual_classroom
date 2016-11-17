@@ -19,6 +19,10 @@ class CourseController extends Controller
     //Create a course 
 
     public function create(Request $req){
+        echo '<pre>';
+        print_r($req);
+        echo '</pre>';
+        die();
     	$data = [
     		'name' => $req->input('name'),
     		'category_id' => $req->input('category_id'),
