@@ -23,7 +23,7 @@ include($file_path);
     <div class="container">
         <div class="row p-t-xxl">
 			<div class="create-course">
-				<form class="form-horizontal" role="form" action="{{ url('register/course') }}" method="post">
+				<form class="form-horizontal" role="form" action="{{ url('register/course') }}" method="post" enctype="Multipart/form-data">
 				    {{ csrf_field() }}
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">Name</label>
@@ -63,9 +63,16 @@ include($file_path);
 				    </div>
 
 				    <div class="form-group">
+				    	<label for="class_number" class="col-sm-2 control-label">Add one image</label>
+				    	<div class="col-sm-10 input-append date">
+				    		<input type="file" name="image" class="control" id="">
+				    	</div>
+				    </div>
+
+				    <div class="form-group">
 				    	<label for="class_number" class="col-sm-2 control-label">Description</label>
 				    	<div class="col-sm-10">
-				    		<textarea name="description" class="form-control" id="" cols="30" rows="10"></textarea>
+				    		<textarea name="description" class="form-control" id="summernote" cols="30" rows="10"></textarea>
 				    	</div>
 				    </div>
 				    

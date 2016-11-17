@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/datepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landing-page.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootaide.css') }}">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
@@ -161,6 +162,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('js/bootaide.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
     <script src="{{ asset('js/app.js') }}"></script> 
 </body>
 </html>

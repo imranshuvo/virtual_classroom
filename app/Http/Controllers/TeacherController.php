@@ -13,7 +13,7 @@ class TeacherController extends Controller
     public function getAllCourses(Request $req){
     	$user = $req->user()->id;
     	$courses = \DB::table('courses')->where('user_id','=',$user)->get();
-    	return view('courses.courses')->with(['courses' => $courses,'type' => 'teacher']);
+    	return view('teacher.courses')->with(['courses' => $courses,'type' => 'teacher']);
     }
 
 

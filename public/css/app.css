@@ -24,3 +24,9 @@
     object-fit: contain;
     width: 100%;
 }
+
+
+/*** Remove the image and video inserting ***/
+.note-insert button + button {
+    display: none !important;
+}

@@ -61,11 +61,11 @@
 				</div>
 				<div class="wrapper b-b">
 					<p class="m-b-none">
-						{{ $course->description }}
+						{!! $course->description !!}
 					</p>
 				</div>
 				<div class="wrapper-lg">
-					
+					<!-- There can be review etc -->
 				</div>
 			</div>
 			@endif

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests;
 Use App\Course;
+use App\Image;
 
 class CourseController extends Controller
 {
@@ -21,6 +22,13 @@ class CourseController extends Controller
     //Create a course 
 
     public function create(Request $req){
+        $image = $req->file('image');
+
+        $thumb = $this->imageManipulate($image,250,250);
+
+        return $thumb;
+        $full = $this->imageManipulate($image,1024,768);
+
         // replace the point from the european date format with a dash
         $date = str_replace('/', '-', $req->input('start_date'));
         // create the mysql date format
@@ -54,7 +62,8 @@ class CourseController extends Controller
 
     // Show all courses 
     public function showAll(){
-    	$courses = \DB::table('courses')->join('users','users.id', '=','courses.user_id')->get();
+    	$courses = \DB::table('courses')->join('users','users.id', '=','courses.user_id')
+                    ->select('courses.*','users.name')->get();
     	return view('courses.courses')->with(['courses' => $courses]);
     }
 
@@ -101,5 +110,16 @@ class CourseController extends Controller
             ]);
         $courses = \DB::table('courses')->where('name','like','%'.$search_criteria.'%')->get();
         return view('courses.courses')->with(['courses' => $courses,'type' => 'student']);
+    }
+
+
+    public function imageManipulate($obj,$width,$height){
+        $image = \Image::make($obj)->resize($width,$height);
+        $path = $obj->getRealPath();
+        $dest = public_path('course/imgs/');
+        $fileName = $dest.'/'.rand(1111,55555).'.'.$obj->getClientOriginalExtension();
+        $name = $obj->getClientOriginalName();
+        $url = $image->save($fileName);
+        return $url;
     }
 }
