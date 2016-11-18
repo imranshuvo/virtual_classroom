@@ -20,13 +20,13 @@ class StudentController extends Controller
     				->get();
     	
 
-    	return view('courses.courses')->with(['courses' => $courses,'type' => 'student']);
+    	return view('student.courses')->with(['courses' => $courses,'type' => 'student']);
 
     }
 
     //single material course page
     public function singleCourseMaterialPage($id){
-    	return view('courses.course-material');
+    	return view('student.course-material');
     }
 
 
