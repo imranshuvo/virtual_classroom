@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Http\Requests;
 Use App\Course;
-use App\Image;
+use Image;
 
 class CourseController extends Controller
 {
@@ -114,11 +114,12 @@ class CourseController extends Controller
 
 
     public function imageManipulate($obj,$width,$height){
-        $image = \Image::make($obj)->resize($width,$height);
+        $image = Image::make($obj)->resize($width,$height);
+        return $image;
         $path = $obj->getRealPath();
         $dest = public_path('course/imgs/');
-        $fileName = $dest.'/'.rand(1111,55555).'.'.$obj->getClientOriginalExtension();
-        $name = $obj->getClientOriginalName();
+        $fileName = time().$obj->getClientOriginalName();
+        $image = $obj->move($dest,$fileName);
         $url = $image->save($fileName);
         return $url;
     }
