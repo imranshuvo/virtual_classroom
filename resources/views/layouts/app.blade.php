@@ -166,6 +166,8 @@
     <script type="text/javascript" src="{{ asset('js/bootaide.js') }}"></script>
     <script src="{{ asset('js/bootstrap-datepicker.js') }}"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+    <script src="https://cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
+    <script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
     <script src="{{ asset('js/app.js') }}"></script> 
 </body>
 </html>
