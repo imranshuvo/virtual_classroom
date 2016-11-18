@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Course;
 
 class StudentController extends Controller
 {
@@ -19,14 +20,14 @@ class StudentController extends Controller
     				->where('course_enrolled.student_id','=',$student_id)
     				->get();
     	
-
-    	return view('student.courses')->with(['courses' => $courses,'type' => 'student']);
+    	return view('student.courses')->with(['courses' => $courses]);
 
     }
 
     //single material course page
     public function singleCourseMaterialPage($id){
-    	return view('student.course-material');
+        $course = Course::find($id);
+    	return view('student.course-material')->with(['course' => $course]);
     }
 
 

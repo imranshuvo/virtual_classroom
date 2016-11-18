@@ -71,13 +71,15 @@
                         @if(Auth::user()->role_id == 1)
                             <li><a href="{{ url('/student/courses') }}">My Courses</a></li>
                         @endif
+                        <!--
                         <li class="dropdown">
                             <a href class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-bell fa fa-bell fa-fw"></i>
                                 <span class="visible-xs-inline">Notifications</span>
                                 <span class="badge badge-sm up bg-danger">2</span>
                             </a>
-                            <!--dropdown -->
+                            
+
                             <div class="dropdown-menu w-xl">
                                 <div class="panel bg-white">
                                     <div class="panel-heading b-light bg-light">
@@ -106,8 +108,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <!--/ dropdown -->
                         </li>
+
+                        -->
                        
                         <li class="dropdown">
                             <a href class="dropdown-toggle clear" data-toggle="dropdown"> 
