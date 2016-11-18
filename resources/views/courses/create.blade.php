@@ -28,13 +28,13 @@ include($file_path);
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">Name</label>
 				      <div class="col-sm-10">
-				        <input type="text" class="form-control" id="email" name="title" placeholder="Enter name of the course">
+				        <input type="text" class="form-control" id="email" name="title" placeholder="Enter name of the course" required="">
 				      </div>
 				    </div>
 				    <div class="form-group">
 				      <label class="control-label col-sm-2" for="email">Category</label>
 				      <div class="col-sm-10">
-				         <select name="category_id" id="" class="form-control">
+				         <select name="category_id" id="" class="form-control" required="">
 				         	@foreach($category as $key => $value)
 				         	    <option value="{{ $key }}">{{ $value }}</option>
 				         	 @endforeach
@@ -45,19 +45,19 @@ include($file_path);
 				    <div class="form-group">
 				    	<label for="class_number" class="col-sm-2 control-label">Number of Classes</label>
 				    	<div class="col-sm-10">
-				    		<input type="number" name="class_number" class="form-control">
+				    		<input type="number" name="class_number" class="form-control" required="">
 				    	</div>
 				    </div>
 				    <div class="form-group">
 				    	<label for="class_number" class="col-sm-2 control-label">Maximum Allowed Students ( max 20 )</label>
 				    	<div class="col-sm-10">
-				    		<input type="number" name="max_allowed_student" class="form-control" min="1" max="20">
+				    		<input type="number" name="max_allowed_student" class="form-control" min="1" max="20" required="">
 				    	</div>
 				    </div>
 				    <div class="form-group">
 				    	<label for="class_number" class="col-sm-2 control-label">Start Date</label>
 				    	<div class="col-sm-10 input-append date" id="dp3" data-date="12-02-2012" data-date-format="yyyy-mm-dd" id="dp3">
-				    		<input type="text" name="start_date" class="form-control" id="dp5">
+				    		<input type="text" name="start_date" class="form-control" id="dp5" required="">
 				    		  <span class="add-on"><i class="icon-th"></i></span>
 				    	</div>
 				    </div>
@@ -65,14 +65,14 @@ include($file_path);
 				    <div class="form-group">
 				    	<label for="class_number" class="col-sm-2 control-label">Add one image</label>
 				    	<div class="col-sm-10 input-append date">
-				    		<input type="file" name="image" class="control" id="">
+				    		<input type="file" name="image" class="control" id="" required="">
 				    	</div>
 				    </div>
 
 				    <div class="form-group">
 				    	<label for="class_number" class="col-sm-2 control-label">Description</label>
 				    	<div class="col-sm-10">
-				    		<textarea name="description" class="form-control" id="summernote" cols="30" rows="10"></textarea>
+				    		<textarea name="description" class="form-control" id="summernote" cols="30" rows="10" required=""></textarea>
 				    	</div>
 				    </div>
 				    

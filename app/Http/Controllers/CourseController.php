@@ -18,48 +18,6 @@ class CourseController extends Controller
     }
 
 
-
-    //Create a course 
-
-    public function create(Request $req){
-        $image = $req->file('image');
-
-        $thumb = $this->imageManipulate($image,250,250);
-
-        return $thumb;
-        $full = $this->imageManipulate($image,1024,768);
-
-        // replace the point from the european date format with a dash
-        $date = str_replace('/', '-', $req->input('start_date'));
-        // create the mysql date format
-        $date = Carbon::createFromFormat('d-m-Y', $date)->toDateString();
-    	$data = [
-    		'title' => $req->input('title'),
-    		'category_id' => $req->input('category_id'),
-    		'class_number' => $req->input('class_number'),
-    		'user_id' => $req->user()->id,
-    		'max_allowed_student' => $req->input('max_allowed_student'),
-    		'start_date' => $date,
-    		'description' => $req->input('description')
-     		];
-
-     	$this->validate($req,[
-     		'title' => 'required',
-     		'category_id' => 'required',
-     		'class_number' => 'required',
-     		'max_allowed_student' => 'required',
-     		'start_date' => 'required',
-     		'description' => 'required'
-     		]);
-        
-     	$id = \DB::table('courses')->insertGetId($data);
-     	if($id != null){
-     		return redirect('home')->with('message','Course Created Successfully!');
-     	}
-    }
-
-
-
     // Show all courses 
     public function showAll(){
     	$courses = \DB::table('courses')->join('users','users.id', '=','courses.user_id')
@@ -113,14 +71,88 @@ class CourseController extends Controller
     }
 
 
-    public function imageManipulate($obj,$width,$height){
-        $image = Image::make($obj)->resize($width,$height);
-        return $image;
-        $path = $obj->getRealPath();
-        $dest = public_path('course/imgs/');
-        $fileName = time().$obj->getClientOriginalName();
-        $image = $obj->move($dest,$fileName);
-        $url = $image->save($fileName);
+
+
+
+
+    //Create a course 
+
+    public function create(Request $req){
+        $image = $req->file('image');
+
+        $url = $this->imageManipulate($image);
+
+        // replace the point from the european date format with a dash
+        $date = str_replace('/', '-', $req->input('start_date'));
+        // create the mysql date format
+        $date = Carbon::createFromFormat('d-m-Y', $date)->toDateString();
+        $data = [
+            'title' => $req->input('title'),
+            'category_id' => $req->input('category_id'),
+            'class_number' => $req->input('class_number'),
+            'user_id' => $req->user()->id,
+            'max_allowed_student' => $req->input('max_allowed_student'),
+            'start_date' => $date,
+            'thumb_url' => $url['thumb'],
+            'large_url' => $url['large'],
+            'description' => $req->input('description')
+            ];
+
+        $this->validate($req,[
+            'title' => 'required',
+            'category_id' => 'required',
+            'class_number' => 'required',
+            'max_allowed_student' => 'required',
+            'start_date' => 'required',
+            'description' => 'required'
+            ]);
+        
+        $id = \DB::table('courses')->insertGetId($data);
+        if($id != null){
+            return redirect('home')->with('message','Course Created Successfully!');
+        }
+    }
+
+
+
+    public function imageManipulate($obj){
+        $image = $obj;
+        $thumbImageUrl = $this->resize($image,250,'thumb');        
+        $largeImageUrl = $this->resize($image,1600,'large');  
+        $url = [
+            'thumb' => $thumbImageUrl,
+            'large' => $largeImageUrl
+        ];
         return $url;
     }
+
+
+    public function resize($image,$size,$type){
+        try{
+            $extension      =   $image->getClientOriginalExtension();
+            $imageRealPath  =   $image->getRealPath();
+            $thumbName      =   $type.'_'. $image->getClientOriginalName();
+            
+            //$imageManager = new ImageManager(); // use this if you don't want facade style code
+            //$img = $imageManager->make($imageRealPath);
+        
+            $img = Image::make($imageRealPath); // use this if you want facade style code
+            $img->resize(intval($size), null, function($constraint) {
+                 $constraint->aspectRatio();
+            });
+            $path = public_path('course/imgs').'/'.time(). $thumbName;
+            $img->save($path);
+
+            return $path;
+
+        }catch(Exception $e){
+
+            return false;
+        }
+    }
+
+
+
+
+
 }

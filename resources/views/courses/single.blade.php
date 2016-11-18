@@ -4,6 +4,12 @@
 @section('content')
 
 
+<?php 
+
+	$image = basename($course->large_url);
+
+?>
+
 
 <section class="bg-dark">
     <div class="container">
@@ -29,7 +35,7 @@
 							<a href="" class="text-white"><i class="icon-eye"></i> 313K</a>
 						</div>
 						<div class="clear m-b s">
-							<a class="pull-left thumb-xxs m-r-sm " herf=""> <img src="imgs/a0.jpg" alt="..." class="img-full img-circle"> </a>
+							<a class="pull-left thumb-xxs m-r-sm " herf=""> <img src="{{ $course->large_url }}" alt="..." class="img-full img-circle"> </a>
 							<div class="clear m-t-xs p-t-2x">
 								<p class="h6"> <a href="" class="text-white">Author: {{ $course->teacher->name }}</a></p>
 							</div>
@@ -57,7 +63,7 @@
 						    @endif
 					    </div>
 					</div>
-					<img class="img-full single-course-public" src="imgs/c6.jpg">
+					<img class="img-full single-course-public" src="{{ asset('course/imgs/') }}/<?php echo $image ?>">
 				</div>
 				<div class="wrapper b-b">
 					<p class="m-b-none">

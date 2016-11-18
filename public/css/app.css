@@ -25,8 +25,13 @@
     width: 100%;
 }
 
+.img-info.img-bg::after {
+    background-color: #3a3f51 !important;
+}
+
 
 /*** Remove the image and video inserting ***/
 .note-insert button + button {
     display: none !important;
 }
+
