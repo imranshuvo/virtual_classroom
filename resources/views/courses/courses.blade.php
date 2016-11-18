@@ -24,6 +24,16 @@
                     {{ session('message') }}
                 </div>
             @endif
+
+
+
+			@if($errors->has())
+				@foreach ($errors->all() as $error)
+				  <div class="alert alert-danger">{{ $error }}</div>
+				@endforeach
+			@endif
+
+
 			
 
 			@if(count($courses) > 0)

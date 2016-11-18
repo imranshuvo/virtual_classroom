@@ -22,6 +22,14 @@ include($file_path);
 <section class="p-v-xxl bg-light">
     <div class="container">
         <div class="row p-t-xxl">
+
+        	
+			@if($errors->has())
+				@foreach ($errors->all() as $error)
+				  <div class="alert alert-danger">{{ $error }}</div>
+				@endforeach
+			@endif
+        
 			<div class="create-course">
 				<form class="form-horizontal" role="form" action="{{ url('register/course') }}" method="post" enctype="Multipart/form-data">
 				    {{ csrf_field() }}
