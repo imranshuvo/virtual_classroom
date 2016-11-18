@@ -19,23 +19,58 @@
 	<div class="container">
 	    <div class="row p-t-xxl">
 
-            <div id="vid-box"></div>
             <div id="vid-thumb"></div>
+            <div id="vid-box" class="video2"></div>
+    
+    
 
-            <form name="loginForm" id="login" action="#" onsubmit="return login(this);">
-                <input type="text" name="username" id="username" placeholder="Pick a username!" />
-                <input type="submit" name="login_submit" value="Log In">
-            </form>
+            <div class="container test">
+
+                <form name="loginForm" id="login" action="#" onsubmit="return errWrap(login,this);">
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="username" id="username" placeholder="Enter A Username" class="form-control input-sm bg-white">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm bg-dark" type="submit" name="login_submit" value="Log In">
+                                    <i class="cbutton__icon fa fa-fw fa fa-sign-in"></i>
+                                </button> 
+                            </span>
+                        </div>
+                    </div>
+
+                </form>
+                
+                
+                
+                <form name="callForm" id="call" action="#" onsubmit="return errWrap(makeCall,this);">
 
 
-            <form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
-                <input type="text" name="number" placeholder="Enter user to dial!" />
-                <input type="submit" value="Call"/>
-            </form>
+                 <div class="form-group">
+                        <div class="input-group">
+                            <input type="text"  name="number" id="call" placeholder="Enter User To Call!" class="form-control input-sm bg-white">
+                            <span class="input-group-btn">
+                                <button class="btn btn-sm bg-dark" type="submit" name="login_submit" value="Call" data-modal="modal-13">
+                        <i class="cbutton__icon fa fa-fw fa fa fa-phone-square"></i>
+                                </button> 
+                            </span>
+                        </div>
+                    </div>
+                </form>
+                
+                <div id="inCall" class="ptext">
+                    <button id="end" class="btn btn-submit bg-dark" onclick="end()" >End</button> 
+                    <button id="mute" class="btn btn-submit bg-dark" onclick="mute()">Mute</button> 
+                    <button id="pause" class="btn btn-submit bg-dark" onclick="pause()">Pause</button>
+                </div>
+                
+                <div id="logs" class="ptext"></div>
 
-            <div id="inCall"> <!-- Buttons for in call features -->
-                <button id="end" onclick="end()">End</button> <button id="mute" onclick="mute()">Mute</button> <button id="pause" onclick="pause()">Pause</button>
+
+
+
             </div>
+
 
 	    </div>
 	</div>

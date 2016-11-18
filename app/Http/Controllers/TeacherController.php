@@ -21,6 +21,6 @@ class TeacherController extends Controller
     //single material course page
     public function singleCourseMaterialPage($id){
         $course = Course::find($id);
-    	return view('teacher.course-material')->with(['course' => $course]);
+    	return view('courses.class')->with(['course' => $course]);
     }
 }

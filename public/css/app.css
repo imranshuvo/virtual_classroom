@@ -29,6 +29,26 @@
     background-color: #3a3f51 !important;
 }
 
+#vid-thumb video {
+    display: block !important;
+    margin: auto !important;
+    width: 70% !important;
+}
+#vid-box > video {
+    display: block;
+    float: left;
+    margin-right: 25px;
+    margin-top: 25px;
+    width: 15% !important;
+}
+.video2 {
+    display: block;
+    margin-bottom: 50px;
+    max-height: 158px;
+    overflow: hidden;
+    width: 100%;
+}
+
 
 /*** Remove the image and video inserting ***/
 .note-insert button + button {
