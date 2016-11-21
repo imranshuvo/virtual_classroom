@@ -161,6 +161,8 @@ return [
         *  Third party services
         */
          Intervention\Image\ImageServiceProvider::class,
+         Riari\Forum\ForumServiceProvider::class,
+         Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
 
 
     ],

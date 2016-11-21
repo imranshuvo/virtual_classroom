@@ -2,10 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iKhan Rocks!</title>
+    <title>
+        @if (isset($thread))
+            {{ $thread->title }} -
+        @endif
+        @if (isset($category))
+            {{ $category->title }} -
+        @endif
+        {{ trans('forum::general.home_title') }}
+    </title>
+
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -19,14 +27,19 @@
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Lato';
-        }
 
-        .fa-btn {
-            margin-right: 6px;
-        }
+    <style>
+    body {
+        padding: 30px 0;
+    }
+
+    textarea {
+        min-height: 200px;
+    }
+
+    .deleted {
+        opacity: 0.65;
+    }
     </style>
 </head>
 <body id="app-layout">
@@ -134,32 +147,54 @@
                         <!--/ dropdown -->
                         </li>
                     @endif
-                        <li><a href="{{ url('forum') }}">Forum</a></li>
+                    <li><a href="{{ url('forum') }}">Forum</a></li>
+
                 </ul>
             </div>
         </div>
     </header>
 
-    @yield('content')
-
-    </div>
-
-
-    <!-- Footer -->
-    <footer class="bg-dark">
-        <div class="container">
-            <div class="row p-v m-t-md text-center">
-                
-                <p class="m-b-none">
-                    Build with <i class="fa fa-heart-o m-h-2x"></i> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
-                </p>
-                
-                <p>
-                   &copy; 2016 
-                </p>
+    <section class="bg-dark">
+    <div class="container">
+        <div class="row p-t-xxl">
+            <div class="col-sm-8 col-sm-offset-2 p-v-xxl text-center">
+                <h1 class="h1 m-t-l p-v-l">Forum</h1>
             </div>
         </div>
-</footer>
+    </div>
+</section>
+
+    
+<section class="p-v-xxl bg-light">
+    <div class="container">
+        <div class="row p-t-xxl">
+            <div class="col-md-10 col-md-offset-1">
+
+        @include ('forum::partials.breadcrumbs')
+        @include ('forum::partials.alerts')
+
+        @yield('content')
+    </div>
+    </div>
+    </div>
+    </section>
+
+
+
+     <footer class="bg-dark">
+            <div class="container">
+                <div class="row p-v m-t-md text-center">
+                    
+                    <p class="m-b-none">
+                        Build with <i class="fa fa-heart-o m-h-2x"></i> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
+                    </p>
+                    
+                    <p>
+                       &copy; 2016 
+                    </p>
+                </div>
+            </div>
+    </footer>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
@@ -171,5 +206,69 @@
     <script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
     <script src="https://cdn.pubnub.com/webrtc/rtc-controller.js"></script>
     <script src="{{ asset('js/app.js') }}"></script> 
+    <script>
+    var toggle = $('input[type=checkbox][data-toggle-all]');
+    var checkboxes = $('table tbody input[type=checkbox]');
+    var actions = $('[data-actions]');
+    var forms = $('[data-actions-form]');
+    var confirmString = "{{ trans('forum::general.generic_confirm') }}";
+
+    function setToggleStates() {
+        checkboxes.prop('checked', toggle.is(':checked')).change();
+    }
+
+    function setSelectionStates() {
+        checkboxes.each(function() {
+            var tr = $(this).parents('tr');
+
+            $(this).is(':checked') ? tr.addClass('active') : tr.removeClass('active');
+
+            checkboxes.filter(':checked').length ? $('[data-bulk-actions]').removeClass('hidden') : $('[data-bulk-actions]').addClass('hidden');
+        });
+    }
+
+    function setActionStates() {
+        forms.each(function() {
+            var form = $(this);
+            var method = form.find('input[name=_method]');
+            var selected = form.find('select[name=action] option:selected');
+            var depends = form.find('[data-depends]');
+
+            selected.each(function() {
+                if ($(this).attr('data-method')) {
+                    method.val($(this).data('method'));
+                } else {
+                    method.val('patch');
+                }
+            });
+
+            depends.each(function() {
+                (selected.val() == $(this).data('depends')) ? $(this).removeClass('hidden') : $(this).addClass('hidden');
+            });
+        });
+    }
+
+    setToggleStates();
+    setSelectionStates();
+    setActionStates();
+
+    toggle.click(setToggleStates);
+    checkboxes.change(setSelectionStates);
+    actions.change(setActionStates);
+
+    forms.submit(function() {
+        var action = $(this).find('[data-actions]').find(':selected');
+
+        if (action.is('[data-confirm]')) {
+            return confirm(confirmString);
+        }
+
+        return true;
+    });
+
+    $('form[data-confirm]').submit(function() {
+        return confirm(confirmString);
+    });
+    </script>
 </body>
 </html>

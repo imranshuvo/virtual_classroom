@@ -7,7 +7,9 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "riari/laravel-forum": "~3.0",
+        "riari/laravel-forum-frontend": "~1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
