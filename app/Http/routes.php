@@ -42,3 +42,9 @@ Route::get('teacher/my-course/{id}',['middleware' => 'auth' , 'uses' => 'Teacher
 Route::get('student/courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
 Route::get('student/my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);
 Route::get('student/profile',['middleware' => 'auth', 'uses' => 'StudentController@getPrivateProfile']);
+
+
+//Library
+Route::get('vc/library','LibraryController@getBooks');
+Route::get('vc/library/new',['middleware' => 'auth', 'uses' => 'LibraryController@addBookView']);
+Route::post('vc/library/save',['middleware' => 'auth','uses' => 'LibraryController@saveBook']);

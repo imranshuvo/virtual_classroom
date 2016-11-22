@@ -134,7 +134,18 @@
                         <!--/ dropdown -->
                         </li>
                     @endif
-                        <li><a href="{{ url('forum') }}">Forum</a></li>
+                        <li class="dropdown">
+                            <a href class="dropdown-toggle clear" data-toggle="dropdown">
+                                  
+                                <span class="hidden-sm hidden-md">Others</span>
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu w">
+                                <li><a href="{{ url('forum') }}">Forum</a></li>
+                                <li><a href="{{ url('vc/library') }}">Library</a></li>
+                            </ul>
+                        </li>
+
                 </ul>
             </div>
         </div>
