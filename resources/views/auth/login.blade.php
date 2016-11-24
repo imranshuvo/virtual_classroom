@@ -16,7 +16,7 @@
     
 <section class="p-v-xxl bg-light">
     <div class="container">
-        <div class="row p-t-xxl">
+        <div class="row p-t-xxl bg-info content">
 
             <div class="col-md-8 col-md-offset-2">
                

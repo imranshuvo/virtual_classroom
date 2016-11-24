@@ -17,7 +17,7 @@
 	
 <section class="p-v-xxl bg-light">
 	<div class="container">
-	    <div class="row p-t-xxl">
+	    <div class="row p-t-xxl bg-info content">
 
             @if (session('message'))
                 <div class="alert alert-success">

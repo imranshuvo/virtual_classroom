@@ -17,7 +17,7 @@
 	
 <section class="p-v-xxl bg-light">
 	<div class="container">
-	    <div class="row p-t-xxl">
+	    <div class="row p-t-xxl bg-info content">
 
             <div id="vid-thumb"></div>
             <div id="vid-box" class="video2"></div>

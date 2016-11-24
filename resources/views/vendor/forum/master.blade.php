@@ -68,7 +68,7 @@
                     </div>
                 </form>
                 <!-- / search form -->
-                <ul class="nav navbar-nav navbar-right">
+               <ul class="nav navbar-nav navbar-right">
                     
                     <li><a href="{{ url('courses') }}">All Courses</a></li>
 
@@ -76,55 +76,7 @@
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else
-                        @if(Auth::user()->role_id == 2)
-                            <li><a href="{{ url('/register/course') }}">Register a Course</a></li>
-                            <li><a href="{{ url('/teacher/courses') }}">My Courses</a></li>
-                        @endif
-                        @if(Auth::user()->role_id == 1)
-                            <li><a href="{{ url('/student/courses') }}">My Courses</a></li>
-                        @endif
-                        <!--
-                        <li class="dropdown">
-                            <a href class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-bell fa fa-bell fa-fw"></i>
-                                <span class="visible-xs-inline">Notifications</span>
-                                <span class="badge badge-sm up bg-danger">2</span>
-                            </a>
-                            
-
-                            <div class="dropdown-menu w-xl">
-                                <div class="panel bg-white">
-                                    <div class="panel-heading b-light bg-light">
-                                        <strong>You have <span>2</span> notifications</strong>
-                                    </div>
-                                    <div class="list-group">
-                                        <a class="list-group-item" href>
-                                            <span class="pull-left thumb-sm m-r-sm">
-                                                <img src="imgs/a0.jpg" alt="..." class="img-circle">
-                                            </span>
-                                            <span class="block m-b-none">
-                                                Panic message<br>
-                                                <small class="text-muted">13 minutes ago</small>
-                                            </span>
-                                        </a>
-                                        <a class="list-group-item" href>
-                                            <span class="block m-b-none">
-                                                First commit<br>
-                                                <small class="text-muted">1 hour ago</small>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="panel-footer text-sm">
-                                        <a class="pull-right" href><i class="fa fa-cog"></i></a>
-                                        <a href>See all the notifications</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-
-                        -->
-                       
+                    @else             
                         <li class="dropdown">
                             <a href class="dropdown-toggle clear" data-toggle="dropdown"> 
                                 <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"> 
@@ -134,6 +86,13 @@
                             </a>
                             <!--dropdown -->
                             <ul class="dropdown-menu w">
+                                 @if(Auth::user()->role_id == 2)
+                                    <li><a href="{{ url('/register/course') }}">Register a Course</a></li>
+                                    <li><a href="{{ url('/teacher/courses') }}">My Courses</a></li>
+                                @endif
+                                @if(Auth::user()->role_id == 1)
+                                    <li><a href="{{ url('/student/courses') }}">My Courses</a></li>
+                                @endif 
                                 <li>
                                     <a href="{{ url('student/profile') }}">Profile</a>
                                 </li>
@@ -147,7 +106,7 @@
                         <!--/ dropdown -->
                         </li>
                     @endif
-                     <li class="dropdown">
+                        <li class="dropdown">
                             <a href class="dropdown-toggle clear" data-toggle="dropdown">
                                   
                                 <span class="hidden-sm hidden-md">Others</span>
@@ -164,7 +123,7 @@
         </div>
     </header>
 
-    <section class="bg-dark">
+    <section class="bg-dark forum" style="top: 20px;">
     <div class="container">
         <div class="row p-t-xxl">
             <div class="col-sm-8 col-sm-offset-2 p-v-xxl text-center">
@@ -175,9 +134,9 @@
 </section>
 
     
-<section class="p-v-xxl bg-light">
+<section class="p-v-xxl bg-light forum">
     <div class="container">
-        <div class="row p-t-xxl">
+        <div class="row p-t-xxl bg-info content">
             <div class="col-md-10 col-md-offset-1">
 
         @include ('forum::partials.breadcrumbs')
@@ -197,10 +156,6 @@
                     
                     <p class="m-b-none">
                         Build with <i class="fa fa-heart-o m-h-2x"></i> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
-                    </p>
-                    
-                    <p>
-                       &copy; 2016 
                     </p>
                 </div>
             </div>

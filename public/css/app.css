@@ -73,6 +73,27 @@
 .bg-dark h1 {
     color: #332600;
 }
+
+.bg-info.content {
+    margin-top: 50px;
+    padding-top: 50px;
+}
+.form-control {
+    border-color: #564aa3;
+}
+.navbar-form .form-control.input-sm.bg-light {
+    border-color: transparent !important;
+}
+.create-course-teacher .form-control, .create-course-teacher textarea, .note-editor{
+    width: 90%;
+}
+footer.bg-dark {
+    padding: 0;
+}
+footer .container .row.m-t-md {
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
 /*** Remove the image and video inserting ***/
 .note-insert button + button {
     display: none !important;

@@ -24,8 +24,8 @@
 
 
 <section class="p-v-xxl bg-light">
-    <div class="row p-t-xxl">
-    	<div class="container">
+    <div class="row p-t-xxl ">
+    	<div class="container bg-info content">
 			@if(count($course) > 0)
 			<div class="panel">
 				<div class="item img-bg img-info">
