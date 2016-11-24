@@ -14,10 +14,10 @@
     color: white;
 }
 .bg-dark h1 {
-    color: white;
+    color: black;
 }
 .bg-dark p, .bg-dark a {
-    color: white;
+    color: #332600;
 }
 .single-course-public.img-full {
     max-height: 500px;
@@ -49,7 +49,30 @@
     width: 100%;
 }
 
-
+.bg-dark {
+    background-color: #ffc933;
+    color: #332600 !important;
+    position: relative;
+    top: 50px;
+}
+.p-t-xxl {
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+.col-md-3{
+    margin-bottom: 25px;
+}
+.bg-info {
+    background-color: white;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.05);
+    color: #332600;
+}
+.bg-info a {
+    color: #332600;
+}
+.bg-dark h1 {
+    color: #332600;
+}
 /*** Remove the image and video inserting ***/
 .note-insert button + button {
     display: none !important;
