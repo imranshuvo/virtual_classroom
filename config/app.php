@@ -163,6 +163,7 @@ return [
          Intervention\Image\ImageServiceProvider::class,
          Riari\Forum\ForumServiceProvider::class,
          Riari\Forum\Frontend\ForumFrontendServiceProvider::class,
+         Cmgmyr\Messenger\MessengerServiceProvider::class,
 
 
     ],

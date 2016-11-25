@@ -21,30 +21,51 @@ Route::get('/signup','WelcomeController@signup');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-
 Route::get('/register/course',['middleware' => 'auth', 'uses' => 'CourseController@getCreateCourseView']);
 Route::post('/register/course',['middleware' => 'auth' , 'uses' => 'CourseController@create']);
-
-Route::get('/teacher/courses',['middleware' => 'auth' , 'uses' => 'TeacherController@getAllCourses']);
 Route::get('courses','CourseController@showAll');
-Route::get('course/{id}','CourseController@showSingle');
-
-Route::get('course/{id}/enroll',['middleware' => 'auth', 'uses' => 'CourseController@enroll']);
-
 Route::post('search','CourseController@search');
 
+
+//Course
+Route::group(['prefix' => 'course'],function(){
+	Route::get('{id}','CourseController@showSingle');
+	Route::get('{id}/enroll',['middleware' => 'auth', 'uses' => 'CourseController@enroll']);
+});
+
 // Teacher
-Route::get('teacher/my-course/{id}',['middleware' => 'auth' , 'uses' => 'TeacherController@singleCourseMaterialPage']);
+Route::group(['prefix' => 'teacher'], function(){
+	Route::get('my-course/{id}',['middleware' => 'auth' , 'uses' => 'TeacherController@singleCourseMaterialPage']);
+	Route::get('courses',['middleware' => 'auth' , 'uses' => 'TeacherController@getAllCourses']);
+});
 
 
 
 //Student
-Route::get('student/courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
-Route::get('student/my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);
-Route::get('student/profile',['middleware' => 'auth', 'uses' => 'StudentController@getPrivateProfile']);
+Route::group(['prefix' => 'student'], function(){
+	Route::get('courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
+	Route::get('my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);
+	Route::get('profile',['middleware' => 'auth', 'uses' => 'StudentController@getPrivateProfile']);
+});
+
 
 
 //Library
-Route::get('vc/library','LibraryController@getBooks');
-Route::get('vc/library/new',['middleware' => 'auth', 'uses' => 'LibraryController@addBookView']);
-Route::post('vc/library/save',['middleware' => 'auth','uses' => 'LibraryController@saveBook']);
+
+Route::group(['prefix' => 'vc/library'], function(){
+	Route::get('/','LibraryController@getBooks');
+	Route::get('new',['middleware' => 'auth', 'uses' => 'LibraryController@addBookView']);
+	Route::post('save',['middleware' => 'auth','uses' => 'LibraryController@saveBook']);
+});
+
+
+
+//Messaging/chat
+
+Route::group(['prefix' => 'messages'], function () {
+    Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+    Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+    Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+    Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+    Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+});
