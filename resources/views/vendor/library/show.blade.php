@@ -15,8 +15,15 @@
     
 <section class="p-v-xxl bg-light">
     <div class="container">
+
+    	<div class="row bg-info content" style="padding-top:25px;padding-bottom: 25px;padding-left: 25px; ">
+    		@if(Auth::user()->role_id == 2)
+        		<a href="{{ url('vc/library/new') }}">+ Add New Book</a>
+        	@endif
+    	</div>
         <div class="row p-t-xxl bg-info content">
-            <div class="col-md-10 col-md-offset-1">
+
+            <div class="col-md-12 ">
             	@if(count($books) > 0)
 
             	<ul>
@@ -32,7 +39,7 @@
 	                		@foreach($books as $book)
 					    	<tr>
 					        	<td>{{ $book->id }}</td>
-					        	<td><a href="../library/books/{{ ($book->book_link) }}">{{ $book->book_name }}</a></td>
+					        	<td><a href="../library/books/{{ ($book->book_link) }}" target="_blank">{{ $book->book_name }}</a></td>
 					        	<td>{{ $book->author_name }}</td>
 					        </tr>
 		            		@endforeach

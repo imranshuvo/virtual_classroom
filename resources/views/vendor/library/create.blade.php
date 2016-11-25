@@ -35,7 +35,7 @@
 			<div class="create-library">
 
 				@if($is_enabled == 'yes')
-				<form class="form-horizontal" role="form" action="{{ url('library/save') }}" method="post" enctype="Multipart/form-data">
+				<form class="form-horizontal" role="form" action="{{ url('vc/library/save') }}" method="post" enctype="Multipart/form-data">
 				    {{ csrf_field() }}
 				   
 				    <div class="form-group">
@@ -83,7 +83,7 @@
 				    
 				    <div class="form-group">        
 				      <div class="col-sm-offset-2 col-sm-10">
-				        <button type="submit" class="btn btn-default">Submit</button>
+				        <button type="submit" class="btn btn-primary">Submit</button>
 				      </div>
 				    </div>
 				  </form>

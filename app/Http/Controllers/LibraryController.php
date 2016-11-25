@@ -33,8 +33,7 @@ class LibraryController extends Controller
     	$book = $req->file('book_link');
     	$bookName = $book->getClientOriginalName();
         $url = time(). $bookName;
-        $destination = public_path('library/books').'/'.$url;
-
+        $destination = public_path('library/books');
         $data = [
         	'uploader_id' => $req->input('uploader_id'),
         	'course_id'  => $req->input('course_id'),
@@ -51,10 +50,11 @@ class LibraryController extends Controller
         	'book_link' => 'mimes:pdf',
         	]);
 
-        $id = \DB::table('library')->insertGetId($data);
+        if($book->move($destination,$url)){
+            $id = \DB::table('library')->insertGetId($data);
+        }
         if($id != null){
-        	$book->move($destination);
-			return redirect()->back()->with('message', 'Book is successfully added to the library.');       
+        	return redirect()->back()->with('message', 'Book is successfully added to the library.');       
 		}
 
     }
