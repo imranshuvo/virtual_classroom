@@ -78,14 +78,16 @@
     margin-top: 50px;
     padding-top: 50px;
 }
-.form-control {
+.form-control , textarea {
     border-color: #564aa3;
 }
 .navbar-form .form-control.input-sm.bg-light {
     border-color: transparent !important;
 }
-.create-course-teacher .form-control, .create-course-teacher textarea, .note-editor{
+.create-course-teacher .form-control, .create-course-teacher textarea, .note-editor, .send-message-form .form-control , .send-message-form textarea.form-control {
     width: 90%;
+    min-width: 90%;
+    max-width: 90%;
 }
 footer.bg-dark {
     padding: 0;

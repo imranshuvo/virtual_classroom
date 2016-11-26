@@ -63,16 +63,17 @@
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
                         <li><a href="{{ url('/register') }}">Register</a></li>
-                    @else             
+                    @else 
                         <li class="dropdown">
                             <a href class="dropdown-toggle clear" data-toggle="dropdown"> 
                                 <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"> 
                                     <img src="imgs/a0.jpg" alt="..."> 
-                                    <i class="on md b-white bottom"></i> 
+                                    @include('messenger.unread-count')
                                 </span> <span class="hidden-sm hidden-md">{{ Auth::user()->name }}</span>
                             </a>
                             <!--dropdown -->
                             <ul class="dropdown-menu w">
+                                <li><a href="{{URL::to('messages')}}">Inbox @include('messenger.unread-count')</a></li>
                                  @if(Auth::user()->role_id == 2)
                                     <li><a href="{{ url('/register/course') }}">Register a Course</a></li>
                                     <li><a href="{{ url('/teacher/courses') }}">My Courses</a></li>
@@ -80,6 +81,7 @@
                                 @if(Auth::user()->role_id == 1)
                                     <li><a href="{{ url('/student/courses') }}">My Courses</a></li>
                                 @endif 
+
                                 <li>
                                     <a href="{{ url('student/profile') }}">Profile</a>
                                 </li>
