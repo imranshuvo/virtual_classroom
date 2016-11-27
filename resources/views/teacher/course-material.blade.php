@@ -19,17 +19,75 @@
 	<div class="container">
 	    <div class="row p-t-xxl bg-info content">
 
-            <div id="vid-box"></div>
+            <div class="col-md-3">
+                <!-- left sidebar -->
+                <div class="list-group">
+                      <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all" class="list-group-item">All exam topic</a>
+                      <a href="{{ url('exam/course')}}/{{ $course->id }}/topic/new" class="list-group-item">+ Create an exam topic</a>
+                </div>
+            </div>
 
-                <form name="loginForm" id="login" action="#" onsubmit="return login(this);">
-                    <input type="text" name="username" id="username" placeholder="Pick a username!" />
-                    <input type="submit" name="login_submit" value="Log In">
-                </form>
+            <div class="col-md-9">
+                <!-- Main content -->
+                <div class="col-md-12">
 
-                <form name="callForm" id="call" action="#" onsubmit="return makeCall(this);">
-                    <input type="text" name="number" placeholder="Enter user to dial!" />
-                    <input type="submit" value="Call"/>
-                </form>
+                    <div class="chat-box col-md-12">
+                        <div id="vid-thumb"></div>
+                        <div id="vid-box" class="video2"></div>
+                
+                
+
+                        <div class="test">
+
+                            <form name="loginForm" id="login" action="#" onsubmit="return errWrap(login,this);">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="username" id="username" placeholder="Enter A Username" class="form-control input-sm bg-white">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm bg-dark" type="submit" name="login_submit" value="Log In">
+                                                <i class="cbutton__icon fa fa-fw fa fa-sign-in"></i>
+                                            </button> 
+                                        </span>
+                                    </div>
+                                </div>
+
+                            </form>
+                            
+                            
+                            
+                            <form name="callForm" id="call" action="#" onsubmit="return errWrap(makeCall,this);">
+
+
+                             <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text"  name="number" id="call" placeholder="Enter User To Call!" class="form-control input-sm bg-white">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-sm bg-dark" type="submit" name="login_submit" value="Call" data-modal="modal-13">
+                                    <i class="cbutton__icon fa fa-fw fa fa fa-phone-square"></i>
+                                            </button> 
+                                        </span>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div id="inCall" class="ptext">
+                                <button id="end" class="btn btn-submit bg-dark" onclick="end()" >End</button> 
+                                <button id="mute" class="btn btn-submit bg-dark" onclick="mute()">Mute</button> 
+                                <button id="pause" class="btn btn-submit bg-dark" onclick="pause()">Pause</button>
+                            </div>
+                            
+                            <div id="logs" class="ptext"></div>
+
+
+
+
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
 
 	    </div>
 	</div>

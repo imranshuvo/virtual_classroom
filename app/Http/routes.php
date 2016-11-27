@@ -37,6 +37,8 @@ Route::group(['prefix' => 'course'],function(){
 Route::group(['prefix' => 'teacher'], function(){
 	Route::get('my-course/{id}',['middleware' => 'auth' , 'uses' => 'TeacherController@singleCourseMaterialPage']);
 	Route::get('courses',['middleware' => 'auth' , 'uses' => 'TeacherController@getAllCourses']);
+	Route::get('profile',['middleware' => 'auth', 'uses' => 'UserProfileController@getProfile']);
+
 });
 
 
@@ -45,7 +47,7 @@ Route::group(['prefix' => 'teacher'], function(){
 Route::group(['prefix' => 'student'], function(){
 	Route::get('courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
 	Route::get('my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);
-	Route::get('profile',['middleware' => 'auth', 'uses' => 'StudentController@getPrivateProfile']);
+	Route::get('profile',['middleware' => 'auth', 'uses' => 'UserProfileController@getProfile']);
 });
 
 
@@ -68,4 +70,23 @@ Route::group(['prefix' => 'messages'], function () {
     Route::post('/', ['as' => 'messages.store','middleware' => 'auth', 'uses' => 'MessagesController@store']);
     Route::get('{id}', ['as' => 'messages.show','middleware' => 'auth', 'uses' => 'MessagesController@show']);
     Route::post('{id}', ['as' => 'messages.update', 'middleware' => 'auth','uses' => 'MessagesController@update']);
+});
+
+
+
+//Exam 
+Route::group(['prefix' => 'exam'], function(){
+	Route::get('course/{course_id}/topic/new',['middleware' => 'auth' , 'uses' => 'ExamController@getNewTopicCreateView']);
+	Route::get('course/{course_id}/topic/all',['middleware' => 'auth' , 'uses' => 'ExamController@index']);
+	Route::get('course/{course_id}/topic/{topic_id}', ['middleware' => 'auth', 'uses'=>'ExamController@getQuestions']);
+	Route::get('course/{course_id}/topic/{topic_id}/edit',['middleware' => 'auth' , 'uses' => 'ExamController@getEdit']);
+	Route::get('course/{course_id}/topic/{topic_id}/delete',['middleware' => 'auth', 'uses' => 'ExamController@getDelete']);
+	Route::get('course/{course_id}/topic/{topic_id}/question/{question_id}/delete',['middleware' => 'auth', 'uses' => 'ExamController@deleteQuestion']);
+
+
+	Route::post('course/{course_id}/topic/create',['middleware' => 'auth', 'uses' => 'ExamController@createNewTopic']);
+	Route::post('course/{course_id}/topic/{topic_id}/update',['middleware' => 'auth', 'uses' => 'ExamController@updateTopic']);
+	Route::post('course/{course_id}/topic/{topic_id}/question/create',['middleware' => 'auth', 'uses' => 'ExamController@postNewQuestion']);
+	Route::post('course/{course_id}/topic/{topic_id}/question/{question_id}/update',['middleware' => 'auth', 'uses' => 'ExamController@updateQuestion']);
+
 });

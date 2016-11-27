@@ -24,6 +24,10 @@ class Course extends Model
     public function teacher(){
     	return $this->hasOne('App\User','id','user_id');
     }
-  
+    
+
+     public function topics(){
+        return $this->hasMany('App\Topic');
+    }
 
 }

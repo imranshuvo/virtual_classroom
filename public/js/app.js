@@ -6,6 +6,38 @@ $(document).ready(function(){
 		  maxHeight: null,             // set maximum height of editor
 		  focus: true                  // set focus to editable area after initializing summernote
 		});
+
+	 //Exam related scripts
+		$('div.alert-success').delay(3000).slideUp(400);
+		$(function(){
+		$('a#btn-delete').on('click', function(e){
+		    e.preventDefault();
+		    e.stopPropagation();
+		    var $a = this;
+		    swal({
+		                title: "Are you sure?",
+		                text: "You will not be able to recover this!",
+		                type: "warning",
+		                showCancelButton: true,
+		                confirmButtonColor: '#DD6B55',
+		                confirmButtonText: 'Yes, delete it!',
+		                closeOnConfirm: false
+		            },
+		            function(){
+		                //console.log($($a).attr('href'));
+		                document.location.href=$($a).attr('href');
+		            });
+		});
+		});
+		$('#add-new-question').hide();
+		$('#btn-add-new-question').on('click', function(){
+		    $('#add-new-question').slideDown();
+		});
+		$.ajaxSetup({
+		    headers: {
+		        'X-CSRF-TOKEN': "{{ csrf_token() }}"
+		    }
+		});
 });
 
 
@@ -108,3 +140,12 @@ function errWrap(fxn, form){
 		return false;
 	}
 }
+
+
+
+
+
+
+
+
+

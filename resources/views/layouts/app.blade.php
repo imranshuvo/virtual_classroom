@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/landing-page.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootaide.css') }}">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/flipclock.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/sweetalert.css') }}">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
@@ -138,6 +140,9 @@
     <script src="https://cdn.pubnub.com/pubnub-3.7.14.min.js"></script>
     <script src="https://cdn.pubnub.com/webrtc/webrtc.js"></script>
     <script src="https://cdn.pubnub.com/webrtc/rtc-controller.js"></script>
+    <script src="{{ asset('js/flipclock.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.countdown.js') }}"></script>
+    <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script> 
 </body>
 </html>
