@@ -17,9 +17,11 @@
     <div class="container">
 
     	<div class="row bg-info content" style="padding-top:25px;padding-bottom: 25px;padding-left: 25px; ">
+    	@if(Auth::check())
     		@if(Auth::user()->role_id == 2)
         		<a href="{{ url('vc/library/new') }}">+ Add New Book</a>
         	@endif
+        @endif
     	</div>
         <div class="row p-t-xxl bg-info content">
 
