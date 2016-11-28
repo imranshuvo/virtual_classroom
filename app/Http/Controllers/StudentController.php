@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Course;
+use App\Topic;
 
 class StudentController extends Controller
 {
@@ -27,7 +28,7 @@ class StudentController extends Controller
     //single material course page
     public function singleCourseMaterialPage($id){
         $course = Course::find($id);
-    	return view('courses.class')->with(['course' => $course]);
+    	return view('student.course-material')->with(['course' => $course]);
     }
 
 
@@ -39,6 +40,13 @@ class StudentController extends Controller
         }
     }
 
+
+    //Get the open exam view page
+    public function getOpenExamsPage($course_id){
+        $course = Course::find($course_id);
+        $exams = Topic::where('course_id',$course_id)->where('status',0)->get();
+        return view('student.open-exams')->with(['exams' => $exams, 'course' => $course ]);
+    }
 
 
 }

@@ -48,6 +48,7 @@ Route::group(['prefix' => 'student'], function(){
 	Route::get('courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
 	Route::get('my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);
 	Route::get('profile',['middleware' => 'auth', 'uses' => 'UserProfileController@getProfile']);
+	Route::get('course/{course_id}/exams/open',['middleware' => 'auth' , 'uses' => 'StudentController@getOpenExamsPage']);
 });
 
 
@@ -82,11 +83,16 @@ Route::group(['prefix' => 'exam'], function(){
 	Route::get('course/{course_id}/topic/{topic_id}/edit',['middleware' => 'auth' , 'uses' => 'ExamController@getEdit']);
 	Route::get('course/{course_id}/topic/{topic_id}/delete',['middleware' => 'auth', 'uses' => 'ExamController@getDelete']);
 	Route::get('course/{course_id}/topic/{topic_id}/question/{question_id}/delete',['middleware' => 'auth', 'uses' => 'ExamController@deleteQuestion']);
+	Route::get('course/{course_id}/topic/{topic_id}/start',['middleware' => 'auth','uses' => 'ExamController@getBeforeStartTest']);
+	Route::get('course/{course_id}/topic/{topic_id}/start-test',['middleware' => 'auth','uses' => 'ExamController@getStartTest']);
+	Route::get('course/{course_id}/topic/{topic_id}/result',['middleware' => 'auth', 'uses' => 'ExamController@showTopicResult']);
+	Route::get('course/{course_id}/topic/{topic_id}/results',['middleware' => 'auth', 'uses' => 'ExamController@getAllTopicsResults']);
 
 
 	Route::post('course/{course_id}/topic/create',['middleware' => 'auth', 'uses' => 'ExamController@createNewTopic']);
 	Route::post('course/{course_id}/topic/{topic_id}/update',['middleware' => 'auth', 'uses' => 'ExamController@updateTopic']);
 	Route::post('course/{course_id}/topic/{topic_id}/question/create',['middleware' => 'auth', 'uses' => 'ExamController@postNewQuestion']);
 	Route::post('course/{course_id}/topic/{topic_id}/question/{question_id}/update',['middleware' => 'auth', 'uses' => 'ExamController@updateQuestion']);
+	Route::post('course/{course_id}/topic/{topic_id}/save-question-result',['middleware' => 'auth','uses' => 'ExamController@postSaveQuestionResult']);
 
 });

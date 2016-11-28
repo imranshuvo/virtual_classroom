@@ -144,5 +144,10 @@
     <script src="{{ asset('js/jquery.countdown.js') }}"></script>
     <script src="{{ asset('js/sweetalert.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script> 
+    <script>
+        
+        @yield('script_clock')
+        @yield('script_form')
+    </script>
 </body>
 </html>
