@@ -125,8 +125,8 @@ class ExamController extends Controller
     public function getBeforeStartTest($course_id,$topic_id,Request $req){
         $course = Course::find($course_id);
         $topic = Topic::find($topic_id);
-        //$req->session()->forget('next_question_id');
-        setcookie('next_question_id','test');
+        $req->session()->forget('next_question_id');
+        //setcookie('next_question_id','test');
         return view('vendor.exam.start')->with(['topic' => $topic, 'course' => $course]);
     }
 
@@ -139,31 +139,29 @@ class ExamController extends Controller
         $first_question_id = $topic->questions()->min('id');
         //dd($first_question_id);
         $last_question_id = $topic->questions()->max('id');
+        //dd($last_question_id);
         $duration = $topic->duration;
         //dd(session('next_question_id'));
-        /*
+        
         if($req->session()->get('next_question_id')){
             $current_question_id = $req->session()->get('next_question_id');
+            //dd($current_question_id);
         }
         else{
             $current_question_id = $first_question_id;
             $req->session()->put('next_question_id', $current_question_id );
+            //dd($current_question_id);
         }
-        */
-        setcookie('next_question_id', $first_question_id);
-
-        if($_COOKIE['next_question_id']){
-            $current_question_id = $_COOKIE['next_question_id'];
-        }else{
-            $current_question_id = $first_question_id;
-            setcookie('next_question_id',$current_question_id);
-        }
+        
+       
         return view('vendor.exam.exam')->with(['topic' => $topic,'questions' => $questions , 'current_question_id' => $current_question_id ,'first_question_id' => $first_question_id ,'last_question_id' => $last_question_id , 'duration' => $duration, 'course' => $course ]);
     }
     
 
     // Save result
     public function postSaveQuestionResult($course_id,$topic_id, Request $req){
+        dd($req->input('question_id'));
+        dd($req->session()->get('next_question_id'));
         $topic = Topic::find($topic_id);
         $question = Question::find($req->input('question_id'));
         if($req->input('option') != null){
@@ -187,11 +185,11 @@ class ExamController extends Controller
             ]);
         }
         $next_question_id = $topic->questions()->where('id','>',$req->input('question_id'))->min('id');
-        /*
+        
         if($next_question_id != null) {
             return Response::json(['next_question_id' => $next_question_id]);
         }
-        */
+        
         return redirect(action('ExamController@showTopicResult',['course_id' => $course_id, 'id' => $topic_id]));
     }
 
