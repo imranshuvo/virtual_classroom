@@ -25,6 +25,7 @@ Route::get('/register/course',['middleware' => 'auth', 'uses' => 'CourseControll
 Route::post('/register/course',['middleware' => 'auth' , 'uses' => 'CourseController@create']);
 Route::get('courses','CourseController@showAll');
 Route::post('search','CourseController@search');
+Route::post('user/profile/upload-photo',['middleware' => 'auth', 'uses' => 'UserProfileController@uploadPhoto']);
 
 
 //Course
