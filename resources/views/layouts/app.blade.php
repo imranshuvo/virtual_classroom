@@ -69,7 +69,11 @@
                         <li class="dropdown">
                             <a href class="dropdown-toggle clear" data-toggle="dropdown"> 
                                 <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"> 
-                                    <img src="imgs/a0.jpg" alt="..."> 
+                                    @if(!empty(Auth::user()->profile_photo))
+                                        <img src="{{ url(Auth::user()->profile_photo) }}">
+                                    @else
+                                        <img src="{{ url('user/no_photo/no_photo.png') }}">
+                                    @endif
                                     @include('messenger.unread-count')
                                 </span> <span class="hidden-sm hidden-md">{{ Auth::user()->name }}</span>
                             </a>

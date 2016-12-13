@@ -28,8 +28,11 @@
                   <div class="col-md-12"><a href="" title="Change photo" class="btn btn-lg" data-toggle="modal" data-target="#editPhoto"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
 
                   <div class="col-md-12 user-image-frame">
-                      <?php  ?>
-                      <img src="{{ url($user->profile_photo) }}">
+                      @if(!empty($user->profile_photo))
+                          <img src="{{ url($user->profile_photo) }}">
+                      @else
+                          <img src="{{ url('user/no_photo/no_photo.png') }}">
+                      @endif
                   </div>
 
                   <!-- User Image upload modal goes here -->
@@ -114,7 +117,7 @@
                                   <div class="panel-body">
                                         <ul class="list-group">
                                             @foreach($t_courses as $course)
-                                                <li class="list-group-item list-group-item-success"><a href="{{ url('teacher/my-course') }}/{{ $course->course_id }}">{{ $course->title }}</a></li>
+                                                <li class="list-group-item list-group-item-success"><a href="{{ url('teacher/my-course') }}/{{ $course->id }}">{{ $course->title }}</a></li>
                                             @endforeach
                                         </ul>
                                   </div>
