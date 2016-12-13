@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\User;
+use App\Course;
 use Image;
 
 
@@ -15,14 +16,28 @@ class UserProfileController extends Controller
 {
     //
 
-
+    //Get user profile info
     public function getProfile(){
-    	$user = User::where('id',Auth::user()->id)->join('roles','roles.id','=','users.role_id')->get();
-        return $user;
-        
-    	return view('user.user-profile')->with(['user' => $user]);
+    	$user = User::find(Auth::user()->id);
+        $courses = Course::where('user_id',$user->id)->get();
+        $enrolled_courses = \DB::table('course_enrolled')->where('student_id',$user->id)->join('courses','courses.id','=','course_enrolled.course_id')->get();
+    	return view('user.user-profile')->with(['user' => $user,'t_courses' => $courses,'s_courses' => $enrolled_courses]);
     }
 
+
+    //Update user name
+    public function updateName(Request $req){
+        $name = $req->input('name');
+
+        $this->validate($req,[
+            'name' => 'required|min:6'
+            ]);
+        $user = User::find($req->user()->id);
+        $user->name = $name;
+        if($user->save()){
+            return back()->with('message','Your name is updated successfully!');
+        }
+    }
 
     //Upload profile photo 
     public function uploadPhoto(Request $req){
@@ -35,7 +50,7 @@ class UserProfileController extends Controller
         $user = User::find($req->user()->id);
         $user->profile_photo = $url;
         if($user->save()){
-            return back()->with('message','Photo added successfully');
+            return back()->with('message','Photo added successfully!');
         }
 
 

@@ -26,6 +26,7 @@ Route::post('/register/course',['middleware' => 'auth' , 'uses' => 'CourseContro
 Route::get('courses','CourseController@showAll');
 Route::post('search','CourseController@search');
 Route::post('user/profile/upload-photo',['middleware' => 'auth', 'uses' => 'UserProfileController@uploadPhoto']);
+Route::post('user/profile/edit-name',['middleware' => 'auth' , 'uses' => 'UserProfileController@updateName']);
 
 
 //Course
