@@ -74,6 +74,7 @@
                                     @else
                                         <img src="{{ url('user/no_photo/no_photo.png') }}">
                                     @endif
+                                    <i class="on md b-white bottom"></i> 
                                     @include('messenger.unread-count')
                                 </span> <span class="hidden-sm hidden-md">{{ Auth::user()->name }}</span>
                             </a>
