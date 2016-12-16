@@ -27,9 +27,9 @@ class MessagesController extends Controller
     {
         $currentUserId = Auth::user()->id;
         // All threads, ignore deleted/archived participants
-        $threads = Thread::getAllLatest()->get();
+        //$threads = Thread::getAllLatest()->get();
         // All threads that user is participating in
-        // $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
+         $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
         // All threads that user is participating in, with new messages
         // $threads = Thread::forUserWithNewMessages($currentUserId)->latest('updated_at')->get();
         return view('messenger.index', compact('threads', 'currentUserId'));
@@ -42,6 +42,7 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
+        $id = $id;
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
@@ -49,11 +50,12 @@ class MessagesController extends Controller
             return redirect('messages');
         }
         // show current user in list if not a current participant
-        // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
+         //$users = User::whereNotIn('id', $thread->participantsUserIds())->get();
         // don't show the current user in list
         $userId = Auth::user()->id;
-        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+        //$users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
         $thread->markAsRead($userId);
+        $users = \DB::table('users')->leftjoin('participants','participants.user_id','=','users.id')->where('participants.thread_id','=',$id)->whereNotIn('user_id',[$userId])->get();
         return view('messenger.show', compact('thread', 'users'));
     }
     /**

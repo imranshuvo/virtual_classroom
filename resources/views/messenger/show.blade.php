@@ -39,15 +39,19 @@
 						<textarea class="form-control" name="message" required=""></textarea>
 					</div>
 				</div>
+
+				<!-- 
 				<div class="form-group">
-					@if($users->count() > 0)
+					@if(count($users) > 0)
 				        <div class="checkbox">
 				            @foreach($users as $user)
-				                <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]" value="{{ $user->id }}">{{ $user->name }}</label>
+				                <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]" value="{{ $user->user_id }}">{{ $user->name }}</label>
 				            @endforeach
 				        </div>
 					@endif
 				</div>
+
+				-->
 
 				<div class="form-group">
 					<button type="submit" class="btn btn-primary">Update</button>
