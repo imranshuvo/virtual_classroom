@@ -15,7 +15,7 @@
 <section class="p-v-xxl bg-light">
 	<div class="container">
 	    <div class="row p-t-xxl bg-info content">
-
+            @if($hide == 0)
             <div class="send-message-form">
                 <form action="{{ url('messages') }}" method="post"  class="form-horizontal">
                     {{ csrf_field() }}
@@ -33,15 +33,26 @@
                       </div>
                     </div>
                     <!-- Bring the use of the associated course . Needs update -->
-                     @if($users->count() > 0)
-                     <div class="form-group">
-                        <div class="checkbox">
-                            @foreach($users as $user)
-                                <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]" value="{{ $user->id }}">{!!$user->name!!}</label>
-                            @endforeach
+                       @if(count($users) > 0)
+                         <div class="form-group">
+                            <div class="checkbox">
+                                @foreach($users as $user)
+                                    @if(Auth::user()->id != $user->id)
+                                    <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]" value="{{ $user->id }}">
+                                        <span class="thumb-sm avatar m-t-n-sm m-b-n-sm m-l-sm"> 
+                                          @if(!empty($user->profile_photo))
+                                              <img src="{{ url($user->profile_photo) }}">
+                                          @else
+                                              <img src="{{ url('user/no_photo/no_photo.png') }}">
+                                          @endif
+                                        </span>
+                                        <span>{!!$user->name!!}</span>     
+                                    </label>
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                    @endif
+                      @endif
 
                     <div class="form-group">        
                       <div class="col-sm-offset-2 col-sm-10">
@@ -50,6 +61,11 @@
                     </div>
                 </form>
             </div>
+          @else
+            <h3 class="text-danger">You only can send message to your coursemates and teachers.</h3>
+          @endif
+
+
 
 	    </div>
 	</div>

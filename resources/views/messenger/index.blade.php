@@ -38,7 +38,10 @@
                         <small>
                             <strong class="label label-info">To :</strong> 
                             @foreach($thread->participants as $participant)
-                                <span class="label label-success">{{ $participant->user->name }}</span>
+                                <!-- Don't show the sender in "To" name -->
+                                @if($thread->creator()->id != $participant->user->id)
+                                    <span class="label label-success">{{ $participant->user->name }}</span>
+                                @endif
                             @endforeach
                         </small>
                     </p>

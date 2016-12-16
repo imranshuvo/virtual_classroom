@@ -47,8 +47,7 @@ class MessagesController extends Controller
             Session::flash('error_message', 'Error: Not found!');
             return redirect('messages');
         }
-        // show current user in list if not a current participant
-         //$users = User::whereNotIn('id', $thread->participantsUserIds())->get();
+       
         // don't show the current user in list
         $userId = Auth::user()->id;
         //$users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
@@ -73,9 +72,28 @@ class MessagesController extends Controller
      */
     public function create()
     {
-        $users = User::where('id', '!=', Auth::id())->get();
+
+        if(Auth::user()->role_id == 1){
+            $courses_enrolled = \DB::table('course_enrolled')->select('course_id')->where('student_id',Auth::user()->id)->get();
+            foreach($courses_enrolled as $course){
+               $users[] = \DB::table('course_enrolled')->join('users','users.id','=','course_enrolled.student_id')->where('course_id','=',$course->course_id)->get();
+            }
+            $users = array_flatten($users);
+        }else{
+            $courses_enrolled = \DB::table('courses')->join('course_enrolled','course_enrolled.course_id','=','courses.id')->select('student_id')->get();
+            foreach($courses_enrolled as $course){
+                $users[] = User::find($course->student_id);
+
+            }  
+            $users = array_unique($users);
+        }
         
-        return view('messenger.create', compact('users'));
+        if(count($users) > 0){
+            $hide = 0;  
+        }else{
+            $hide = 1;
+        }
+        return view('messenger.create', compact('users','hide'));
     }
     /**
      * Stores a new message thread.
