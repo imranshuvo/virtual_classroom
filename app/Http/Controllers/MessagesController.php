@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use App\Course;
 
 
 class MessagesController extends Controller
@@ -26,12 +27,10 @@ class MessagesController extends Controller
     public function index()
     {
         $currentUserId = Auth::user()->id;
-        // All threads, ignore deleted/archived participants
-        //$threads = Thread::getAllLatest()->get();
+        
         // All threads that user is participating in
-         $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
-        // All threads that user is participating in, with new messages
-        // $threads = Thread::forUserWithNewMessages($currentUserId)->latest('updated_at')->get();
+        $threads = Thread::forUser($currentUserId)->latest('updated_at')->get();
+       
         return view('messenger.index', compact('threads', 'currentUserId'));
     }
     /**
@@ -42,11 +41,10 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
-        $id = $id;
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+            Session::flash('error_message', 'Error: Not found!');
             return redirect('messages');
         }
         // show current user in list if not a current participant
@@ -55,8 +53,18 @@ class MessagesController extends Controller
         $userId = Auth::user()->id;
         //$users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
         $thread->markAsRead($userId);
-        $users = \DB::table('users')->leftjoin('participants','participants.user_id','=','users.id')->where('participants.thread_id','=',$id)->whereNotIn('user_id',[$userId])->get();
-        return view('messenger.show', compact('thread', 'users'));
+        $users = \DB::table('users')->join('participants','participants.user_id','=','users.id')->where('participants.thread_id','=',$id)->get();
+        
+        foreach($users as $user){
+           $ids[] = $user->user_id;
+        }
+        //restricting other users who are not in conversation from accessing the message
+        $user_restrict = in_array(Auth::user()->id, $ids);
+        if($user_restrict != true){
+            Session::flash('error_message', 'You do not have necessary permission to access the message!');
+            return redirect('messages');
+        }
+        return view('messenger.show', compact('thread', 'users','user_restrict'));
     }
     /**
      * Creates a new message thread.
@@ -66,6 +74,7 @@ class MessagesController extends Controller
     public function create()
     {
         $users = User::where('id', '!=', Auth::id())->get();
+        
         return view('messenger.create', compact('users'));
     }
     /**

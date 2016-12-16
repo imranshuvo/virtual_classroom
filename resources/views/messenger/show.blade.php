@@ -15,18 +15,24 @@
 <section class="p-v-xxl bg-light">
 	<div class="container">
 	    <div class="row p-t-xxl bg-info content">
-
-
 	    	 <h1>{{ $thread->subject }}</h1>
 	    	 @foreach($thread->messages as $message)
 	            <div class="media">
 	                <a class="pull-left" href="#">
-	                    <img src="//www.gravatar.com/avatar/{{ md5($message->user->email) }} ?s=64" alt="{{ $message->user->name }}" class="img-circle">
+	                	<span  class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+	                		@if(!empty($message->user->profile_photo))
+	                            <img src="{{ url($message->user->profile_photo) }}" class="img-circle">
+	                        @else
+	                            <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-circle">
+	                        @endif
+	                	</span>
+	                	
+	                    <!--<img src="//www.gravatar.com/avatar/{{ md5($message->user->email) }} ?s=64" alt="{{ $message->user->name }}" class="img-circle">-->
 	                </a>
 	                <div class="media-body">
 	                    <h5 class="media-heading">{{ $message->user->name }}</h5>
 	                    <p>{{ $message->body }}</p>
-	                    <div class="text-muted"><small>Posted {{ $message->created_at->diffForHumans() }}</small></div>
+	                    <div class="text-muted"><small>{{ $message->created_at->diffForHumans() }}</small></div>
 	                </div>
 	            </div>
 			@endforeach

@@ -33,8 +33,15 @@
                 <div class="media alert {{ $class }}">
                     <h4 class="media-heading"><a href="{{ url('messages/' . $thread->id) }}">{{ $thread->subject }}</a></h4>
                     <p>{{ $thread->latestMessage->body }}</p>
-                    <p><small><strong>Creator:</strong> {{ $thread->creator()->name }}</small></p>
-                    <p><small><strong>Participants:</strong> {{ $thread->participantsString(Auth::id()) }}</small></p>
+                    <p><small><strong class="label label-info">From :</strong> <span class="label label-success"> {{ $thread->creator()->name }}</span></small></p>
+                    <p>
+                        <small>
+                            <strong class="label label-info">To :</strong> 
+                            @foreach($thread->participants as $participant)
+                                <span class="label label-success">{{ $participant->user->name }}</span>
+                            @endforeach
+                        </small>
+                    </p>
                 </div>
                 @endforeach
             @else
