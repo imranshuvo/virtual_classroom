@@ -15,11 +15,7 @@
 <section class="p-v-xxl bg-light">
 	<div class="container">
 
-        <div class="row bg-info content">
-            <div class="col-sm-10">
-                <a href="{{URL::to('messages/create')}}">+ New Message</a>
-            </div>
-        </div>
+        
 	    <div class="row p-t-xxl bg-info content">
 
             @if (Session::has('error_message'))
@@ -27,10 +23,12 @@
                     {{ Session::get('error_message') }}
                 </div>
             @endif
-            @if($threads->count() > 0)
+        
+            <div class="left col-sm-9">
+                @if($threads->count() > 0)
                 @foreach($threads as $thread)
                 <?php $class = $thread->isUnread($currentUserId) ? 'alert-info' : ''; ?>
-                <div class="media alert {{ $class }}">
+                <div class="media alert {{ $class }} panel">
                     <h4 class="media-heading"><a href="{{ url('messages/' . $thread->id) }}">{{ $thread->subject }}</a></h4>
                     <p>{{ $thread->latestMessage->body }}</p>
                     <p><small><strong class="label label-info">From :</strong> <span class="label label-success"> {{ $thread->creator()->name }}</span></small></p>
@@ -49,7 +47,11 @@
                 @endforeach
             @else
                 <p>Sorry, no threads.</p>
-        @endif
+            @endif
+            </div>
+            <div class="right col-sm-3">
+                <a href="{{URL::to('messages/create')}}" class="btn btn-info">+ New Message</a>
+            </div>
 
 	    </div>
 	</div>

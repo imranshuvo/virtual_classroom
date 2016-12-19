@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Http\Requests;
 Use App\Course;
 use Image;
+use App\User;
 
 class CourseController extends Controller
 {
@@ -150,9 +151,6 @@ class CourseController extends Controller
             return false;
         }
     }
-
-
-
 
 
 }

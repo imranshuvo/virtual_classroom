@@ -101,3 +101,27 @@ footer .container .row.m-t-md {
     display: none !important;
 }
 
+
+
+
+/**** Message ***********/
+.s_title, .t_title{
+    display: none;
+}
+.left-users h3:first-of-type, .left-users h4:first-of-type {
+    display: block;
+}
+
+.bg-light{
+    background: white;
+}
+.bg-info{
+    background: #edf1f2;
+}
+.right{
+    background: white none repeat scroll 0 0;
+    min-height: 200px;
+    padding-top: 50px;
+    text-align: center;
+    width: 24%;
+}

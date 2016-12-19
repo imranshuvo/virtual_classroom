@@ -72,12 +72,14 @@ class MessagesController extends Controller
      */
     public function create()
     {
-
+        $users = [];
         if(Auth::user()->role_id == 1){
             $courses_enrolled = \DB::table('course_enrolled')->select('course_id')->where('student_id',Auth::user()->id)->get();
             foreach($courses_enrolled as $course){
                $users[] = \DB::table('course_enrolled')->join('users','users.id','=','course_enrolled.student_id')->where('course_id','=',$course->course_id)->get();
+               $teachers[] = \DB::table('users')->join('courses','users.id','=','courses.user_id')->where('courses.id','=',$course->course_id)->get();
             }
+            $users = array_merge($users,$teachers);
             $users = array_flatten($users);
         }else{
             $courses_enrolled = \DB::table('courses')->join('course_enrolled','course_enrolled.course_id','=','courses.id')->select('student_id')->get();

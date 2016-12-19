@@ -14,7 +14,7 @@
 	
 <section class="p-v-xxl bg-light">
 	<div class="container">
-	    <div class="row p-t-xxl bg-info content">
+	    <div class="row p-t-xxl bg-info content col-sm-12">
 	    	 <h1>{{ $thread->subject }}</h1>
 	    	 @foreach($thread->messages as $message)
 	            <div class="media">
@@ -38,7 +38,7 @@
 			@endforeach
 
 			<h2>Add a new message</h2>
-			<form class="form-horizontal" method="post" action="{{ url('messages') }}/{{ $thread->id }}">
+			<form class="form-horizontal col-sm-12" method="post" action="{{ url('messages') }}/{{ $thread->id }}">
 				{{ csrf_field() }}
 				<div class="form-group">
 					<div class="col-md-10 col-md-offset-1">
