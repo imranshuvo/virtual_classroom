@@ -35,8 +35,8 @@ Route::group(['prefix' => 'course'],function(){
 	Route::get('{id}/enroll',['middleware' => 'auth', 'uses' => 'CourseController@enroll']);
 	Route::get('{id}/class',['middleware' => 'auth', 'uses' => 'CourseController@getClassPage']);
 
-	Route::post('{id}/edit',['middleware' => 'auth', 'uses' => 'CourseController@editCourse']);
-	Route::post('{id}/delete',['middleware' => 'auth', 'uses' => 'CourseController@deleteCourse'])
+	Route::post('{id}/update',['middleware' => 'auth', 'uses' => 'CourseController@editCourse']);
+	Route::post('{id}/delete',['middleware' => 'auth', 'uses' => 'CourseController@deleteCourse']);
 });
 
 // Teacher

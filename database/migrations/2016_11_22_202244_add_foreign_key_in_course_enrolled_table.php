@@ -16,8 +16,8 @@ class AddForeignKeyInCourseEnrolledTable extends Migration
             //
             $table->integer('course_id')->unsigned()->change();
             $table->integer('student_id')->unsigned()->change();
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('student_id')->references('id')->on('users');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

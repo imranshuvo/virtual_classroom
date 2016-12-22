@@ -28,10 +28,15 @@
                     @endif
 
                     @if(isset($message))
-
 						<div class="alert alert-success">
 							{{ $message }}
 						</div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger">
+                            {{$errors->first()}}
+                        </div>
                     @endif
 
 

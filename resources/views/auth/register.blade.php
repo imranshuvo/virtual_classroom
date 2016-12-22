@@ -53,12 +53,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="user-type" class="col-md-4 control-label">I am </label>
+                        <label for="user-type" class="col-md-4 control-label">I want </label>
 
                         <div class="col-md-6">
                             <select name="role_id" id="" class="form-control">
-                                <option value="1">Student</option>
-                                <option value="2">Teacher</option>
+                                <option value="1">Learn</option>
+                                <option value="2">Teach</option>
                             </select>
                         </div>
                     </div>
@@ -86,6 +86,34 @@
                             @if ($errors->has('password_confirmation'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('designation') ? ' has-error' : '' }}">
+                        <label for="designation" class="col-md-4 control-label">Designation</label>
+
+                        <div class="col-md-6">
+                            <input id="designation" type="text" class="form-control" name="designation" value="{{ old('designation') }}" required="">
+
+                            @if ($errors->has('designation'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('designation') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="form-group{{ $errors->has('biography') ? ' has-error' : '' }}">
+                        <label for="biography" class="col-md-4 control-label">Short Biography ( Include Your Academic History )</label>
+
+                        <div class="col-md-6">
+                            <textarea id="biography" type="text" class="form-control" name="biography" required=""> {{ old('biography') }} </textarea>
+
+                            @if ($errors->has('biography'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('biography') }}</strong>
                                 </span>
                             @endif
                         </div>

@@ -68,13 +68,18 @@
                   <div class="row">
                       <div class="col-md-12">
                             <!-- User bio goes here -->
-                            <h3 class="user-name">{{ $user->name }} <span class="edit-name text-right"><a href="" title="Change name" class="btn btn-lg" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></span></h3>
+                            <h3 class="user-name">{{ $user->name }} </h3> <span class="edit-name pull-right btn btn-danger"><a href="" title="Update Profile" class="btn btn-lg" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update</a></span>
+                            <h5 class="user-designation">{{ $user->designation }} </h5>
                             <h6 class="user-email">{{ $user->email }}</h6>
                             @if($user->role_id == 2)
                               <h5 class="user-designation label label-info">Teacher</h5> 
                             @else
                               <h5 class="user-designation label label-info">Student</h5>
                             @endif
+
+                            <p class="user-biography" style="margin-top:50px"> 
+                                {{ $user->biography }}
+                            </p>
 
 
                             <!-- edit Teacher/Student name -->
@@ -93,7 +98,19 @@
                                                     <input type="text" name="name" class="form-control" value="{{ $user->name }}">
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <input type="text" name="designation" class="form-control" value="{{ $user->designation }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-md-12">
+                                                    <textarea name="biography" class="form-control" value="">{{ $user->designation }}</textarea>
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div class="modal-footer">
                                           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                           <button type="submit" class="btn btn-primary">Save changes</button>

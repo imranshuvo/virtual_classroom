@@ -138,3 +138,18 @@ footer .container .row.m-t-md {
     top: 0 !important;
     width: 100% !important;
 }
+.course-image-single .item.img-bg.img-info {
+    margin-bottom: 50px;
+    max-height: 300px;
+    object-fit: contain;
+    width: 100%;
+}
+.row.p-t-xxl.bg-info.content {
+    padding: 30px;
+}
+.course-title{
+    margin-top: 50px;
+}
+.img-small {
+    max-width: 100px;
+}

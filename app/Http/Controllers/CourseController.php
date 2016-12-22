@@ -111,7 +111,7 @@ class CourseController extends Controller
         
         $id = \DB::table('courses')->insertGetId($data);
         if($id != null){
-            return redirect('home')->with('message','Course Created Successfully!');
+            return redirect('teacher/courses')->with('message','Course Created Successfully!');
         }
     }
 
@@ -153,7 +153,34 @@ class CourseController extends Controller
         }
     }
 
+    // Update course 
+    public function editCourse($course_id,Request $req){
+        if($req->user()->role_id == 2){
+            $data = [
+                'class_number' => $req->input('class_number'),
+                'max_allowed_student' => $req->input('max_allowed_student'),
+                'description' => $req->input('description')
+            ];
 
+            $this->validate($req,[
+                'class_number' => 'required',
+                'max_allowed_student' => 'required',
+                'description' => 'required'
+                ]);
+            $course = Course::find($course_id);
+            if($course->update($data)){
+                return \Redirect::back()->withErrors(['Course updated successfully!']);
+            }
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
+
+    }
+    //Delete course
+    public function deleteCourse($course_id){
+        $course = Course::find($course_id)->delete();
+        return redirect('teacher/courses')->with('message','Course Deleted Successfully!');
+    }
 
     //Get the class page 
 

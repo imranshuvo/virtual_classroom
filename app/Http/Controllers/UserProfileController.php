@@ -27,14 +27,19 @@ class UserProfileController extends Controller
 
     //Update user name
     public function updateName(Request $req){
-        $name = $req->input('name');
+        $data = [
+            'name' => $req->input('name'),
+            'designation' => $req->input('designation'),
+            'biography' => $req->input('biography'),
+        ];
 
         $this->validate($req,[
-            'name' => 'required|min:6'
+            'name' => 'required|min:6',
+            'designation' => 'required',
+            'biography' => 'required'
             ]);
         $user = User::find($req->user()->id);
-        $user->name = $name;
-        if($user->save()){
+        if($user->update($data)){
             return back()->with('message','Your name is updated successfully!');
         }
     }
