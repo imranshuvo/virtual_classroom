@@ -40,8 +40,16 @@
 						@else 
 							<a href="{{ url('course') }}/{{ $course->id }}" >
 					  	@endif
-						
+							
+							<?php 
+
+								$image = basename($course->thumb_url);
+
+							?>
 							<div class="item text-center bg-info" style="height: 315px;">
+								<div class="top-image course-image">
+									<img src="{{ asset('course/imgs/') }}/<?php echo $image ?> " class="">
+								</div>
 								<div class="top w-full p-h-xxl p-v-lg">
 									<h5>{{ $course->title }}</h5>
 									<div class="line line-lg b-b b-white w-3x m-auto"></div>

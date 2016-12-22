@@ -22,7 +22,8 @@
             <div class="col-md-3">
                 <!-- left sidebar -->
                 <div class="list-group">
-                      <a href="{{ url('student/course') }}/{{ $course->id }}/exams/open" class="list-group-item">Open Exams</a>
+                    <a href="{{ url('course')}}/{{ $course->id }}/class" class="list-group-item">Class</a>
+                    <a href="{{ url('student/course') }}/{{ $course->id }}/exams/open" class="list-group-item">Open Exams</a>
                 </div>
             </div>
 

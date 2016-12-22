@@ -33,6 +33,10 @@ Route::post('user/profile/edit-name',['middleware' => 'auth' , 'uses' => 'UserPr
 Route::group(['prefix' => 'course'],function(){
 	Route::get('{id}','CourseController@showSingle');
 	Route::get('{id}/enroll',['middleware' => 'auth', 'uses' => 'CourseController@enroll']);
+	Route::get('{id}/class',['middleware' => 'auth', 'uses' => 'CourseController@getClassPage']);
+
+	Route::post('{id}/edit',['middleware' => 'auth', 'uses' => 'CourseController@editCourse']);
+	Route::post('{id}/delete',['middleware' => 'auth', 'uses' => 'CourseController@deleteCourse'])
 });
 
 // Teacher

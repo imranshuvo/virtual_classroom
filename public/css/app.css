@@ -55,6 +55,9 @@
     position: relative;
     top: 50px;
 }
+.class-elements .bg-dark{
+    top:0px;
+}
 .p-t-xxl {
     padding-bottom: 25px;
     padding-top: 25px;
@@ -124,4 +127,14 @@ footer .container .row.m-t-md {
     padding-top: 50px;
     text-align: center;
     width: 24%;
+}
+
+
+/************************ Course Page ***********************/
+.top-image.course-image > img {
+    max-height: 125px;
+    opacity: 0.8;
+    position: relative;
+    top: 0 !important;
+    width: 100% !important;
 }

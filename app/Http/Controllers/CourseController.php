@@ -23,6 +23,7 @@ class CourseController extends Controller
     public function showAll(){
     	$courses = \DB::table('courses')->join('users','users.id', '=','courses.user_id')
                     ->select('courses.*','users.name')->get();
+         //dd($courses);
     	return view('courses.courses')->with(['courses' => $courses]);
     }
 
@@ -150,6 +151,15 @@ class CourseController extends Controller
 
             return false;
         }
+    }
+
+
+
+    //Get the class page 
+
+    public function getClassPage($course_id){
+        $course = Course::find($course_id);
+        return view('courses.class')->with(['course' => $course]);
     }
 
 
