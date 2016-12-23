@@ -46,16 +46,16 @@
 								$image = basename($course->thumb_url);
 
 							?>
-							<div class="item text-center bg-info" style="height: 315px;">
+							<div class="item text-center bg-info">
 								<div class="top-image course-image">
 									<img src="{{ asset('course/imgs/') }}/<?php echo $image ?> " class="">
 								</div>
-								<div class="top w-full p-h-xxl p-v-lg">
+								<div class="course-course-title">
 									<h5>{{ $course->title }}</h5>
-									<div class="line line-lg b-b b-white w-3x m-auto"></div>
+									<div class="line line-lg b-b b-info w-3x m-auto"></div>
 								</div>	
-								<div class="bottom w-full p-h-xxl p-v-lg">
-									<h6>Start Date: {{ date('j F,Y',strtotime($course->start_date)) }}</h6>
+								<div class="w-full p-h-xxl p-v-lg">
+									<h6>Start Date: <span class="text-info">{{ date('j F,Y',strtotime($course->start_date)) }}</span></h6>
 									<h6>Allowed Students: {{ $course->max_allowed_student }}</h6>
 									<h6>Number of Classes: {{ $course->class_number }}</h6>								
 								</div>						

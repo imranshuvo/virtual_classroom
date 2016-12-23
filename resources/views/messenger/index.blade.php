@@ -16,7 +16,7 @@
 	<div class="container">
 
         
-	    <div class="row p-t-xxl bg-info content">
+	    <div class="row p-t-xxl content">
 
             @if (Session::has('error_message'))
                 <div class="alert alert-danger" role="alert">
@@ -24,33 +24,39 @@
                 </div>
             @endif
         
-            <div class="left col-sm-9">
+            <div class="col-sm-9">
                 @if($threads->count() > 0)
                 @foreach($threads as $thread)
-                <?php $class = $thread->isUnread($currentUserId) ? 'alert-info' : ''; ?>
-                <div class="media alert {{ $class }} panel">
-                    <h4 class="media-heading"><a href="{{ url('messages/' . $thread->id) }}">{{ $thread->subject }}</a></h4>
-                    <p>{{ $thread->latestMessage->body }}</p>
-                    <p><small><strong class="label label-info">From :</strong> <span class="label label-success"> {{ $thread->creator()->name }}</span></small></p>
-                    <p>
-                        <small>
-                            <strong class="label label-info">To :</strong> 
-                            @foreach($thread->participants as $participant)
-                                <!-- Don't show the sender in "To" name -->
-                                @if($thread->creator()->id != $participant->user->id)
-                                    <span class="label label-success">{{ $participant->user->name }}</span>
-                                @endif
-                            @endforeach
-                        </small>
-                    </p>
-                </div>
+                    <?php $class = $thread->isUnread($currentUserId) ? 'alert-info' : ''; ?>
+                    <div class="media alert {{ $class }} panel">
+                        <h4 class="media-heading"><a href="{{ url('messages/' . $thread->id) }}">{{ $thread->subject }}</a></h4>
+                        <p><small><strong class="label label-info">From :</strong> <span class="label label-success"> {{ $thread->creator()->name }}</span></small></p>
+                        <p>
+                            <small>
+                                <strong class="label label-info">To :</strong> 
+                                @foreach($thread->participants as $participant)
+                                    <!-- Don't show the sender in "To" name -->
+                                    @if($thread->creator()->id != $participant->user->id)
+                                        <span class="label label-success">{{ $participant->user->name }}</span>
+                                    @endif
+                                @endforeach
+                            </small>
+                        </p>
+                        <p>{{ $thread->latestMessage->body }}</p>
+                        
+                    </div>
                 @endforeach
             @else
-                <p>Sorry, no threads.</p>
+                <div class="panel">
+                    <p style="padding: 20px;" class="text-danger">Sorry, no threads.</p>
+                </div>
+                
             @endif
             </div>
-            <div class="right col-sm-3">
-                <a href="{{URL::to('messages/create')}}" class="btn btn-info">+ New Message</a>
+            <div class="col-sm-3">
+                <div class="panel wrapper-xxl bg-offWhite text-center">
+                   <a href="{{URL::to('messages/create')}}" title="Change photo" class="btn btn-lg"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> New Message</a>
+                </div>
             </div>
 
 	    </div>

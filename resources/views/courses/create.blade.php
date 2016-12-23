@@ -21,7 +21,7 @@ include($file_path);
     
 <section class="p-v-xxl bg-light">
     <div class="container">
-        <div class="row p-t-xxl bg-info content">
+        <div class="row p-t-xxl content">
 
         	
 			@if($errors->has())
@@ -30,7 +30,7 @@ include($file_path);
 				@endforeach
 			@endif
         
-			<div class="create-course-teacher">
+			<div class="create-course-teacher col-sm-9">
 				<form class="form-horizontal" role="form" action="{{ url('register/course') }}" method="post" enctype="Multipart/form-data">
 				    {{ csrf_field() }}
 				    <div class="form-group">
@@ -90,7 +90,15 @@ include($file_path);
 				      </div>
 				    </div>
 				  </form>
-			</div>		
+			</div>	
+
+			<!-- Right Sidebar -->
+			<div class="col-sm-3">
+				<div class="panel wrapper-xl bg-offWhite text-center">
+                  <a href="{{ url('teacher/courses') }}" class="btn btn-lg"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to My Courses</a>
+              </div>
+			</div>
+			<!-- End Right Sidebar -->	
 		</div>
 	</div>
 </section>

@@ -14,56 +14,64 @@
 	
 <section class="p-v-xxl bg-light">
 	<div class="container">
-	    <div class="row p-t-xxl bg-info content col-sm-12">
-	    	 <h1>{{ $thread->subject }}</h1>
-	    	 @foreach($thread->messages as $message)
-	            <div class="media">
-	                <a class="pull-left" href="#">
-	                	<span  class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-	                		@if(!empty($message->user->profile_photo))
-	                            <img src="{{ url($message->user->profile_photo) }}" class="img-circle">
-	                        @else
-	                            <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-circle">
-	                        @endif
-	                	</span>
-	                	
-	                    <!--<img src="//www.gravatar.com/avatar/{{ md5($message->user->email) }} ?s=64" alt="{{ $message->user->name }}" class="img-circle">-->
-	                </a>
-	                <div class="media-body">
-	                    <h5 class="media-heading">{{ $message->user->name }}</h5>
-	                    <p>{{ $message->body }}</p>
-	                    <div class="text-muted"><small>{{ $message->created_at->diffForHumans() }}</small></div>
-	                </div>
-	            </div>
-			@endforeach
+	    <div class="row p-t-xxl content col-sm-12">
 
-			<h2>Add a new message</h2>
-			<form class="form-horizontal col-sm-12" method="post" action="{{ url('messages') }}/{{ $thread->id }}">
-				{{ csrf_field() }}
-				<div class="form-group">
-					<div class="col-md-10 col-md-offset-1">
-						<textarea class="form-control" name="message" required=""></textarea>
-					</div>
-				</div>
 
-				<!-- 
-				<div class="form-group">
-					@if(count($users) > 0)
-				        <div class="checkbox">
-				            @foreach($users as $user)
-				                <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]" value="{{ $user->user_id }}">{{ $user->name }}</label>
-				            @endforeach
-				        </div>
-					@endif
-				</div>
+	    	<!-- Main content starts here -->
+	    	<div class="col-sm-9">
+	    		<div class="">
+	    			<div class="panel-body">
+	    				@foreach($thread->messages as $message)
+	        			<div class="media">
+				        	<div class="media-left">
+							    <span class="thumb-sm avatar">
+							    	@if(!empty($message->user->profile_photo))
+			                            <img src="{{ url($message->user->profile_photo) }}" class="img-circle">
+			                        @else
+			                            <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-circle">
+			                        @endif
+							    </span>
+						  	</div>
+						  	<div class="media-body">
+						    	<div class="pos-rlt wrapper b b-light r r-2x bg-white">
+				                	<span class="arrow left pull-up"></span>
+				                	<h5 class="m-b-none" style="padding-top: 0px; padding-bottom: 10px;"><b>Subject : </b>{{ $thread->subject }}</h5>
+				                	<h6 class="media-heading" style="padding-bottom: 10px;"><b>From : </b>{{ $message->user->name }}</h6>
+				                	<div class="text-muted"><small>{{ $message->created_at->diffForHumans() }}</small></div>
+				                    <p style="padding-top:10px;">{{ $message->body }}</p>
+				              	</div>
+						  	</div>
+					    </div>
+					    @endforeach
+	        		</div>
+	    		</div>
+	    		<div class="reply-form">
+					<form class="form-horizontal col-sm-12" method="post" action="{{ url('messages') }}/{{ $thread->id }}">
+						{{ csrf_field() }}
+						<div class="form-group">
+							<div class="col-md-11 col-md-offset-1">
+								<textarea class="form-control" name="message" required="" placeholder="Reply to this message" style="padding: 15px;"></textarea>
+							</div>
+						</div>
+						<div class="form-group text-center">
+							<button type="submit" class="btn btn-primary text-center" style="margin:auto;">Reply</button>
+						</div>
 
-				-->
+					</form>
+	    		</div>
+	    	</div>
 
-				<div class="form-group">
-					<button type="submit" class="btn btn-primary">Update</button>
-				</div>
+	    	<!-- End of Main Content -->
 
-			</form>
+	    	<!-- Sidebar right starts here -->
+	    	<div class="col-sm-3 panel-body">
+	    		<div class="panel wrapper-xxl bg-offWhite text-center">
+                   <a href="{{URL::to('messages')}}" class="btn btn-lg"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to Inbox</a>
+                </div>
+	    	</div>
+	    	<!-- End of right Sidebar -->
+
+			
 	    </div>
 	</div>
 </section>

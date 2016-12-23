@@ -81,9 +81,12 @@
     margin-top: 50px;
     padding-top: 50px;
 }
-.form-control , textarea {
-    border-color: #564aa3;
-}
+/*.form-control , textarea {
+    border-color: #23b7e5;
+}*/
+/*.note-editor.note-frame {
+    border: 1px solid #23b7e5;
+}*/
 .navbar-form .form-control.input-sm.bg-light {
     border-color: transparent !important;
 }
@@ -94,6 +97,7 @@
 }
 footer.bg-dark {
     padding: 0;
+    background: #3A3F51 !important;
 }
 footer .container .row.m-t-md {
     margin-bottom: 10px;
@@ -113,6 +117,7 @@ footer .container .row.m-t-md {
 }
 .left-users h3:first-of-type, .left-users h4:first-of-type {
     display: block;
+    text-align: center;
 }
 
 /*.bg-light{
@@ -121,22 +126,18 @@ footer .container .row.m-t-md {
 /*.bg-info{
     background: #edf1f2;
 }*/
-.right{
+/*.right{
     background: white none repeat scroll 0 0;
     min-height: 200px;
     padding-top: 50px;
     text-align: center;
     width: 24%;
 }
-
+*/
 
 /************************ Course Page ***********************/
 .top-image.course-image > img {
-    max-height: 125px;
-    opacity: 0.8;
-    position: relative;
-    top: 0 !important;
-    width: 100% !important;
+    width: 100%;
 }
 .course-image-single .item.img-bg.img-info {
     margin-bottom: 50px;
@@ -157,7 +158,13 @@ footer .container .row.m-t-md {
 .enroll-btn .form-control.pull-right.btn.btn-primary {
     max-width: 200px;
 }
+.single-course-box .w-full.p-h-xxl.p-v-lg {
+    padding-top: 0;
+}
 
+.course-course-title {
+    padding: 8px 10px 0;
+}
 
 /************************* Profile *************************/
 .user-image-frame {
@@ -165,4 +172,30 @@ footer .container .row.m-t-md {
 }
 .user-image-frame .img-full{
     max-width: 300px;
+}
+
+.thumb-sm .label {
+    border-radius: 0.25em;
+    color: #fff;
+    display: inline;
+    font-size: 100%;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.4em 0.2em 0.3em;
+    position: absolute;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+/***************************** Messages ********************/
+.teacher-section, .student-section {
+    padding: 10px;
+}
+.reply-form .form-control {
+    margin: 0 !important;
+    padding: 0;
+}
+.reply-form .col-md-11.col-md-offset-1 {
+    padding-left: 0;
 }
