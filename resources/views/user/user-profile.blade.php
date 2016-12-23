@@ -5,7 +5,8 @@
     <div class="container">
         <div class="row p-t-xxl">
             <div class="col-sm-8 col-sm-offset-2 p-v-xxl text-center">
-                <h1 class="h1 m-t-l p-v-l">Profile</h1>
+                <h1 class="h1 m-t-l p-v-l">{{ $user->name }}</h1>
+                <h5>{{ $user->designation }}</h5>
             </div>
         </div>
     </div>
@@ -14,45 +15,156 @@
     
 <section class="p-v-xxl bg-light">
     <div class="container">
-        <div class="row p-t-xxl bg-info content">
-            <div class="col-md-12"> 
-              @if (session('message'))
-                  <div class="alert alert-success">
-                      {{ session('message') }}
+        <div class="row p-t-xxl content">
+
+              <div class="row">
+                  <!--blog post -->
+                  <div class="col-sm-8">
+                    
+                      <!--post -->
+                      <div class="panel">
+                        <div class="">
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    {{$errors->first()}}
+                                </div>
+                            @endif
+                            @if (session('message'))
+                                <div class="alert alert-success">
+                                    {{ session('message') }}
+                                </div>
+                            @endif
+
+                            @if(isset($message))
+                                <div class="alert alert-success">
+                                    {{ $message }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="item img-bg img-info">
+                            
+                        </div>
+                        
+                        <div class="wrapper-lg">
+                            <div class="user-image-frame">
+                                @if(!empty($user->profile_photo))
+                                    <img src="{{ url($user->profile_photo) }}" class="img-full">
+                                @else
+                                    <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-full">
+                                @endif
+                            </div>
+                            <div class="text-center">
+                              <h4>{{ $user->name }}</h4>
+                              <h6>{{ $user->designation }}</h6>
+                              <p>{{ $user->biography }}</p>
+                            </div>
+
+                           
+                        </div>
+                        <div class="wrapper b-b">
+                          <p class="m-b-none">
+                              <a href=""><span></span> {{ count($t_courses) }} Courses</a>
+                          </p>
+                        </div>
+                        
+                      </div>
+                      <!--/ post -->
+                    
                   </div>
-              @endif
-            </div>
-            <div class="col-md-12">
-              <div class="col-md-4">
-                  <!-- User image goes here -->
-                  <div class="col-md-12"><a href="" title="Change photo" class="btn btn-lg" data-toggle="modal" data-target="#editPhoto"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></div>
+                  <!--/ blog post -->
 
-                  <div class="col-md-12 user-image-frame">
-                      @if(!empty($user->profile_photo))
-                          <img src="{{ url($user->profile_photo) }}">
-                      @else
-                          <img src="{{ url('user/no_photo/no_photo.png') }}">
-                      @endif
+                  <!--blog sidebar -->
+                  <div class="col-sm-4">
+                      <div class="panel wrapper-xxl bg-offWhite text-center">
+                           <a href="" title="Change photo" class="btn btn-lg" data-toggle="modal" data-target="#editPhoto"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Change Photo</a>
+                      </div>
+
+                      <div class="panel wrapper-xxl bg-offWhite text-center">
+                           <a href="" title="Update Profile" class="btn btn-lg" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update Profile</a>
+                      </div>
+                    
+                    @if(count($t_courses) > 0)
+                      <div class="panel wrapper-xxl bg-offWhite">
+                        <h5 class="m-t-none m-b-lg text-center">My Courses</h5>
+                        @foreach($t_courses as $course)
+                        <div class="">
+                          <?php $image = basename($course->thumb_url); ?>
+                          @if(!empty($image))
+                            <a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/<?php echo $image;?>" alt="..." class="img-full"> </a>
+                          @else
+                            <a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/no/placeholder.png" alt="..." class="img-full"> </a>
+                          @endif
+                          <div class="clear">
+                            <a href="{{ url('course') }}/{{ $course->id }}" class="text-info text-ellipsis">{{ $course->title }}</a>
+                            <small class="block text-muted">Start Date: {{ date('j F,Y',strtotime($course->start_date)) }}</small>
+                          </div>
+                        </div>
+                        <div class="line-sm"></div>
+                        @endforeach
+                      </div>
+                    @endif
+
                   </div>
+                  <!--/ blog sidebar -->
+                </div>
 
-                  <!-- User Image upload modal goes here -->
 
-                  <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
+                <!-- User Image upload modal goes here -->
+
+                <div class="modal fade" id="editPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Upload/Edit your profile photo</h4>
+                      </div>
+                        <div class="modal-body">
+                          <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('user/profile/upload-photo') }}">
+                                  {{ csrf_field() }}
+                                  <div class="form-group">
+                                      <div class="col-md-12">
+                                          <input type="file" name="profile-photo" class="form-control">
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                              </div>
+                          </form>
+                    </div>
+                  </div>
+                </div> 
+
+                <!-- edit Teacher/Student name -->
+                <div class="modal fade" id="editName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title" id="myModalLabel">Upload/Edit your profile photo</h4>
+                          <h4 class="modal-title" id="myModalLabel">Edit your name</h4>
                         </div>
                           <div class="modal-body">
-                             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('user/profile/upload-photo') }}">
+                             <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('user/profile/edit-name') }}">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="file" name="profile-photo" class="form-control">
+                                        <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <input type="text" name="designation" class="form-control" value="{{ $user->designation }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <textarea name="biography" class="form-control" value="">{{ $user->biography }}</textarea>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                               <button type="submit" class="btn btn-primary">Save changes</button>
@@ -60,107 +172,8 @@
                         </form>
                       </div>
                     </div>
-                  </div>                  
-              </div>
+                </div>
 
-
-              <div class="col-md-8">
-                  <div class="row">
-                      <div class="col-md-12">
-                            <!-- User bio goes here -->
-                            <h3 class="user-name">{{ $user->name }} </h3> <span class="edit-name pull-right btn btn-danger"><a href="" title="Update Profile" class="btn btn-lg" data-toggle="modal" data-target="#editName"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Update</a></span>
-                            <h5 class="user-designation">{{ $user->designation }} </h5>
-                            <h6 class="user-email">{{ $user->email }}</h6>
-                            @if($user->role_id == 2)
-                              <h5 class="user-designation label label-info">Teacher</h5> 
-                            @else
-                              <h5 class="user-designation label label-info">Student</h5>
-                            @endif
-
-                            <p class="user-biography" style="margin-top:50px"> 
-                                {{ $user->biography }}
-                            </p>
-
-
-                            <!-- edit Teacher/Student name -->
-                            <div class="modal fade" id="editName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                      <h4 class="modal-title" id="myModalLabel">Edit your name</h4>
-                                    </div>
-                                      <div class="modal-body">
-                                         <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('user/profile/edit-name') }}">
-                                            {{ csrf_field() }}
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <input type="text" name="name" class="form-control" value="{{ $user->name }}">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <input type="text" name="designation" class="form-control" value="{{ $user->designation }}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-md-12">
-                                                    <textarea name="biography" class="form-control" value="">{{ $user->biography }}</textarea>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                          <button type="submit" class="btn btn-primary">Save changes</button>
-                                        </div>
-                                    </form>
-                                  </div>
-                                </div>
-                            </div>
-                      </div>
-                        
-                  </div>
-                  
-
-                  <div class="my-courses row" style="margin-top: 40px;">
-
-                      <div class="col-md-12">
-                        @if(count($t_courses) > 0)
-                            <div class="panel panel-success" >
-                                <div class="panel panel-primary">
-                                  <div class="panel-heading">My Courses</div>
-                                  <div class="panel-body">
-                                        <ul class="list-group">
-                                            @foreach($t_courses as $course)
-                                                <li class="list-group-item list-group-item-success"><a href="{{ url('teacher/my-course') }}/{{ $course->id }}">{{ $course->title }}</a></li>
-                                            @endforeach
-                                        </ul>
-                                  </div>
-
-                              </div>
-                            </div>
-
-                        @endif
-
-                        @if(count($s_courses))
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">My Courses</div>
-                                <div class="panel-body">
-                                      <ul class="list-group">
-                                          @foreach($s_courses as $course)
-                                              <li class="list-group-item list-group-item-success"><a href="{{ url('student/my-course') }}/{{ $course->course_id }}">{{ $course->title }}</a></li>
-                                          @endforeach
-                                      </ul>
-                                </div>
-                            </div>
-
-                        @endif
-                        </div>
-                  </div>
-              </div>
-            </div>
 
         </div>
     </div>

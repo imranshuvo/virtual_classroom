@@ -157,3 +157,12 @@ footer .container .row.m-t-md {
 .enroll-btn .form-control.pull-right.btn.btn-primary {
     max-width: 200px;
 }
+
+
+/************************* Profile *************************/
+.user-image-frame {
+    text-align: center;
+}
+.user-image-frame .img-full{
+    max-width: 300px;
+}
