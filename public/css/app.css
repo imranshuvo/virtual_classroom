@@ -10,15 +10,15 @@
     box-shadow: 2px 1px 2px #47C1E3;
 }
 .bg-info {
-    background-color: #4da6c7;
+    background-color: #23b7e5;
     color: white;
 }
-.bg-dark h1 {
+/*.bg-dark h1 {
     color: black;
-}
-.bg-dark p, .bg-dark a {
+}*/
+/*.bg-dark p, .bg-dark a {
     color: #332600;
-}
+}*/
 .single-course-public.img-full {
     max-height: 500px;
     object-fit: contain;
@@ -50,8 +50,8 @@
 }
 
 .bg-dark {
-    background-color: #ffc933;
-    color: #332600 !important;
+    background-color: #23b7e5;
+    color: #d9f3fb !important;
     position: relative;
     top: 50px;
 }
@@ -73,9 +73,9 @@
 .bg-info a {
     color: #332600;
 }
-.bg-dark h1 {
+/*.bg-dark h1 {
     color: #332600;
-}
+}*/
 
 .bg-info.content {
     margin-top: 50px;
@@ -115,12 +115,12 @@ footer .container .row.m-t-md {
     display: block;
 }
 
-.bg-light{
+/*.bg-light{
     background: white;
-}
-.bg-info{
+}*/
+/*.bg-info{
     background: #edf1f2;
-}
+}*/
 .right{
     background: white none repeat scroll 0 0;
     min-height: 200px;
@@ -152,4 +152,8 @@ footer .container .row.m-t-md {
 }
 .img-small {
     max-width: 100px;
+}
+
+.enroll-btn .form-control.pull-right.btn.btn-primary {
+    max-width: 200px;
 }

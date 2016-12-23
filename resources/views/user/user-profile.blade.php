@@ -106,7 +106,7 @@
 
                                             <div class="form-group">
                                                 <div class="col-md-12">
-                                                    <textarea name="biography" class="form-control" value="">{{ $user->designation }}</textarea>
+                                                    <textarea name="biography" class="form-control" value="">{{ $user->biography }}</textarea>
                                                 </div>
                                             </div>
                                         </div>

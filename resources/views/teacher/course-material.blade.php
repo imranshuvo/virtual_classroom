@@ -22,79 +22,15 @@
 	
 <section class="p-v-xxl bg-light">
 	<div class="container">
-	    <div class="row p-t-xxl bg-info content">
-            <div class="course-image-single">
-                <div class="row">
-                    <div class="image col-md-12">
-                        @if(!empty($image))
-                        <img src="{{ asset('course/imgs') }}/<?php echo $image ?>" class="item img-bg img-info">
-                        @else
-                            <img src="{{ asset('course/imgs/no') }}/placeholder.png" class="item img-bg img-info">
-                        @endif
-                    </div>
-                </div>
-            </div>
+	    <div class="row p-t-xxl content">
 
-            <div class="after-image">
-                <div class="row">
-
-                <div class="col-md-3">
-                    <!-- left sidebar -->
-                    <div class="list-group">
-                        <a href="{{ url('course') }}/{{ $course->id }}/class" class="list-group-item">Class</a>
-                        <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all" class="list-group-item">All exam topic</a>
-                        <a href="{{ url('exam/course')}}/{{ $course->id }}/topic/new" class="list-group-item">+ Create an exam topic</a>
-
-                    </div>
-                </div>
-
-                <div class="col-md-9">
-                    <!-- Main content -->
-                    <div class="col-md-9">
-                        <div class="row">
-                            <h2 class="content-title">About This Course</h2>
-                            <p class="published-at">Published : {{ date('j F,Y',strtotime($course->created_at )) }}</p>
-                            <h4 class="course-title content-title" >Course Description</h4>
-                            <p class="course-description">
-                                {!! $course->description !!}
-                            </p>
-                        </div>
-                        <div class="row" style="margin-top: 100px;">
-                            <h2 class="content-title" style="margin-bottom: 30px;">Instructor Biography</h2>
-                            <div class="row col-md-12">
-                                <div class="col-md-4">
-                                    <!-- Instructor photo -->
-                                    @if(!empty($user->profile_photo))
-                                        <img src="{{ url($user->profile_photo) }}" class="img-small">
-                                    @else
-                                        <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-small">
-                                    @endif
-                                    
-                                </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <h4 class="user-name">{{ $user->name }}</h4>
-                                        <p class="user-designation">{{ $user->designation }}</p>
-                                        <p class="user-biography">{{ $user->biography }}</p>
-                                    </div>
-                                    <div class="row">
-                                        <h4 class="other-courses-by-me" style="margin-top: 50px;">More Courses by Me</h4>
-                                        @if(count($courses) > 0)
-                                            @foreach($courses as $course)
-                                                <a href="{{ url('course') }}/{{ $course->id }}">{{ $course->title }}</a>
-                                            @endforeach
-                                        @endif
-                                    </div>
-
-                                </div>
-                                
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-3">
-                        <div class="row">
+            <div class="row">
+                <!--blog post -->
+                <div class="col-sm-8">
+                    
+                    <!--post -->
+                    <div class="panel">
+                        <div class="">
                             @if($errors->any())
                                 <div class="alert alert-danger">
                                     {{$errors->first()}}
@@ -111,23 +47,117 @@
                                     {{ $message }}
                                 </div>
                             @endif
-
                         </div>
-                        <div class="row">
-                            <div id="inCall" class="ptext pull-right">
-                                <a href="" class="btn btn-danger" data-toggle="modal" data-target="#editCourse"><i class="fa fa-edit"></i> Edit</a> 
-                                <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteCourse"><i class="fa fa-remove"></i> Delete</a>
-                            </div>
+                        <div class="item img-bg img-info">
+                            @if(!empty($image))
+                                <img src="{{ asset('course/imgs') }}/<?php echo $image ?>" class="img-full">
+                            @else
+                                <img src="{{ asset('course/imgs/no') }}/placeholder.png" class="img-full">
+                            @endif
+                        </div>
+                        <div class="bottom wrapper-lg w-full">
+                            <h4 class="h4 text-inline"><a class="text" href="">{{ $course->title }}</a></h4>
+                            <small class="">Published : {{ date('j F,Y',strtotime($course->created_at )) }}</small>
+                        </div>
+                        <div class="wrapper-lg">
+                            <a href="" class="m-r-xl"><span>{{ $enrolled }}</span> Students Enrolled</a>
+                            <a href=""><span>{{ $seat_left }}</span> Seat Left</a>
+                            <form action="{{ url('course') }}/{{ $course->id }}/enroll" method="get" class="enroll-btn">
+                                <div class="form-group">
+                                    <button type="submit" class="form-control pull-right btn btn-primary" value="Enroll">Enroll in This Course</button>
+                                </div>
+                            </form>
+                            
+                        </div>
+                        <div class="wrapper b-b">
+                            <p class="m-b-none">
+                                {!! $course->description !!}
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <!--/ post -->
+                    
+                </div>
+                <!--/ blog post -->
+
+                <!--blog sidebar -->
+                <div class="col-sm-4">
+
+                    <div class="panel wrapper-xxl bg-offWhite text-center">
+                        <div id="inCall" class="ptext">
+                            <a href="" class="btn btn-danger" data-toggle="modal" data-target="#editCourse"><i class="fa fa-edit"></i> Edit</a> 
+                            <a href="" class="btn btn-danger" data-toggle="modal" data-target="#deleteCourse"><i class="fa fa-remove"></i> Delete</a>
                         </div>
                     </div>
+                    <div class="panel wrapper-xxl bg-offWhite">
+                        <div class="">
+                            <a href="{{ url('course') }}/{{ $course->id }}/class"> Goto Class </a>
+                        </div>
+                        <div class="">
+                            <div class="line-sm b-b"></div>
+                        </div>
+                        <div class="">
+                            <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all">  All Exam Topics </a>
+                        </div>
+                        <div class="">
+                            <div class="line-sm b-b"></div>
+                        </div>
+                        <div class="">
+                            <a href="{{ url('exam/course')}}/{{ $course->id }}/topic/new">  + Create an Exam Topic </a>
+                        </div>
+                        <div class="">
+                            <div class="line-sm b-b"></div>
+                        </div>
+                    </div>
+                    <div class="panel wrapper-xxl bg-offWhite text-center">
+                        <h5 class="m-t-none m-b-lg">Instructor Biography</h5>
+                        <div class="">
+                            @if(!empty($user->profile_photo))
+                                <img src="{{ url($user->profile_photo) }}" class="img-full">
+                            @else
+                                <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-full">
+                            @endif
+                        </div>
+                        <div class="text-center">
+                            <h4>{{ $user->name }}</h4>
+                            <h6>{{ $user->designation }}</h6>
+                            <p>{{ $user->biography }}</p>
+                        </div>
+                    </div>
+                    
+                    @if(count($all_courses) > 0)
+                        <div class="panel wrapper-xxl bg-offWhite">
+                            <h5 class="m-t-none m-b-lg text-center">Check My Other Courses</h5>
+                            @foreach($all_courses as $course)
+                            <div class="">
+                                <?php $image = basename($course->thumb_url); ?>
+                                @if(!empty($image))
+                                    <a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/<?php echo $image;?>" alt="..." class="img-full"> </a>
+                                @else
+                                    <a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/no/placeholder.png" alt="..." class="img-full"> </a>
+                                @endif
+                                <div class="clear">
+                                    <a href="{{ url('course') }}/{{ $course->id }}" class="text-info text-ellipsis">{{ $course->title }}</a>
+                                    <small class="block text-muted">Start Date: {{ date('j F,Y',strtotime($course->start_date)) }}</small>
+                                </div>
+                            </div>
+                            <div class="line-sm"></div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                <!--/ blog sidebar -->
+            </div>
 
 
-
+                <div class="col-md-9">
+                    <!-- Main content -->
                     <!-- Modals -->
                     <div class="row">
                         <!-- Edit Course Modal -->
-                        <div id="editCourse" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
+                        <div id="editCourse" class="modal fade bs-example-modal-lg" role="dialog">
+                            <div class="modal-dialog modal-lg">
 
                                 <!-- Modal content-->
                                 <div class="modal-content">

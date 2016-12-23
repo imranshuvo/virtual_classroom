@@ -25,57 +25,106 @@
 
 <section class="p-v-xxl bg-light">
     <div class="row p-t-xxl ">
-    	<div class="container bg-info content">
-			@if(count($course) > 0)
-			<div class="panel">
-				<div class="item img-bg img-info">
-					<div class="top wrapper-lg w-full">
-						<div class="pull-right m-t-xxs">
-							<a href="" class="m-r-sm text-white"><i class="fa fa-heart-o"></i> 36K</a>
-							<a href="" class="text-white"><i class="icon-eye"></i> 313K</a>
-						</div>
-						<div class="clear m-b s">
-							<a class="pull-left thumb-xxs m-r-sm " herf=""> <img src="{{ $course->large_url }}" alt="..." class="img-full img-circle"> </a>
-							<div class="clear m-t-xs p-t-2x">
-								<p class="h6"> <a href="" class="text-white">Author: {{ $course->teacher->name }}</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="bottom wrapper-lg w-full">
-						<div class="col-md-8">
-							<h4 class="h4 text-inline"><a class="text-white" href="">{{ $course->title }}</a></h4>
-						</div>
-						<div class="col-md-4">
-							@if(Auth::check())
-								@if(Auth::user()->role_id == 1)
-							    <div class="col-md-8 col-md-offset-4">
-							      	 <form action="{{ url('course') }}/{{ $course->id }}/enroll" method="get">
-										<div class="form-group">
-											<button type="submit" class="form-control btn btn-primary" value="Enroll">Enroll</button>
-										</div>
-							      	</form>
-							    </div>
-							    @endif
-							@else
-								<div class="alert alert-notice">
-									You must <a href="{{ url('login') }}">login</a> to enroll in this course!
-								</div>
-						    @endif
-					    </div>
-					</div>
-					<img class="img-full single-course-public" src="{{ asset('course/imgs/') }}/<?php echo $image ?>">
-				</div>
-				<div class="wrapper b-b">
-					<p class="m-b-none">
-						{!! $course->description !!}
-					</p>
-				</div>
-				<div class="wrapper-lg">
-					<!-- There can be review etc -->
-				</div>
-			</div>
-			@endif
+    	<div class="container content">
+    		<div class="row">
+				<!--blog post -->
+				<div class="col-sm-8">
+					
+					<!--post -->
+					<div class="panel">
+						<div class="">
+							@if($errors->any())
+                                <div class="alert alert-danger">
+                                    {{$errors->first()}}
+                                </div>
+                            @endif
+                            @if (session('message'))
+                                <div class="alert alert-success">
+                                    {{ session('message') }}
+                                </div>
+                            @endif
 
+                            @if(isset($message))
+                                <div class="alert alert-success">
+                                    {{ $message }}
+                                </div>
+                            @endif
+						</div>
+						<div class="item img-bg img-info">
+							@if(!empty($image))
+	                        	<img src="{{ asset('course/imgs') }}/<?php echo $image ?>" class="img-full">
+	                        @else
+	                            <img src="{{ asset('course/imgs/no') }}/placeholder.png" class="img-full">
+	                        @endif
+						</div>
+						<div class="bottom wrapper-lg w-full">
+							<h4 class="h4 text-inline"><a class="text" href="">{{ $course->title }}</a></h4>
+							<small class="">Published : {{ date('j F,Y',strtotime($course->created_at )) }}</small>
+						</div>
+						<div class="wrapper-lg">
+							<a href="" class="m-r-xl"><span>{{ $enrolled }}</span> Students Enrolled</a>
+							<a href=""><span>{{ $seat_left }}</span> Seat Left</a>
+							<form action="{{ url('course') }}/{{ $course->id }}/enroll" method="get" class="enroll-btn">
+								<div class="form-group">
+									<button type="submit" class="form-control pull-right btn btn-primary" value="Enroll">Enroll in This Course</button>
+								</div>
+					      	</form>
+							
+						</div>
+						<div class="wrapper b-b">
+							<p class="m-b-none">
+								{!! $course->description !!}
+							</p>
+						</div>
+						
+					</div>
+					<!--/ post -->
+					
+				</div>
+				<!--/ blog post -->
+
+				<!--blog sidebar -->
+				<div class="col-sm-4">
+					<div class="panel wrapper-xxl bg-offWhite text-center">
+						<h5 class="m-t-none m-b-lg">Instructor Biography</h5>
+						<div class="">
+							@if(!empty($user->profile_photo))
+                                <img src="{{ url($user->profile_photo) }}" class="img-full">
+                            @else
+                                <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-full">
+                            @endif
+						</div>
+						<div class="text-center">
+							<h4>{{ $user->name }}</h4>
+							<h6>{{ $user->designation }}</h6>
+							<p>{{ $user->biography }}</p>
+						</div>
+					</div>
+					
+					@if(count($all_courses) > 0)
+						<div class="panel wrapper-xxl bg-offWhite">
+							<h5 class="m-t-none m-b-lg text-center">Check My Other Courses</h5>
+							@foreach($all_courses as $course)
+							<div class="">
+								<?php $image = basename($course->thumb_url); ?>
+								@if(!empty($image))
+									<a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/<?php echo $image;?>" alt="..." class="img-full"> </a>
+								@else
+									<a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/no/placeholder.png" alt="..." class="img-full"> </a>
+								@endif
+								<div class="clear">
+									<a href="{{ url('course') }}/{{ $course->id }}" class="text-info text-ellipsis">{{ $course->title }}</a>
+									<small class="block text-muted">Start Date: {{ date('j F,Y',strtotime($course->start_date)) }}</small>
+								</div>
+							</div>
+							<div class="line-sm"></div>
+							@endforeach
+						</div>
+					@endif
+
+				</div>
+				<!--/ blog sidebar -->
+			</div>
 		</div>
 	</div>
 </section>

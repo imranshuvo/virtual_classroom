@@ -30,32 +30,41 @@ class CourseController extends Controller
     //Show single course
     public function showSingle($id){
         $course = Course::find($id);
-    	return view('courses.single')->with(['course' => $course]);
+        $course_enrolled = \DB::table('course_enrolled')->where('course_id','=',$id)->distinct('student_id')->count('student_id');
+        $seat_left = $course->max_allowed_student - $course_enrolled;
+        $user = User::find($course->user_id);
+        $all_courses = Course::where('user_id','=',$user->id)->where('id','!=',$id)->get();
+    	return view('courses.single')->with(['all_courses' => $all_courses ,'user' => $user,'course' => $course,'enrolled' => $course_enrolled,'seat_left' => $seat_left]);
     }
 
 
     //Enroll a student
 
     public function enroll(Request $req, $id){
-        $course_id = $id;
-        $user_id = $req->user()->id;
-        $enrolled_id = \DB::table('course_enrolled')->where([
-                [ 'course_id', $course_id ],
-                [ 'student_id', $user_id ]
-            ])->get();
-        if(count($enrolled_id) < 1 ){
-            if($course_id != null && !empty($course_id)){
-            \DB::table('course_enrolled')->insert([
-                    'course_id' => $course_id,
-                    'student_id' => $user_id
-                ]);
-            return view('courses.thanks')->with(['message' => 'Ureka! You have successfully enrolled!']);
+        if($req->user()->role_id == 1){
+            $course_id = $id;
+            $user_id = $req->user()->id;
+            $enrolled_id = \DB::table('course_enrolled')->where([
+                    [ 'course_id', $course_id ],
+                    [ 'student_id', $user_id ]
+                ])->get();
+            if(count($enrolled_id) < 1){
+                if($course_id != null && !empty($course_id)){
+                \DB::table('course_enrolled')->insert([
+                        'course_id' => $course_id,
+                        'student_id' => $user_id
+                    ]);
+                return view('courses.thanks')->with(['message' => 'Ureka! You have successfully enrolled!']);
+                }else{
+                    return \Redirect::back()->withErrors(['Something went wrong! You can not enrolled in this course this right now!']);
+                }
             }else{
-                return \Redirect::back()->withErrors(['Something went wrong! You can not enrolled in this course this right now!']);
+                return \Redirect::back()->withErrors(['You are already enrolled in this course!']);
             }
         }else{
-            return \Redirect::back()->withErrors(['You are already enrolled in this course!']);
+            return \Redirect::back()->withErrors(['Only students are allowed to enroll in a course!']);
         }
+        
         
     }
 
