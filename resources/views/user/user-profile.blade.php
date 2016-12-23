@@ -116,14 +116,14 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Upload/Edit your profile photo</h4>
+                        <h4 class="modal-title" id="myModalLabel">Upload/Change Your Photo</h4>
                       </div>
                         <div class="modal-body">
                           <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('user/profile/upload-photo') }}">
                                   {{ csrf_field() }}
                                   <div class="form-group">
                                       <div class="col-md-12">
-                                          <input type="file" name="profile-photo" class="form-control">
+                                          <input type="file" name="profile-photo" class="">
                                       </div>
                                   </div>
                               </div>
@@ -142,7 +142,7 @@
                       <div class="modal-content">
                         <div class="modal-header">
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                          <h4 class="modal-title" id="myModalLabel">Edit your name</h4>
+                          <h4 class="modal-title" id="myModalLabel">Update Your Profile</h4>
                         </div>
                           <div class="modal-body">
                              <form class="form-horizontal" method="post" enctype="multipart/form-data" action="{{ url('user/profile/edit-name') }}">

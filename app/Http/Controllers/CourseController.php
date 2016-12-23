@@ -195,7 +195,8 @@ class CourseController extends Controller
 
     public function getClassPage($course_id){
         $course = Course::find($course_id);
-        return view('courses.class')->with(['course' => $course]);
+        $teacher = User::where('id','=',$course->user_id)->get()->first();
+        return view('courses.class')->with(['course' => $course,'teacher' => $teacher ]);
     }
 
 

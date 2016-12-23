@@ -90,7 +90,7 @@
                                 @endif 
 
                                 <li>
-                                    <a href="{{ url('student/profile') }}">Profile</a>
+                                    <a href="{{ url('user/profile') }}">Profile</a>
                                 </li>
                                 
                                 <li class="divider"></li>

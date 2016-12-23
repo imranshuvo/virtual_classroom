@@ -30,55 +30,73 @@ class ExamController extends Controller
 
     //Create a new topic for the course exam
     public function createNewTopic($course_id, Request $req){
-
-        $topic = new Topic($req->all());
-        $course = Course::find($req->input('course'));
-        $course->topics()->save($topic);
-        session()->flash('flash_mess', 'Topic was created completely');
-		return redirect()->action('ExamController@index', ['course_id' => $course_id]);
+        if(Auth::user()->role_id == 2){
+            $topic = new Topic($req->all());
+            $course = Course::find($req->input('course'));
+            $course->topics()->save($topic);
+            session()->flash('flash_mess', 'Topic was created completely');
+    		return redirect()->action('ExamController@index', ['course_id' => $course_id]);
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
     }
 
 
     //Get the new topic create view
     public function getNewTopicCreateView($course_id){
-    	$course = Course::find($course_id);
-    	return view('vendor.exam.new-topic')->with(['course' => $course]);
+        if(Auth::user()->role_id == 2){
+        	$course = Course::find($course_id);
+        	return view('vendor.exam.new-topic')->with(['course' => $course]);
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
     }
 
 
     // get Edit the topic view
     public function getEdit($course_id,$topic_id){
-    	$topic = Topic::findOrFail($topic_id);
-        $title = "Edit topic '{$topic->name}'";
-        $course = Course::find($course_id);
-        return view('vendor.exam.edit-topic')->with(['topic' => $topic,'title' => $title,'course' => $course]);
+        if(Auth::user()->role_id == 2){
+        	$topic = Topic::findOrFail($topic_id);
+            $title = "Edit topic '{$topic->name}'";
+            $course = Course::find($course_id);
+            return view('vendor.exam.edit-topic')->with(['topic' => $topic,'title' => $title,'course' => $course]);
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
     }
 
     //Delete the topic
     public function getDelete($course_id, $topic_id){
-    	 $topic = Topic::findOrFail($topic_id);
-        Topic::destroy($topic_id);
-        session()->flash('flash_mess', 'Topic  was deleted');
-		return redirect()->action('ExamController@index', ['course_id' => $course_id]);
+        if(Auth::user()->role_id == 2){
+        	 $topic = Topic::findOrFail($topic_id);
+            Topic::destroy($topic_id);
+            session()->flash('flash_mess', 'Topic  was deleted');
+    		return redirect()->action('ExamController@index', ['course_id' => $course_id]);
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
     }
 
 
     //Update the topic
     public function updateTopic($course_id,$topic_id, Request $req){
-
-    	$data = [
-    		'name' => $req->input('name'),
-    		'course_id' => $req->input('course'),
-    		'duration' => $req->input('duration'),
-    		'status' => $req->input('status')
-    	];
-    	$this->validate($req,[
-    		'name' => 'required',
-    		'duration' => 'required'
-    		]);
-    	$topic = Topic::find($topic_id);
-    	$topic->update($data);
-    	return redirect()->action('ExamController@index',['course_id' => $course_id]);
+        if(Auth::user()->role_id == 2){
+        	$data = [
+        		'name' => $req->input('name'),
+        		'course_id' => $req->input('course'),
+        		'duration' => $req->input('duration'),
+        		'status' => $req->input('status')
+        	];
+        	$this->validate($req,[
+        		'name' => 'required',
+        		'duration' => 'required'
+        		]);
+        	$topic = Topic::find($topic_id);
+        	$topic->update($data);
+        	return redirect()->action('ExamController@index',['course_id' => $course_id]);
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
 
     }
 
@@ -98,26 +116,38 @@ class ExamController extends Controller
 
     //Create a New question
     public function postNewQuestion($course_id,$topic_id, Request $req){
-    	$topic = Topic::find($topic_id);
-    	$question = new Question($req->all());
-    	$topic->questions()->save($question);
-    	session()->flash('flash_mess','Question was added successfully.');
-    	return redirect(action('ExamController@getQuestions',['course_id' => $course_id,'id' => $topic_id]));
+        if(Auth::user()->role_id == 2){
+        	$topic = Topic::find($topic_id);
+        	$question = new Question($req->all());
+        	$topic->questions()->save($question);
+        	session()->flash('flash_mess','Question was added successfully.');
+        	return redirect(action('ExamController@getQuestions',['course_id' => $course_id,'id' => $topic_id]));
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
     }
 
     //Delete the question
     public function deleteQuestion($course_id,$topic_id,$question_id){
-        Question::destroy($question_id);
-        session()->flash('flash_mess', 'Question #'.$question_id.' was deleted');
-        return redirect(action('ExamController@getQuestions', ['course_id'=> $course_id, 'id' =>  $topic_id ]));
+        if(Auth::user()->role_id == 2){
+            Question::destroy($question_id);
+            session()->flash('flash_mess', 'Question #'.$question_id.' was deleted');
+            return redirect(action('ExamController@getQuestions', ['course_id'=> $course_id, 'id' =>  $topic_id ]));
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
     }
 
     //Update the question
     public function updateQuestion($course_id,$topic_id,$question_id,Request $req){
-    	$question = Question::findOrFail($question_id);
-        $question->update($req->all());
-        session()->flash('flash_mess', 'Question #'.$question->id.' was changed completely');
-        return redirect(action('ExamController@getQuestions', ['course_id'=> $course_id, 'id' => $topic_id ]));
+        if(Auth::user()->role_id == 2){
+        	$question = Question::findOrFail($question_id);
+            $question->update($req->all());
+            session()->flash('flash_mess', 'Question #'.$question->id.' was changed completely');
+            return redirect(action('ExamController@getQuestions', ['course_id'=> $course_id, 'id' => $topic_id ]));
+        }else{
+            return \Redirect::back()->withErrors(['You are not allowed to perform this action!']);
+        }
     }
 
 

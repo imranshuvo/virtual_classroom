@@ -4,6 +4,11 @@
 @section('content')
 
 
+<?php
+    $image = basename($course->large_url);
+?>
+
+
 <section class="bg-dark">
     <div class="container">
         <div class="row p-t-xxl">
@@ -17,78 +22,103 @@
     
 <section class="p-v-xxl bg-light">
     <div class="container">
-        <div class="row p-t-xxl bg-info content">
+        <div class="row p-t-xxl content">
 
-            <div class="col-md-3">
-                <!-- left sidebar -->
-                <div class="list-group">
-                    <a href="{{ url('course')}}/{{ $course->id }}/class" class="list-group-item">Class</a>
-                    <a href="{{ url('student/course') }}/{{ $course->id }}/exams/open" class="list-group-item">Open Exams</a>
-                </div>
-            </div>
-
-            <div class="col-md-9">
-                <!-- Main content -->
-                <div class="col-md-12">
-
-                    <div class="chat-box col-md-12">
-                        <div id="vid-thumb"></div>
-                        <div id="vid-box" class="video2"></div>
-                
-                
-
-                        <div class="test">
-
-                            <form name="loginForm" id="login" action="#" onsubmit="return errWrap(login,this);">
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" name="username" id="username" placeholder="Enter A Username" class="form-control input-sm bg-white">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm bg-dark" type="submit" name="login_submit" value="Log In">
-                                                <i class="cbutton__icon fa fa-fw fa fa-sign-in"></i>
-                                            </button> 
-                                        </span>
-                                    </div>
+            <div class="row">
+                <!--blog post -->
+                <div class="col-sm-8">
+                    
+                    <!--post -->
+                    <div class="panel">
+                        <div class="">
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    {{$errors->first()}}
                                 </div>
-
-                            </form>
-                            
-                            
-                            
-                            <form name="callForm" id="call" action="#" onsubmit="return errWrap(makeCall,this);">
-
-
-                             <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text"  name="number" id="call" placeholder="Enter User To Call!" class="form-control input-sm bg-white">
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-sm bg-dark" type="submit" name="login_submit" value="Call" data-modal="modal-13">
-                                    <i class="cbutton__icon fa fa-fw fa fa fa-phone-square"></i>
-                                            </button> 
-                                        </span>
-                                    </div>
+                            @endif
+                            @if (session('message'))
+                                <div class="alert alert-success">
+                                    {{ session('message') }}
                                 </div>
-                            </form>
-                            
-                            <div id="inCall" class="ptext">
-                                <button id="end" class="btn btn-submit bg-dark" onclick="end()" >End</button> 
-                                <button id="mute" class="btn btn-submit bg-dark" onclick="mute()">Mute</button> 
-                                <button id="pause" class="btn btn-submit bg-dark" onclick="pause()">Pause</button>
-                            </div>
-                            
-                            <div id="logs" class="ptext"></div>
+                            @endif
 
-
-
-
+                            @if(isset($message))
+                                <div class="alert alert-success">
+                                    {{ $message }}
+                                </div>
+                            @endif
                         </div>
+                        <div class="item img-bg img-info">
+                            @if(!empty($image))
+                                <img src="{{ asset('course/imgs') }}/<?php echo $image ?>" class="img-full">
+                            @else
+                                <img src="{{ asset('course/imgs/no') }}/placeholder.png" class="img-full">
+                            @endif
+                        </div>
+                        <div class="bottom wrapper-lg w-full">
+                            <h4 class="h4 text-inline"><a class="text" href="">{{ $course->title }}</a></h4>
+                            <small class="">Published : {{ date('j F,Y',strtotime($course->created_at )) }}</small>
+                        </div>
+                        <div class="wrapper-lg">
+                            <a href="" class="m-r-xl"><span>{{ $enrolled }}</span> Students Enrolled</a>
+                            <a href=""><span>{{ $seat_left }}</span> Seat Left</a>    
+                            <a href="{{ url('course') }}/{{ $course->id }}/class" class="btn btn-primary pull-right"> Goto Class </a>
+                        </div>
+                        <div class="wrapper b-b">
+                            <p class="m-b-none">
+                                {!! $course->description !!}
+                            </p>
+                        </div>
+                        
                     </div>
+                    <!--/ post -->
                     
                 </div>
+                <!--/ blog post -->
 
+                <!--blog sidebar -->
+                <div class="col-sm-4">
+                    <div class="panel wrapper-xxl bg-offWhite">
+                        <h5 class="m-t-none m-b-lg">Information</h5>
+                        <div class="">
+                            <p>Call No :  <b>{{ $user->email }}_{{ $course->id }}</b></p>
+                        </div>
+                        <div class="">
+                            <div class="line-sm b-b"></div>
+                        </div>
+                        <div class="">
+                            <p>Start Date: <b>{{ date('j F,Y',strtotime($course->start_date )) }}</b></p>
+                        </div>
+                        <div class="">
+                            <div class="line-sm b-b"></div>
+                        </div>
+                    </div>
+                    <div class="panel wrapper-xxl bg-offWhite">
+                        <div class="">
+                            <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all"> Exams </a>
+                        </div>
+                        <div class="">
+                            <div class="line-sm b-b"></div>
+                        </div>
+                    </div>
+                    <div class="panel wrapper-xxl bg-offWhite text-center">
+                        <h5 class="m-t-none m-b-lg">Instructor Biography</h5>
+                        <div class="">
+                            @if(!empty($user->profile_photo))
+                                <img src="{{ url($user->profile_photo) }}" class="img-full">
+                            @else
+                                <img src="{{ url('user/no_photo/no_photo.png') }}" class="img-full">
+                            @endif
+                        </div>
+                        <div class="text-center">
+                            <h4>{{ $user->name }}</h4>
+                            <h6>{{ $user->designation }}</h6>
+                            <p>{{ $user->biography }}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--/ blog sidebar -->
             </div>
-
         </div>
     </div>
 </section>

@@ -27,6 +27,7 @@ Route::get('courses','CourseController@showAll');
 Route::post('search','CourseController@search');
 Route::post('user/profile/upload-photo',['middleware' => 'auth', 'uses' => 'UserProfileController@uploadPhoto']);
 Route::post('user/profile/edit-name',['middleware' => 'auth' , 'uses' => 'UserProfileController@updateName']);
+Route::get('user/profile',['middleware' => 'auth', 'uses' => 'UserProfileController@getProfile']);
 
 
 //Course
@@ -53,7 +54,6 @@ Route::group(['prefix' => 'teacher'], function(){
 Route::group(['prefix' => 'student'], function(){
 	Route::get('courses',['middleware' => 'auth','uses' => 'StudentController@showAllCourses']);
 	Route::get('my-course/{id}',['middleware' => 'auth', 'uses' => 'StudentController@singleCourseMaterialPage']);
-	Route::get('profile',['middleware' => 'auth', 'uses' => 'UserProfileController@getProfile']);
 	Route::get('course/{course_id}/exams/open',['middleware' => 'auth' , 'uses' => 'StudentController@getOpenExamsPage']);
 });
 
