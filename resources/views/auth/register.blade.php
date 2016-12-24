@@ -53,7 +53,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="user-type" class="col-md-4 control-label">I want </label>
+                        <label for="user-type" class="col-md-4 control-label">I want to</label>
 
                         <div class="col-md-6">
                             <select name="role_id" id="" class="form-control">

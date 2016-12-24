@@ -1,6 +1,13 @@
+body{
+    color: #1c2b36;
+}
+
 .navbar{
 	margin-bottom: 0px;
 	height: 100px;
+}
+.navbar-form .form-control.input-sm.bg-light {
+    min-width: 500px;
 }
 .container.topnav {
     font-size: 17px;
@@ -198,4 +205,21 @@ footer .container .row.m-t-md {
 }
 .reply-form .col-md-11.col-md-offset-1 {
     padding-left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+/********************************** Responsive ******************************/
+@media only screen and ( max-width: 767px){
+    .navbar-form .form-control.input-sm.bg-light {
+        min-width: 250px;
+    }
 }

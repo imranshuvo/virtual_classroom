@@ -62,7 +62,7 @@
                         <div class="wrapper-lg">
                             <a href="" class="m-r-xl"><span>{{ $enrolled }}</span> Students Enrolled</a>
                             <a href=""><span>{{ $seat_left }}</span> Seat Left</a>    
-                            <a href="{{ url('course') }}/{{ $course->id }}/class" class="btn btn-primary pull-right"> Goto Class </a>
+                            <a href="{{ url('course') }}/{{ $course->id }}/class" class="btn btn-danger pull-right"> Join Class </a>
                         </div>
                         <div class="wrapper b-b">
                             <p class="m-b-none">
@@ -91,6 +91,9 @@
                         </div>
                         <div class="">
                             <div class="line-sm b-b"></div>
+                        </div>
+                        <div class="">
+                            <p><a href="{{ url('course') }}/{{ $course->id }}/class" class="btn btn-danger">Join Class</a></p>
                         </div>
                     </div>
                     <div class="panel wrapper-xxl bg-offWhite">
