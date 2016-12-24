@@ -17,27 +17,35 @@
     <div class="container">
         <div class="row p-t-xxl content">
             <div class="col-md-9">
-				@if($errors->has())
-					@foreach ($errors->all() as $error)
-	                <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
-	                    <span class="arrow left pull-up arrow-danger"></span>
-	                    <p class="m-b-none text-white">{{ $error }}</p>
-	                </div>
-	                @endforeach
-	            @endif
-	            @if (session()->has('message'))
-	                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
-	                    <span class="arrow left pull-up arrow-success"></span>
-	                    <p class="m-b-none text-white">{{ session()->get('message') }}</p>
-	                </div>
-	            @endif
+            	
+            		@if($errors->has())
+						@foreach ($errors->all() as $error)
+						<div class="panel">
+			                <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+			                    <span class="arrow left pull-up arrow-danger"></span>
+			                    <p class="m-b-none text-white">{{ $error }}</p>
+			                </div>
+		                </div>
+		                @endforeach
+		            @endif
+		            @if (session()->has('message'))
+		            <div class="panel">
+		                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+		                    <span class="arrow left pull-up arrow-success"></span>
+		                    <p class="m-b-none text-white">{{ session()->get('message') }}</p>
+		                </div>
+		            </div>
+		            @endif
 
-	            @if(isset($message))
-	                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
-	                    <span class="arrow left pull-up arrow-success"></span>
-	                    <p class="m-b-none text-white">{{ $message }}</p>
-	                </div>
-	            @endif
+		            @if(isset($message))
+		            <div class="panel">
+		                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+		                    <span class="arrow left pull-up arrow-success"></span>
+		                    <p class="m-b-none text-white">{{ $message }}</p>
+		                </div>
+		            </div>
+		            @endif
+				
 
 				<div class="create-library">
 
@@ -78,6 +86,13 @@
 					    	<label for="class_number" class="col-sm-2 control-label">Add the book ( PDF )</label>
 					    	<div class="col-sm-10 input-append date">
 					    		<input type="file" name="book_link" class="control" id="" required="">
+					    	</div>
+					    </div>
+
+					    <div class="form-group">
+					    	<label for="class_number" class="col-sm-2 control-label">Add Book Cover Photo</label>
+					    	<div class="col-sm-10 input-append date">
+					    		<input type="file" name="book_thumb" class="control" id="" required="">
 					    	</div>
 					    </div>
 

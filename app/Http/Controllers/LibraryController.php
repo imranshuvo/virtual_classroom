@@ -12,7 +12,7 @@ class LibraryController extends Controller
 
 
     public function getBooks(){
-    	$books = \DB::table('library')->get();
+    	$books = \DB::table('library')->join('courses','library.course_id','=','courses.id')->paginate(15);
     	return view('vendor.library.show')->with(['books' => $books]);
     }
 
@@ -31,15 +31,20 @@ class LibraryController extends Controller
 
     public function saveBook(Request $req){
     	$book = $req->file('book_link');
+        $book_thumb = $req->file('book_thumb');
     	$bookName = $book->getClientOriginalName();
+        $thumbName = $book_thumb->getClientOriginalName();
+        $thumb_url = time().$thumbName;
         $url = time(). $bookName;
         $destination = public_path('library/books');
+        $d_thumb = public_path('library/imgs');
         $data = [
         	'uploader_id' => $req->input('uploader_id'),
         	'course_id'  => $req->input('course_id'),
         	'author_name' => $req->input('author_name'),
         	'book_name' => $req->input('book_name'),
         	'book_link' => $url,
+            'book_thumb' => $thumb_url,
         	'online_link' => $req->input('online_link')
         ];
 
@@ -47,10 +52,11 @@ class LibraryController extends Controller
         	'course_id' => 'required',
         	'author_name' => 'required',
         	'book_name' => 'required',
-        	'book_link' => 'mimes:pdf',
+        	'book_link' => 'required|mimes:pdf',
+            'book_thumb' => 'required|mimes:png,jpg,jpeg',
         	]);
 
-        if($book->move($destination,$url)){
+        if($book->move($destination,$url) && $book_thumb->move($d_thumb,$thumb_url)){
             $id = \DB::table('library')->insertGetId($data);
         }
         if($id != null){
