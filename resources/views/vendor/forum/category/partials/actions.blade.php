@@ -1,4 +1,4 @@
-<div class="panel panel-default" data-actions>
+<div class="panel panel-info" data-actions>
     <div class="panel-heading">
         <span class="glyphicon glyphicon-option-vertical"></span>
         <a href="#" data-toggle="collapse" data-target=".collapse.category-options">{{ trans('forum::categories.actions') }}</a>
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="panel-footer clearfix">
-            <button type="submit" class="btn btn-default pull-right">{{ trans('forum::general.proceed') }}</button>
+            <button type="submit" class="btn btn-danger pull-right">{{ trans('forum::general.proceed') }}</button>
         </div>
     </div>
 </div>

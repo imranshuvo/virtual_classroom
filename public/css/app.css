@@ -197,7 +197,10 @@ footer .container .row.m-t-md {
     padding-left: 0;
 }
 
-
+/********************************* Forum **********************/
+.forum .form-control {
+    background: #edf1f2;
+}
 
 
 

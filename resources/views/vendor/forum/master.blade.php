@@ -140,17 +140,17 @@
     
 <section class="p-v-xxl bg-light forum">
     <div class="container">
-        <div class="row p-t-xxl bg-info content">
-            <div class="col-md-10 col-md-offset-1">
-
-        @include ('forum::partials.breadcrumbs')
-        @include ('forum::partials.alerts')
-
-        @yield('content')
+        <div class="row p-t-xxl content">
+            <div class="col-sm-12">
+                <div class="panel" style="padding: 25px;">
+                    @include ('forum::partials.breadcrumbs')
+                    @include ('forum::partials.alerts')
+                    @yield('content')
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-    </div>
-    </section>
+</section>
 
 
 

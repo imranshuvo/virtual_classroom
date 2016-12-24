@@ -18,7 +18,7 @@
             </div>
 
             <button type="submit" class="btn btn-success pull-right">{{ trans('forum::general.create') }}</button>
-            <a href="{{ URL::previous() }}" class="btn btn-default">{{ trans('forum::general.cancel') }}</a>
+            <a href="{{ URL::previous() }}" class="btn btn-danger">{{ trans('forum::general.cancel') }}</a>
         </form>
     </div>
 @stop

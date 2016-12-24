@@ -1,7 +1,7 @@
 <form action="{{ Forum::route('category.store') }}" method="POST">
     {!! csrf_field() !!}
 
-    <div class="panel panel-default">
+    <div class="panel panel-info forum">
         <div class="panel-heading">
             <span class="glyphicon glyphicon-plus"></span>
             <a href="#" data-toggle="collapse" data-target=".collapse.create-category">{{ trans('forum::categories.create') }}</a>
@@ -10,11 +10,11 @@
             <div class="panel-body">
                 <div class="form-group">
                     <label for="title">{{ trans('forum::general.title') }}</label>
-                    <input type="text" name="title" value="{{ old('title') }}" class="form-control">
+                    <input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title of the Category" required="">
                 </div>
                 <div class="form-group">
                     <label for="description">{{ trans('forum::general.description') }}</label>
-                    <input type="text" name="description" value="{{ old('description') }}" class="form-control">
+                    <input type="text" name="description" value="{{ old('description') }}" class="form-control" placeholder="Brief Description of the Category">
                 </div>
                 <div class="form-group">
                     <label for="category-id">{{ trans_choice('forum::categories.category', 1) }}</label>
@@ -24,8 +24,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="weight">{{ trans('forum::general.weight') }}</label>
-                    <input type="number" id="weight" name="weight" value="{{ !empty(old('weight')) ? old('weight') : 0 }}" class="form-control">
+                    <!-- <label for="weight">{{ trans('forum::general.weight') }}</label> -->
+                    <input type="hidden" id="weight" name="weight" value="{{ !empty(old('weight')) ? old('weight') : 0 }}" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>
@@ -37,13 +37,11 @@
                 <div class="form-group">
                     <label>
                         <input type="hidden" name="private" value="0">
-                        <input type="checkbox" name="private" value="1">
-                        {{ trans('forum::categories.make_private') }}
                     </label>
                 </div>
             </div>
             <div class="panel-footer clearfix">
-                <button type="submit" class="btn btn-default pull-right">{{ trans('forum::general.create') }}</button>
+                <button type="submit" class="btn btn-danger pull-right">{{ trans('forum::general.create') }}</button>
             </div>
         </div>
     </div>
