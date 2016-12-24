@@ -19,9 +19,10 @@
 	<div class="container">
 	    <div class="row p-t-xxl">
 
-            @if (session('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
+            @if(session('message'))
+                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                    <span class="arrow left pull-up arrow-success"></span>
+                    <p class="m-b-none text-white">{{ session('message') }}</p>
                 </div>
             @endif
 
@@ -29,7 +30,10 @@
 
 			@if($errors->has())
 				@foreach ($errors->all() as $error)
-				  <div class="alert alert-danger">{{ $error }}</div>
+				  <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+                      <span class="arrow left pull-up arrow-danger"></span>
+                      <p class="m-b-none text-white">{{ $error }}</p>
+                  </div>
 				@endforeach
 			@endif
 

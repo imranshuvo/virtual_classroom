@@ -101,8 +101,12 @@
                   </form>
               @else
                   <div class="panel">
-                      <p class="text-danger" style="padding: 20px;">You only can send message to your coursemates and teachers.</p>  
+                      <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+                        <span class="arrow left pull-up arrow-danger"></span>
+                        <p class="m-b-none text-white">You only can send message to your coursemates and teachers.</p>
+                      </div> 
                  </div>
+
               @endif
           </div>
           <!-- End of Left bar content -->

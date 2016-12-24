@@ -26,7 +26,10 @@ include($file_path);
         	
 			@if($errors->has())
 				@foreach ($errors->all() as $error)
-				  <div class="alert alert-danger">{{ $error }}</div>
+				  <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+                      <span class="arrow left pull-up arrow-danger"></span>
+                      <p class="m-b-none text-white">{{ $error }}</p>
+                  </div>
 				@endforeach
 			@endif
         

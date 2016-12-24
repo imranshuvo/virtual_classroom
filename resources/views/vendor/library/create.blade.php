@@ -18,20 +18,28 @@
         <div class="row p-t-xxl bg-info content">
             <div class="col-md-10 col-md-offset-1">
 
-            @if(session()->has('message'))
-			    <div class="alert alert-success">
-			        {{ session()->get('message') }}
-			    </div>
-			@endif
-            @if($errors->has())
+			@if($errors->has())
 				@foreach ($errors->all() as $error)
-				  <div class="alert alert-danger">{{ $error }}</div>
-				@endforeach
-			@endif
+                <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+                    <span class="arrow left pull-up arrow-danger"></span>
+                    <p class="m-b-none text-white">{{ $error }}</p>
+                </div>
+                @endforeach
+            @endif
+            @if (session()->has('message'))
+                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                    <span class="arrow left pull-up arrow-success"></span>
+                    <p class="m-b-none text-white">{{ session()->get('message') }}</p>
+                </div>
+            @endif
 
+            @if(isset($message))
+                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                    <span class="arrow left pull-up arrow-success"></span>
+                    <p class="m-b-none text-white">{{ $message }}</p>
+                </div>
+            @endif
 
-
-        
 			<div class="create-library">
 
 				@if($is_enabled == 'yes')

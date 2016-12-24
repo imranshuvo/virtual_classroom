@@ -18,10 +18,11 @@
         
 	    <div class="row p-t-xxl content">
 
-            @if (Session::has('error_message'))
-                <div class="alert alert-danger" role="alert">
-                    {{ Session::get('error_message') }}
-                </div>
+            @if(Session::has('error_message'))
+                <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+                    <span class="arrow left pull-up arrow-danger"></span>
+                    <p class="m-b-none text-white">{{ Session::get('error_message') }}</p>
+                </div> 
             @endif
         
             <div class="col-sm-9">

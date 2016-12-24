@@ -19,12 +19,25 @@
 	<div class="container">
 	    <div class="row p-t-xxl">
 
-            @if (session('message'))
-                <div class="alert alert-success">
-                    {{ session('message') }}
+            @if($errors->any())
+                <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+                    <span class="arrow left pull-up arrow-danger"></span>
+                    <p class="m-b-none text-white">{{$errors->first()}}</p>
                 </div>
             @endif
-			
+            @if (session('message'))
+                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                    <span class="arrow left pull-up arrow-success"></span>
+                    <p class="m-b-none text-white">{{ session('message') }}</p>
+                </div>
+            @endif
+
+            @if(isset($message))
+                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                    <span class="arrow left pull-up arrow-success"></span>
+                    <p class="m-b-none text-white">{{ $message }}</p>
+                </div>
+            @endif
 
 			@if(count($courses) > 0)
 				@foreach($courses as $course)
