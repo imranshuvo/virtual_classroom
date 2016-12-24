@@ -24,8 +24,8 @@ class CreateLibraryTable extends Migration
             $table->timestamps();
         });
         Schema::table('library',function (Blueprint $table){
-            $table->foreign('course_id')->references('id')->on('courses');
-            $table->foreign('uploader_id')->references('id')->on('users');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('uploader_id')->references('id')->on('users')->onDelete('cascade');
         });
 
     }

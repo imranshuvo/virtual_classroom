@@ -30,7 +30,8 @@ class AddForeignKeyInCourseEnrolledTable extends Migration
     {
         Schema::table('course_enrolled', function (Blueprint $table) {
             //
-            $table->dropForeign(['course_id','student_id']);
+            $table->dropForeign(['course_id']);
+            $table->dropForeign(['student_id']);
         });
     }
 }

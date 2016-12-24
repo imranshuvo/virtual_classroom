@@ -119,7 +119,14 @@ footer .container .row.m-t-md {
 .note-insert button + button {
     display: none !important;
 }
-
+.single-course-box .item.text-center.bg-info {
+    max-height: 385px;
+    min-height: 385px;
+}
+.top-image.course-image > img {
+    max-height: 160px;
+    width: 100%;
+}
 
 
 
