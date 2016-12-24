@@ -132,16 +132,16 @@
                     @if(count($all_courses) > 0)
                         <div class="panel wrapper-xxl bg-offWhite">
                             <h5 class="m-t-none m-b-lg text-center">Check My Other Courses</h5>
-                            @foreach($all_courses as $course)
+                            @foreach($all_courses as $all_course)
                             <div class="">
                                 <?php $image = basename($course->thumb_url); ?>
                                 @if(!empty($image))
-                                    <a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/<?php echo $image;?>" alt="..." class="img-full"> </a>
+                                    <a herf="{{ url('course') }}/{{ $all_course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/<?php echo $image;?>" alt="..." class="img-full"> </a>
                                 @else
-                                    <a herf="{{ url('course') }}/{{ $course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/no/placeholder.png" alt="..." class="img-full"> </a>
+                                    <a herf="{{ url('course') }}/{{ $all_course->id }}" class="pull-left thumb-md b m-r-sm"> <img src="{{ asset('course/imgs') }}/no/placeholder.png" alt="..." class="img-full"> </a>
                                 @endif
                                 <div class="clear">
-                                    <a href="{{ url('course') }}/{{ $course->id }}" class="text-info text-ellipsis">{{ $course->title }}</a>
+                                    <a href="{{ url('course') }}/{{ $all_course->id }}" class="text-info text-ellipsis">{{ $course->title }}</a>
                                     <small class="block text-muted">Start Date: {{ date('j F,Y',strtotime($course->start_date)) }}</small>
                                 </div>
                             </div>
