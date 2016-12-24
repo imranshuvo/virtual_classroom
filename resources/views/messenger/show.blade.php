@@ -65,7 +65,7 @@
 
 	    	<!-- Sidebar right starts here -->
 	    	<div class="col-sm-3 panel-body">
-	    		<div class="panel wrapper-xxl bg-offWhite text-center">
+	    		<div class="panel wrapper-xl bg-offWhite text-center">
                    <a href="{{URL::to('messages')}}" class="btn btn-lg"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to Inbox</a>
                 </div>
 	    	</div>

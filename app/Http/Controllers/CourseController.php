@@ -77,8 +77,8 @@ class CourseController extends Controller
         $this->validate($req,[
             'search' => 'required'
             ]);
-        $courses = \DB::table('courses')->where('title','like','%'.$search_criteria.'%')->get();
-        return view('courses.search')->with(['courses' => $courses,'type' => 'student']);
+        $courses = \DB::table('courses')->where('title','like','%'.$search_criteria.'%')->join('users','users.id', '=','courses.user_id')->select('courses.*','users.name')->get();
+        return view('courses.courses')->with(['courses' => $courses,'type' => 'student']);
     }
 
 

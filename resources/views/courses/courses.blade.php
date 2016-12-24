@@ -40,16 +40,8 @@
 				@foreach($courses as $course)
 
 					<div class="col-md-3 single-course-box">
-
-						@if(isset($type))
-							@if($type == 'student')
-								<a href="{{ url('student/my-course/') }}/{{ $course->id }}">
-							@else
-								<a href="{{ url('teacher/my-course/') }}/{{ $course->id }}">
-							@endif
-						@else 
 							<a href="{{ url('course') }}/{{ $course->id }}" >
-					  	@endif
+					  
 							<?php 
 
 								$image = basename($course->thumb_url);

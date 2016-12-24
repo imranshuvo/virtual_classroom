@@ -1,7 +1,12 @@
 body{
-    color: #1c2b36;
+    color: #58666e;
+    font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
 }
-
+p,span,a{
+    font-weight: 500;
+}
 .navbar{
 	margin-bottom: 0px;
 	height: 100px;
@@ -18,7 +23,7 @@ body{
 }
 .bg-info {
     background-color: #23b7e5;
-    color: white;
+    /*color: white; */
 }
 /*.bg-dark h1 {
     color: black;
@@ -58,7 +63,7 @@ body{
 
 .bg-dark {
     background-color: #23b7e5;
-    color: #d9f3fb !important;
+    color: #d9f3fb !important; 
     position: relative;
     top: 50px;
 }
@@ -78,7 +83,7 @@ body{
     color: #332600;
 }
 .bg-info a {
-    color: #332600;
+    color: #332600; 
 }
 /*.bg-dark h1 {
     color: #332600;
@@ -126,21 +131,6 @@ footer .container .row.m-t-md {
     display: block;
     text-align: center;
 }
-
-/*.bg-light{
-    background: white;
-}*/
-/*.bg-info{
-    background: #edf1f2;
-}*/
-/*.right{
-    background: white none repeat scroll 0 0;
-    min-height: 200px;
-    padding-top: 50px;
-    text-align: center;
-    width: 24%;
-}
-*/
 
 /************************ Course Page ***********************/
 .top-image.course-image > img {

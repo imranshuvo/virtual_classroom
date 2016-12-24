@@ -54,7 +54,7 @@
             @endif
             </div>
             <div class="col-sm-3">
-                <div class="panel wrapper-xxl bg-offWhite text-center">
+                <div class="panel wrapper-xl bg-offWhite text-center">
                    <a href="{{URL::to('messages/create')}}" title="Change photo" class="btn btn-lg"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> New Message</a>
                 </div>
             </div>

@@ -109,7 +109,7 @@
 
           <!-- Right Sidebar -->
           <div class="col-sm-3">
-              <div class="panel wrapper-xxl bg-offWhite text-center">
+              <div class="panel wrapper-xl bg-offWhite text-center">
                   <a href="{{ url('messages') }}" class="btn btn-lg"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to Inbox</a>
               </div>
           </div>

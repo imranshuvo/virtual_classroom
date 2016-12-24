@@ -47,7 +47,7 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="text" class="form-control input-sm bg-light" placeholder="Search" name="search">
+                            <input type="text" class="form-control input-sm bg-light" placeholder="What course will your life take?" name="search" required="">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-sm bg-light">
                                     <i class="fa fa-search"></i>
