@@ -23,6 +23,7 @@
                         @include ('forum::category.partials.options')
                     </select>
                 </div>
+                <input type="hidden" name="cat_author_id" value="{{ Auth::user()->id }}">
                 <div class="form-group">
                     <!-- <label for="weight">{{ trans('forum::general.weight') }}</label> -->
                     <input type="hidden" id="weight" name="weight" value="{{ !empty(old('weight')) ? old('weight') : 0 }}" class="form-control">

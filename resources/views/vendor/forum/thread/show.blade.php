@@ -16,15 +16,14 @@
         </h2>
 
         <hr>
-
-        @can ('manageThreads', $category)
+        @if(\App::make('App\Http\Controllers\ForumController')->isThreadAuthor($thread->id) == true)
             <form action="{{ Forum::route('thread.update', $thread) }}" method="POST" data-actions-form>
                 {!! csrf_field() !!}
                 {!! method_field('patch') !!}
 
-                @include ('forum::thread.partials.actions')
+               @include ('forum::thread.partials.actions')
             </form>
-        @endcan
+        @endif
 
         @can ('deletePosts', $thread)
             <form action="{{ Forum::route('bulk.post.update') }}" method="POST" data-actions-form>

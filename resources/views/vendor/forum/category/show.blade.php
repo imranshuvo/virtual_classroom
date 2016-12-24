@@ -15,15 +15,14 @@
         </h2>
 
         <hr>
-
-        @can ('manageCategories')
+        @if(\App::make('App\Http\Controllers\ForumController')->isCatAuthor($category->id) == true)
             <form action="{{ Forum::route('category.update', $category) }}" method="POST" data-actions-form>
                 {!! csrf_field() !!}
                 {!! method_field('patch') !!}
 
                 @include ('forum::category.partials.actions')
             </form>
-        @endcan
+        @endif
 
         @if (!$category->children->isEmpty())
             <table class="table table-category">

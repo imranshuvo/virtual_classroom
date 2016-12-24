@@ -26,7 +26,7 @@
     <td>
         @if (!$post->trashed())
             @can ('edit', $post)
-                <a href="{{ Forum::route('post.edit', $post) }}">{{ trans('forum::general.edit') }}</a>
+                <a href="{{ Forum::route('post.edit', $post) }}" class="btn btn-sm btn-danger">{{ trans('forum::general.edit') }}</a>
             @endcan
         @endif
     </td>
