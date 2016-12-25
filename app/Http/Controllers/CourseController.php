@@ -9,13 +9,18 @@ use App\Http\Requests;
 Use App\Course;
 use Image;
 use App\User;
+use Auth;
 
 class CourseController extends Controller
 {
     //
 
     public function getCreateCourseView(){
-    	return view('courses.create');
+        if(Auth::user()->role_id == 2){
+            return view('courses.create');      
+        }else{
+            return 'You do not have permission to access this page';
+        }
     }
 
 
