@@ -95,7 +95,7 @@
                     </div>
                     <div class="panel wrapper-xxl bg-offWhite">
                         <div class="">
-                            <a href="{{ url('course') }}/{{ $course->id }}/class"> Goto Class </a>
+                            <a href="{{ url('course') }}/{{ $course->id }}/class" class="btn btn-danger"> Goto Class </a>
                         </div>
                         <div class="">
                             <div class="line-sm b-b"></div>

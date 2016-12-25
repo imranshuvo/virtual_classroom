@@ -14,19 +14,10 @@
     
 <section class="p-v-xxl bg-light">
     <div class="container">
-        <div class="row p-t-xxl bg-info content">
+        <div class="row p-t-xxl content">
         	@include('errors.list')
 
-            <div class="col-md-3">
-                <!-- left sidebar -->
-                <div class="list-group">
-                    <a href="{{ url('teacher/my-course') }}/{{ $course->id }}" class="list-group-item"><< Back to course page</a>
-                    <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all" class="list-group-item">All exam topic</a>
-
-                </div>
-            </div>
-
-            <div class="col-md-9">
+            <div class="col-sm-9">
 
             	<form class="form-horizontal" action="{{ url('exam/course') }}/{{ $course->id }}/topic/create" method="post">
             		{{ csrf_field() }}
@@ -69,6 +60,17 @@
                     </div>
 
             	</form>
+            </div>
+
+            <div class="col-sm-3">
+                <!-- left sidebar -->
+                <div class="panel wrapper-xl bg-offWhite text-center">
+                    <a href="{{ url('teacher/my-course') }}/{{ $course->id }}" class="btn btn-lg"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to Course</a>
+                </div>
+                <div class="panel wrapper-xl bg-offWhite text-center">
+                    <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all" class="btn btn-lg">All Exam Topic</a>
+                </div>
+
             </div>
 
         </div>

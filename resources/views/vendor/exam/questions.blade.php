@@ -14,40 +14,34 @@
     
 <section class="p-v-xxl bg-light">
     <div class="container">
-        <div class="row p-t-xxl bg-info content">
+        <div class="row p-t-xxl content">
             @include('errors.list')
 
             @if(Session::has('flash_mess'))
-                <div class="alert alert-success">{{Session::get('flash_mess')}}</div>
+                <div class="panel">
+                    <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                        <span class="arrow left pull-up arrow-success"></span>
+                        <p class="m-b-none text-white">{{Session::get('flash_mess')}}</p>
+                    </div>
+                </div>
             @endif
 
-            <div class="col-md-3">
-                <!-- left sidebar -->
-                <div class="list-group">
-                    <a href="{{ url('teacher/my-course') }}/{{ $course->id }}" class="list-group-item"><< Back to course page</a>
-                    <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all" class="list-group-item">All exam topic</a>
-                    <a href="{{ url('exam/course')}}/{{ $course->id }}/topic/new" class="list-group-item">+ Create an exam topic</a>
-                </div>
-            </div>
 
-            <div class="col-md-9">
-                <div class="row">
+            <div class="col-sm-9">
+                <div class="panel" style="padding: 25px;">
                     <div class="question-topic">
                         <h3>Course Name: <b>{{ $course->title }}</b></h3>
                         <h3>Topic Name: <b>{{ $topic->name }}</b></h3>
                         <h3>Duration: <b>{{ $topic->duration }}</b> minutes</h3>
                     </div>
-                </div>
-                <div class="row">
+
                      <button type="button" class="btn btn-primary" id="btn-add-new-question"><span class="glyphicon glyphicon-plus"></span> Add new question</button>
 
                      <br><br><br>
                      <form class="form-horizontal" method="post" action="{{ url('exam/course') }}/{{ $course->id }}/topic/{{ $topic->id }}/question/create" id="add-new-question">
                          @include('vendor.exam.question-form')
 
-                </div>
 
-                <div class="row"> 
                     @if(!$questions->isEmpty())
                         <div class="panel panel-default">
                             <!-- Default panel contents -->
@@ -78,8 +72,24 @@
                         </div>
                     @endif
                 </div>
-
             </div>
+
+            <div class="col-sm-3">
+                <!-- left sidebar -->
+                <div class="panel wrapper-xl bg-offWhite text-center">
+                    <a href="{{ url('teacher/my-course') }}/{{ $course->id }}" class="btn btn-lg"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Back to course page</a>
+                </div>
+                <div class="panel wrapper-xl bg-offWhite text-center">
+                    <a href="{{ url('exam/course')}}/{{ $course->id }}/topic/new" class="btn btn-lg">+ Create an exam topic</a>
+                </div>
+                <div class="panel wrapper-xl bg-offWhite text-center">
+                    <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/all" class="btn btn-lg">All exam topic</a>
+                </div>
+            </div>
+
+
+
+
         </div>
     </div>
 </section>
