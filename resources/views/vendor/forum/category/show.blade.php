@@ -15,13 +15,15 @@
         </h2>
 
         <hr>
-        @if(\App::make('App\Http\Controllers\ForumController')->isCatAuthor($category->id) == true)
-            <form action="{{ Forum::route('category.update', $category) }}" method="POST" data-actions-form>
-                {!! csrf_field() !!}
-                {!! method_field('patch') !!}
+        @if(!Auth::guest())
+            @if(\App::make('App\Http\Controllers\ForumController')->isCatAuthor($category->id) == true)
+                <form action="{{ Forum::route('category.update', $category) }}" method="POST" data-actions-form>
+                    {!! csrf_field() !!}
+                    {!! method_field('patch') !!}
 
-                @include ('forum::category.partials.actions')
-            </form>
+                    @include ('forum::category.partials.actions')
+                </form>
+            @endif
         @endif
 
         @if (!$category->children->isEmpty())
