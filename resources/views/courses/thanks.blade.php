@@ -14,38 +14,50 @@
 
 
 <section class="p-v-xxl bg-light">
-    <div class="row p-t-xxl bg-info content">
+    <div class="container">
+        <div class="row p-t-xxl content">
 
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Congratulation!</div>
+            <div class="col-sm-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Congratulation!</div>
 
-                <div class="panel-body">
-                    @if($errors->any())
-                        <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
-                            <span class="arrow left pull-up arrow-danger"></span>
-                            <p class="m-b-none text-white">{{$errors->first()}}</p>
+                        <div class="panel-body">
+                            @if($errors->any())
+                                <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
+                                    <span class="arrow left pull-up arrow-danger"></span>
+                                    <p class="m-b-none text-white">{{$errors->first()}}</p>
+                                </div>
+                            @endif
+                            @if (session('message'))
+                                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                                    <span class="arrow left pull-up arrow-success"></span>
+                                    <p class="m-b-none text-white">{{ session('message') }}</p>
+                                </div>
+                            @endif
+
+                            @if(isset($message))
+                                <div class="pos-rlt wrapper b b-light r r-2x bg-success">
+                                    <span class="arrow left pull-up arrow-success"></span>
+                                    <p class="m-b-none text-white">{{ $message }}</p>
+                                </div>
+                            @endif
+
+                            <div>
+                                
+                            </div>
                         </div>
-                    @endif
-                    @if (session('message'))
-                        <div class="pos-rlt wrapper b b-light r r-2x bg-success">
-                            <span class="arrow left pull-up arrow-success"></span>
-                            <p class="m-b-none text-white">{{ session('message') }}</p>
-                        </div>
-                    @endif
-
-                    @if(isset($message))
-                        <div class="pos-rlt wrapper b b-light r r-2x bg-success">
-                            <span class="arrow left pull-up arrow-success"></span>
-                            <p class="m-b-none text-white">{{ $message }}</p>
-                        </div>
-                    @endif
-
                 </div>
             </div>
+
+                <!-- Right Sidebar -->
+            <div class="col-sm-3">
+                <div class="panel wrapper-xl bg-offWhite text-center">
+                  <a href="{{ url('student/my-course') }}/{{ $course_id }}" class="btn btn-lg"><i class="fa fa-hand-o-left" aria-hidden="true"></i> Go to Coure Page</a>
+              </div>
+            </div>
+            <!-- End Right Sidebar -->
         </div>
     </div>
-</div>
 </section>
 
 

@@ -25,20 +25,25 @@
                       <div class="col-sm-4">
                           <div class="panel left-users">
                               <!-- Show the available users here -->
+                              <?php $i = 0; $j = 0; $exist = [];?>
                               @if(count($users) > 0)
                                   <div class="form-group users">
                                       <div class="checkbox col-sm-12 col-md-12 list-group-lg m-b-none r-none">
                                           @foreach($users as $user)
+                                          
                                               @if(Auth::user()->id != $user->id)
                                                   @if($user->role_id == 1)
                                                       @if(Auth::user()->role_id == 2)
-                                                          <h3 class="s_title">Students</h4>
-                                                          <div class="line line-lg b-b b-info w-3x m-auto"></div>
+                                                          @if($i == 0)
+                                                              <h3 class="s_title">Students</h4>
+                                                              <div class="line line-lg b-b b-info w-3x m-auto"></div>
+                                                          @endif
                                                       @else
-                                                          <h3 class="s_title">Classmates</h4>
-                                                          <div class="line line-lg b-b b-info w-3x m-auto"></div>
+                                                          @if($i == 0)
+                                                              <h3 class="s_title">Classmates</h4>
+                                                              <div class="line line-lg b-b b-info w-3x m-auto"></div>
+                                                          @endif
                                                       @endif
-                                                      
                                                       <div class="student-section clearfix">
                                                           <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]" value="{{ $user->id }}">
                                                               <span class="thumb-sm avatar m-t-n-sm m-b-n-sm m-l-sm"> 
@@ -52,8 +57,10 @@
                                                           </label>
                                                       </div>
                                                   @else
-                                                    <h4 class="t_title"> Instructors </h4>
-                                                    <div class="line line-lg b-b b-info w-3x m-auto"></div>
+                                                    @if($j == 0)
+                                                        <h4 class="t_title" style="margin-top: 40px;"> Instructors </h4>
+                                                        <div class="line line-lg b-b b-info w-3x m-auto"></div>
+                                                    @endif
                                                     <div class="teacher-section clearfix">
                                                         
                                                           <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]" value="{{ $user->id }}">
@@ -67,8 +74,10 @@
                                                               <span>{!!$user->name!!}</span>     
                                                           </label>
                                                     </div>
+                                                    <?php $j++; ?>
                                                   @endif
                                               @endif
+                                              <?php $i++; ?>
                                           @endforeach
                                       </div>
                                   </div>

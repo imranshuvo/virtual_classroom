@@ -16,6 +16,7 @@
         </h2>
 
         <hr>
+        @if(!Auth::guest())
         @if(\App::make('App\Http\Controllers\ForumController')->isThreadAuthor($thread->id) == true)
             <form action="{{ Forum::route('thread.update', $thread) }}" method="POST" data-actions-form>
                 {!! csrf_field() !!}
@@ -23,6 +24,7 @@
 
                @include ('forum::thread.partials.actions')
             </form>
+        @endif
         @endif
 
         @can ('deletePosts', $thread)

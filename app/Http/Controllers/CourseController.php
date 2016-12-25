@@ -54,7 +54,7 @@ class CourseController extends Controller
                         'course_id' => $course_id,
                         'student_id' => $user_id
                     ]);
-                return view('courses.thanks')->with(['message' => 'Ureka! You have successfully enrolled!']);
+                return view('courses.thanks')->with(['message' => 'Ureka! You have successfully enrolled!','course_id' => $course_id]);
                 }else{
                     return \Redirect::back()->withErrors(['Something went wrong! You can not enrolled in this course this right now!']);
                 }

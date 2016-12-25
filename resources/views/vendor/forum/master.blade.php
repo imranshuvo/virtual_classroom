@@ -86,10 +86,12 @@
                                         <img src="{{ url('user/no_photo/no_photo.png') }}">
                                     @endif
                                     <i class="on md b-white bottom"></i> 
+                                    @include('messenger.unread-count')
                                 </span> <span class="hidden-sm hidden-md">{{ Auth::user()->name }}</span>
                             </a>
                             <!--dropdown -->
                             <ul class="dropdown-menu w">
+                                <li><a href="{{URL::to('messages')}}">Inbox @include('messenger.unread-count')</a></li>
                                  @if(Auth::user()->role_id == 2)
                                     <li><a href="{{ url('/register/course') }}">Register a Course</a></li>
                                     <li><a href="{{ url('/teacher/courses') }}">My Courses</a></li>
@@ -142,7 +144,7 @@
     <div class="container">
         <div class="row p-t-xxl content">
             <div class="col-sm-12">
-                <div class="panel" style="padding: 25px;">
+                <div class="panel" style="padding: 45px 25px;">
                     @include ('forum::partials.breadcrumbs')
                     @include ('forum::partials.alerts')
                     @yield('content')
@@ -159,7 +161,10 @@
                 <div class="row p-v m-t-md text-center">
                     
                     <p class="m-b-none">
-                        Build with <i class="fa fa-heart-o m-h-2x"></i> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
+                        Build <!-- <i class="fa fa-heart-o m-h-2x"></i> --> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
+                    </p>
+                    <p>
+                        2016 &copy; <a href="http:://www.vc.ikhan.rocks">vc.ikhan.rocks</a>
                     </p>
                 </div>
             </div>

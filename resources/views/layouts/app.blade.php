@@ -130,7 +130,7 @@
             <div class="row p-v m-t-md text-center">
                 
                 <p class="m-b-none">
-                    Build with <i class="fa fa-heart-o m-h-2x"></i> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
+                    Build <!-- with <i class="fa fa-heart-o m-h-2x"></i> --> by <a href="https://www.facebook.com/narmivoshu" target="_blank"> Shuvo&Fahima</a>
                 </p>
                 <p>
                     2016 &copy; <a href="http:://www.vc.ikhan.rocks">vc.ikhan.rocks</a>

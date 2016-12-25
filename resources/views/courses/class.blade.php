@@ -21,7 +21,7 @@
 
             <!-- Left main content -->
             <div class="col-sm-9">
-                <div class="panel col-sm-12" style="padding:0px 50px;">
+                <div class="panel col-sm-12" style="padding:20px 40px;">
                     <div class="chat-box col-md-12">
                         <div class="row">
                             <div id="vid-thumb"></div>
