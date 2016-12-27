@@ -79,8 +79,22 @@ class MessagesController extends Controller
                $users[] = \DB::table('course_enrolled')->join('users','users.id','=','course_enrolled.student_id')->where('course_id','=',$course->course_id)->get();
                $teachers[] = \DB::table('users')->join('courses','users.id','=','courses.user_id')->where('courses.id','=',$course->course_id)->get();
             }
-            $users = array_merge($users,$teachers);
-            $users = array_flatten($users);
+            $merged = array_merge($users,$teachers);
+            $flattened = array_flatten($merged);
+            //dd($users);
+            foreach($flattened as $current){
+                $exist[] = $current->id;
+            }
+            $exist = array_unique($exist);
+            //dd($exist);
+            foreach($exist as $key => $value){
+                $s[] = User::find($value);
+            }
+            //dd($a);
+            //dd($b);
+            //dd($exist);
+            $users = $s;
+            //dd($users);
         }else{
             $courses_enrolled = \DB::table('courses')->join('course_enrolled','course_enrolled.course_id','=','courses.id')->select('student_id')->get();
             foreach($courses_enrolled as $course){
