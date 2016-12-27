@@ -55,9 +55,15 @@
                                             </h4>
                                         </td>
                                         <td>
-                                            <a class="btn btn-info" href="{{action('ExamController@getQuestions', [$course->id,$topic->id])}}">Manage Questions</a>
-                                            <a class="btn btn-warning" href="{{action('ExamController@getEdit', [$course->id,$topic->id])}}">Edit</a>
-                                            <a class="btn btn-danger" id="btn-delete" href="{{action('ExamController@getDelete', [$course->id,$topic->id])}}">Delete</a>
+                                            @if(!Auth::guest())
+                                                @if(Auth::user()->role_id == 2)
+                                                    <a class="btn btn-info" href="{{action('ExamController@getQuestions', [$course->id,$topic->id])}}">Manage Questions</a>
+                                                    <a class="btn btn-warning" href="{{action('ExamController@getEdit', [$course->id,$topic->id])}}">Edit</a>
+                                                    <a class="btn btn-danger" id="btn-delete" href="{{action('ExamController@getDelete', [$course->id,$topic->id])}}">Delete</a>
+                                                @else
+                                                    <a href="{{ url('exam/course') }}/{{ $course->id }}/topic/{{ $topic->id}}/start" class="btn btn-info">Start Test</a>
+                                                @endif
+                                            @endif
                                         </td>
 
                                     </tr>
