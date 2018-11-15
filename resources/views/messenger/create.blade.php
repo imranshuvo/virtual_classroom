@@ -6,6 +6,7 @@
         <div class="row p-t-xxl">
             <div class="col-sm-8 col-sm-offset-2 p-v-xxl text-center">
                 <h1 class="h1 m-t-l p-v-l"></h1>
+
             </div>
         </div>
     </div>
@@ -19,6 +20,14 @@
 
           <!-- Start of left bar content -->
           <div class="col-sm-9">
+
+
+              @if ($errors->any())
+                  <div class="alert alert-danger"">
+                      {{ implode('', $errors->all(':message')) }}
+                  </div>
+               @endif
+
               @if($hide == 0)
                   <form action="{{ url('messages') }}" method="post"  class="form-horizontal col-sm-12">
                       {{ csrf_field() }}
@@ -30,7 +39,6 @@
                                   <div class="form-group users">
                                       <div class="checkbox col-sm-12 col-md-12 list-group-lg m-b-none r-none">
                                           @foreach($users as $user)
-                                          
                                               @if(Auth::user()->id != $user->id)
                                                   @if($user->role_id == 1)
                                                       @if(Auth::user()->role_id == 2)
@@ -112,7 +120,7 @@
                   <div class="panel">
                       <div class="pos-rlt wrapper b b-light r r-2x bg-danger">
                         <span class="arrow left pull-up arrow-danger"></span>
-                        <p class="m-b-none text-white">You only can send message to your coursemates and teachers.</p>
+                        <p class="m-b-none text-white">You only can send message to your students or classmates. </p>
                       </div> 
                  </div>
 

@@ -14,9 +14,9 @@
                         @else
                             <option value="delete" data-confirm="true" data-method="delete">{{ trans('forum::general.delete') }}</option>
                         @endif
-                        <option value="permadelete" data-confirm="true" data-method="delete">{{ trans('forum::general.perma_delete') }}</option>
+                       <!-- <option value="permadelete" data-confirm="true" data-method="delete">{{ trans('forum::general.perma_delete') }}</option> -->
                     @endcan
-
+                    <!-- 
                     @if (!$thread->trashed())
                         @can ('moveThreadsFrom', $category)
                             <option value="move">{{ trans('forum::general.move') }}</option>
@@ -39,6 +39,7 @@
                             <option value="rename">{{ trans('forum::general.rename') }}</option>
                         @endcan
                     @endif
+                -->
                 </select>
             </div>
             <div class="form-group hidden" data-depends="move">

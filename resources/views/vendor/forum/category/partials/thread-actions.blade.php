@@ -7,8 +7,9 @@
                 @can ('deleteThreads', $category)
                     <option value="delete" data-confirm="true" data-method="delete">{{ trans('forum::general.delete') }}</option>
                     <option value="restore" data-confirm="true">{{ trans('forum::general.restore') }}</option>
-                    <option value="permadelete" data-confirm="true" data-method="delete">{{ trans('forum::general.perma_delete') }}</option>
+                    <!-- <option value="permadelete" data-confirm="true" data-method="delete">{{ trans('forum::general.perma_delete') }}</option> -->
                 @endcan
+                <!-- 
                 @can ('moveThreadsFrom', $category)
                     <option value="move">{{ trans('forum::general.move') }}</option>
                 @endcan
@@ -20,6 +21,7 @@
                     <option value="pin">{{ trans('forum::threads.pin') }}</option>
                     <option value="unpin">{{ trans('forum::threads.unpin') }}</option>
                 @endcan
+            -->
             </select>
         </div>
         <div class="form-group hidden" data-depends="move">

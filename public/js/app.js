@@ -79,8 +79,8 @@ var vidCount  = 0;
 function login(form) {
 	var phone = window.phone = PHONE({
 	    number        : form.username.value || "Anonymous", // listen on username line else Anonymous
-	    publish_key   : 'pub-c-561a7378-fa06-4c50-a331-5c0056d0163c', // Your Pub Key
-	    subscribe_key : 'sub-c-17b7db8a-3915-11e4-9868-02ee2ddab7fe', // Your Sub Key
+	    publish_key   : 'pub-c-425eee1a-af0b-45f7-b8c7-ea655c1d8d0d', // Your Pub Key
+	    subscribe_key : 'sub-c-347c4aaa-e7fb-11e8-a0ef-c29873a03a60', // Your Sub Key
 	});
 	var ctrl = window.ctrl = CONTROLLER(phone);
 	ctrl.ready(function(){

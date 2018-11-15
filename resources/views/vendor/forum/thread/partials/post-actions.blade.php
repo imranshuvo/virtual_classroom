@@ -6,7 +6,7 @@
             <select name="action" id="thread-action" class="form-control">
                 <option value="delete" data-confirm="true" data-method="delete">{{ trans('forum::general.delete') }}</option>
                 <option value="restore" data-confirm="true">{{ trans('forum::general.restore') }}</option>
-                <option value="permadelete" data-confirm="true" data-method="delete">{{ trans('forum::general.perma_delete') }}</option>
+                <!-- <option value="permadelete" data-confirm="true" data-method="delete">{{ trans('forum::general.perma_delete') }}</option> -->
             </select>
         </div>
     </div>

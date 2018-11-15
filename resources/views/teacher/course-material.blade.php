@@ -5,7 +5,11 @@
 
 
 <?php
-    $image = basename($course->large_url);
+if($course->large_url != ''):
+    $image = asset('course/imgs/').'/'.basename($course->large_url);
+else:
+    $image = asset('course/imgs/no/').'/'.basename('placeholder.png');
+endif;
 ?>
 
 
@@ -52,15 +56,11 @@
                             @endif
                         </div>
                         <div class="item img-bg img-info">
-                            @if(!empty($image))
-                                <img src="{{ asset('course/imgs') }}/<?php echo $image ?>" class="img-full">
-                            @else
-                                <img src="{{ asset('course/imgs/no') }}/placeholder.png" class="img-full">
-                            @endif
+                            <img src="<?php echo $image ?>" class="img-full">
+
                         </div>
                         <div class="bottom wrapper-lg w-full">
                             <h4 class="h4 text-inline"><a class="text" href="">{{ $course->title }}</a></h4>
-                            <small class="">Published : {{ date('j F,Y',strtotime($course->created_at )) }}</small>
                         </div>
                         <div class="wrapper-lg">
                             <a href="" class="m-r-xl"><span>{{ $enrolled }}</span> Students Enrolled</a>

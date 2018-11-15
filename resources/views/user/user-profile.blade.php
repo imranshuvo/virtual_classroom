@@ -151,18 +151,18 @@
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                                        <input type="text" name="name" class="form-control" value="{{ $user->name }}" placeholder="Name">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <input type="text" name="designation" class="form-control" value="{{ $user->designation }}">
+                                        <input type="text" name="designation" class="form-control" value="{{ $user->designation }}" placeholder="Designation">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-md-12">
-                                        <textarea name="biography" class="form-control" value="">{{ $user->biography }}</textarea>
+                                        <textarea name="biography" class="form-control" value="" placeholder="Biography">{{ $user->biography }}</textarea>
                                     </div>
                                 </div>
                             </div>

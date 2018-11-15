@@ -101,7 +101,11 @@ class CourseController extends Controller
         // replace the point from the european date format with a dash
         $date = str_replace('/', '-', $req->input('start_date'));
         // create the mysql date format
-        $date = Carbon::createFromFormat('d-m-Y', $date)->toDateString();
+        //dd($date);
+
+        $date = Carbon::createFromFormat('m-d-Y', $date)->toDateString();
+        //dd($date);
+
         $data = [
             'title' => $req->input('title'),
             'category_id' => $req->input('category_id'),

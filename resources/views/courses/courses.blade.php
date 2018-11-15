@@ -45,15 +45,17 @@
 
 					<div class="col-md-3 single-course-box">
 							<a href="{{ url('course') }}/{{ $course->id }}" >
-					  
-							<?php 
+								<?php
+								if($course->thumb_url != ''):
+									$image = asset('course/imgs/').'/'.basename($course->thumb_url);
+								else:
+									$image = asset('course/imgs/no/').'/'.basename('placeholder.png');
+								endif;
 
-								$image = basename($course->thumb_url);
-
-							?>
+								?>
 							<div class="item text-center bg-info">
 								<div class="top-image course-image">
-									<img src="{{ asset('course/imgs/') }}/<?php echo $image ?> " class="">
+									<img src="<?php echo $image ?> " class="">
 								</div>
 								<div class="course-course-title">
 									<h5>{{ $course->title }}</h5>

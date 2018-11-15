@@ -75,40 +75,40 @@ class MessagesController extends Controller
         $users = [];
         if(Auth::user()->role_id == 1){
             $courses_enrolled = \DB::table('course_enrolled')->select('course_id')->where('student_id',Auth::user()->id)->get();
-            foreach($courses_enrolled as $course){
-               $users[] = \DB::table('course_enrolled')->join('users','users.id','=','course_enrolled.student_id')->where('course_id','=',$course->course_id)->get();
-               $teachers[] = \DB::table('users')->join('courses','users.id','=','courses.user_id')->where('courses.id','=',$course->course_id)->get();
-            }
-            $merged = array_merge($users,$teachers);
-            $flattened = array_flatten($merged);
-            //dd($users);
-            foreach($flattened as $current){
-                $exist[] = $current->id;
-            }
-            $exist = array_unique($exist);
-            //dd($exist);
-            foreach($exist as $key => $value){
-                $s[] = User::find($value);
-            }
-            //dd($a);
-            //dd($b);
-            //dd($exist);
-            $users = $s;
-            //dd($users);
-        }else{
-            $courses_enrolled = \DB::table('courses')->join('course_enrolled','course_enrolled.course_id','=','courses.id')->select('student_id')->get();
-            foreach($courses_enrolled as $course){
-                $users[] = User::find($course->student_id);
 
-            }  
-            $users = array_unique($users);
+            foreach($courses_enrolled as $course){
+               $students = \DB::table('course_enrolled')->join('users','users.id','=','course_enrolled.student_id')->where('course_id','=',$course->course_id)->get();
+
+               //dd($users);
+               $teachers = \DB::table('users')->join('courses','users.id','=','courses.user_id')->where('courses.id','=',$course->course_id)->get();
+            }
+            foreach($students as $user){
+                if($user->student_id != Auth::user()->id):
+                    //check if the student id is not the same as the current student id
+                    $users[] = $user;
+                endif;
+            }
+
+        }else{
+            $courses_by_teacher = \DB::table('courses')->where('user_id','=',Auth::user()->id)->select('id')->get();
+
+            foreach($courses_by_teacher as $course ){
+                $students = \DB::table('course_enrolled')->where('course_id','=', $course->id)->select('student_id')->get();
+            }
+
+            foreach($students as $user){
+
+                $users[] = User::find($user->student_id);
+            }
         }
-        
-        if(count($users) > 0){
-            $hide = 0;  
+
+
+        if(count($users) > 0 ){
+            $hide = 0;
         }else{
             $hide = 1;
         }
+        //dd($users);
         return view('messenger.create', compact('users','hide'));
     }
     /**
@@ -116,9 +116,24 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function store()
+    public function store(Request $request)
     {
         $input = Input::all();
+
+
+
+        $validator = $this->validate($request,
+            [
+                'subject' => 'required',
+                'message' => 'required',
+                'recipients' => 'required'
+            ]
+        );
+//        if ($validator->fails())
+//        {
+//            return redirect()->back()->withErrors($validator->messages());
+//        }
+
         $thread = Thread::create(
             [
                 'subject' => $input['subject'],
